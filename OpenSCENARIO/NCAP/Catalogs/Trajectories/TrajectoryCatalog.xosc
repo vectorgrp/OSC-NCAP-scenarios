@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='utf-8'?>
+<OpenSCENARIO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="OpenSCENARIO.xsd">
+  <!--Copyright (c) 2024, Vector Informatik GmbH--><FileHeader revMajor="1" revMinor="3" date="2024-07-08T13:20:36" description="Pedestrian Catalog for NCAP Scenarios" author="Vector Informatik GmbH"><License name="Mozilla Public License Version 2.0" resource="https://www.mozilla.org/en-US/MPL/2.0/" spdxId="MPL-2.0" /></FileHeader>
+  <Catalog name="TrajectoryCatalog">
+    <Trajectory closed="false" name="VRU_CPx">
+      <ParameterDeclarations>
+        <ParameterDeclaration name="VRU_initS" parameterType="double" value="200" />
+        <ParameterDeclaration name="VRU_latDist" parameterType="double" value="-4" />
+        <ParameterDeclaration name="trajectoryOrientation" parameterType="int" value="1" />
+      </ParameterDeclarations>
+      <Shape>
+        <Polyline>
+          <Vertex>
+            <Position>
+              <LanePosition roadId="0" laneId="-1" s="$VRU_initS" offset="${$VRU_latDist*$trajectoryOrientation}">
+                <Orientation h="${$trajectoryOrientation*pi/2}" type="relative" />
+              </LanePosition>
+            </Position>
+          </Vertex>
+          <Vertex>
+            <Position>
+              <LanePosition roadId="0" laneId="-1" s="$VRU_initS" offset="${$VRU_latDist*$trajectoryOrientation*-1}">
+                <Orientation h="${$trajectoryOrientation*pi/2}" type="relative" />
+              </LanePosition>
+            </Position>
+          </Vertex>
+        </Polyline>
+      </Shape><!--Trajectory for Pedestrian perpendicular to road suitable vor CPNA, CPFA, CPNCO through parameters-->
+    </Trajectory>
+    <Trajectory closed="false" name="Ego_CxTx">
+      <ParameterDeclarations>
+        <ParameterDeclaration name="start_roadID" parameterType="int" value="0" />
+        <ParameterDeclaration name="start_laneID" parameterType="string" value="-1" />
+        <ParameterDeclaration name="straight_roadID" parameterType="int" value="2" />
+        <ParameterDeclaration name="straight_laneID" parameterType="string" value="-1" />
+        <ParameterDeclaration name="straight_length" parameterType="double" value="100" />
+        <ParameterDeclaration name="start_s" parameterType="double" value="150" />
+        <ParameterDeclaration name="kappa1" parameterType="double" value="${1/1500}" />
+        <ParameterDeclaration name="kappa2" parameterType="double" value="${1/9}" />
+        <ParameterDeclaration name="clothoidLength" parameterType="double" value="7" />
+        <ParameterDeclaration name="arcLength" parameterType="double" value="7" />
+      </ParameterDeclarations>
+      <Shape>
+        <ClothoidSpline>
+          <ClothoidSplineSegment curvatureEnd="0" curvatureStart="0" length="$straight_length">
+            <PositionStart>
+              <LanePosition roadId="$start_roadID" laneId="$start_laneID" s="$start_s" />
+            </PositionStart>
+          </ClothoidSplineSegment>
+          <ClothoidSplineSegment curvatureEnd="$kappa2" curvatureStart="$kappa1" length="$clothoidLength">
+          </ClothoidSplineSegment>
+          <ClothoidSplineSegment curvatureEnd="$kappa2" curvatureStart="$kappa2" length="$arcLength" />
+          <ClothoidSplineSegment curvatureEnd="$kappa1" curvatureStart="$kappa2" length="$clothoidLength" />
+          <ClothoidSplineSegment curvatureEnd="0" curvatureStart="0" length="$straight_length" />
+        </ClothoidSpline>
+      </Shape><!--Trajectory for Ego vehicle turning on intersection suitable vor CPTAx, CBTAx, CMFtap, CCFtap-->
+    </Trajectory>
+    <Trajectory closed="false" name="VRU_CxTfx">
+      <ParameterDeclarations>
+        <ParameterDeclaration name="laneWidth" parameterType="double" value="3.5" />
+        <ParameterDeclaration name="armLength" parameterType="double" value="150" />
+        <ParameterDeclaration name="roadRadius" parameterType="double" value="8" />
+        <ParameterDeclaration name="tStart" parameterType="double" value="-9.5" />
+        <ParameterDeclaration name="centerlineOffset" parameterType="double" value="9.5" />
+        <ParameterDeclaration name="trajectoryOrientation" parameterType="int" value="1" />
+      </ParameterDeclarations>
+      <Shape>
+        <Polyline>
+          <Vertex>
+            <Position>
+              <TrajectoryPosition s="${$armLength+$roadRadius+$laneWidth-$centerlineOffset}" t="$tStart">
+                <TrajectoryRef>
+                  <Trajectory closed="false" name="_VRU_HelperTrajectory_Farside">
+                    <Shape>
+                      <Polyline>
+                        <Vertex>
+                          <Position>
+                            <RoadPosition roadId="1" s="0" t="0" />
+                          </Position>
+                        </Vertex>
+                        <Vertex>
+                          <Position>
+                            <RoadPosition roadId="3" s="0" t="0">
+                              <Orientation h="${pi/2}" type="relative" />
+                            </RoadPosition>
+                          </Position>
+                        </Vertex>
+                      </Polyline>
+                    </Shape><!--helper trajectory to define straight line independent of roads-->
+                  </Trajectory>
+                </TrajectoryRef>
+                <Orientation h="${$trajectoryOrientation*-1*pi/2}" type="relative" />
+              </TrajectoryPosition>
+            </Position>
+          </Vertex>
+          <Vertex>
+            <Position>
+              <TrajectoryPosition s="${$armLength+$roadRadius+$laneWidth-$centerlineOffset}" t="${-$tStart}">
+                <TrajectoryRef>
+                  <Trajectory closed="false" name="_VRU_HelperTrajectory_Farside">
+                    <Shape>
+                      <Polyline>
+                        <Vertex>
+                          <Position>
+                            <RoadPosition roadId="1" s="0" t="0" />
+                          </Position>
+                        </Vertex>
+                        <Vertex>
+                          <Position>
+                            <RoadPosition roadId="3" s="0" t="0">
+                              <Orientation h="${pi/2}" type="relative" />
+                            </RoadPosition>
+                          </Position>
+                        </Vertex>
+                      </Polyline>
+                    </Shape>
+                  </Trajectory>
+                </TrajectoryRef>
+                <Orientation h="${$trajectoryOrientation*-1*pi/2}" type="relative" />
+              </TrajectoryPosition>
+            </Position>
+          </Vertex>
+        </Polyline>
+      </Shape>
+    </Trajectory>
+  </Catalog>
+</OpenSCENARIO>

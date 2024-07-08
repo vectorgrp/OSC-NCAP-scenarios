@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8'?>
+<OpenSCENARIO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="OpenSCENARIO.xsd">
+  <!--Copyright (c) 2024, Vector Informatik GmbH--><FileHeader author="Vector Informatik GmbH" date="2024-07-08T13:20:36" description="Single Parameter Set with Ego Speed = 50 kph and 50% Overlap for NCAP AEB CCRm" revMajor="1" revMinor="3"><License name="Mozilla Public License Version 2.0" resource="https://www.mozilla.org/en-US/MPL/2.0/" spdxId="MPL-2.0" /></FileHeader>
+  <ParameterValueDistribution>
+    <ScenarioFile filepath="../NCAP_AEB_C2C_CCR_2023.xosc" />
+    <Deterministic>
+      <DeterministicSingleParameterDistribution parameterName="Scenario_ID">
+        <DistributionSet>
+          <Element value="CCRm" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="Ego_speed_kph">
+        <DistributionSet>
+          <Element value="50" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="Overlap">
+        <DistributionSet>
+          <Element value="100" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="GVT_final_speed_kph">
+        <DistributionSet>
+          <Element value="20" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="GVT_init_speed_kph">
+        <DistributionSet>
+          <Element value="20" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="isCCRbraking">
+        <DistributionSet>
+          <Element value="false" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+    </Deterministic>
+  </ParameterValueDistribution>
+</OpenSCENARIO>

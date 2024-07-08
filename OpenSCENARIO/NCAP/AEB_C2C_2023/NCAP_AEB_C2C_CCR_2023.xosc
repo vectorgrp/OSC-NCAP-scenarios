@@ -1,0 +1,223 @@
+<?xml version='1.0' encoding='utf-8'?>
+<OpenSCENARIO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="OpenSCENARIO.xsd">
+  <!--Copyright (c) 2024, Vector Informatik GmbH--><FileHeader revMajor="1" revMinor="3" date="2024-07-08T13:20:36" author="Vector Informatik GmbH" description="Base Scenario for NCAP 2023 AEB C2C CCRs and (through variations) CCRm, CCRb"><License name="Mozilla Public License Version 2.0" resource="https://www.mozilla.org/en-US/MPL/2.0/" spdxId="MPL-2.0" /></FileHeader>
+  <ParameterDeclarations>
+    <ParameterDeclaration name="Ego_width" parameterType="double" value="1.815"><!--required for positioning according to overlap-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Ego_initTimeHeadway" parameterType="double" value="5"><!--speed-dependent adjustment of initial distance to GVT-->
+      <ConstraintGroup>
+        <ValueConstraint value="4" rule="greaterThan" /><!--set headway large enough to avoid critical distances at start-->
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Ego_speed_kph" parameterType="double" value="20"><!--Ego test speed-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Ego_initS" parameterType="double" value="50"><!--initial advance of Ego entity-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Overlap" parameterType="double" value="100"><!--lateral overlap defined as a percentage of the width of the VUT overlapping the GVT-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="isCCRbraking" parameterType="boolean" value="false"><!--flag to indicate if GVT is braking (CCRb only)-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="GVT_width" parameterType="double" value="1.712"><!--required for positioning according to overlap-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="GVT_init_speed_kph" parameterType="double" value="0"><!--initial speed of the GVT-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="GVT_final_speed_kph" parameterType="double" value="0"><!--final speed of GVT different from initial speed for CCRb only-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="GVT_deceleration" parameterType="double" value="2"><!--deceleration in m/s^2 of the GVT for CCRb only-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="GVT_braking_delay" parameterType="double" value="3"><!--time delay in s after headway is established to initiate braking for CCRb only-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="GVT_headway" parameterType="double" value="12"><!--space headway in m as defined in NCAP protocol for CCRb only-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Scenario_ID" parameterType="string" value="CCRs"><!--this parameter is not used within the scenario but may support the assessment-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Ego_speed" parameterType="double" value="${$Ego_speed_kph/3.6}"><!--allows kph as unit in variation definition as in NCAP protocol -->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_GVT_init_speed" parameterType="double" value="${$GVT_init_speed_kph/3.6}"><!--allows kph as unit in variation definition as in NCAP protocol -->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_GVT_final_speed" parameterType="double" value="${$GVT_final_speed_kph/3.6}"><!--allows kph as unit in variation definition as in NCAP protocol -->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_GVT_offset" parameterType="double" value="${sign($Overlap)*min(1.0,100.0-$Overlap)*($GVT_width/2-$Ego_width*((abs($Overlap)-50.0)/100.0))}"><!--resulting lateral offset of the GVT depending on vehicles' widths and desired overlap--><!--min(1.0,100.0-$Overlap) to ensure that 100% overlap leads to 0 offset-->
+    </ParameterDeclaration>
+    
+  </ParameterDeclarations>
+  <VariableDeclarations>
+    <VariableDeclaration name="collisionDetected" variableType="boolean" value="false" />
+    <VariableDeclaration name="egoSpeedReached" variableType="double" value="0.0" />
+  </VariableDeclarations>
+  <CatalogLocations>
+    <VehicleCatalog>
+      <Directory path="../Catalogs/Vehicles" />
+    </VehicleCatalog>
+    <ManeuverCatalog>
+      <Directory path="../Catalogs/Maneuver" />
+    </ManeuverCatalog>
+  </CatalogLocations>
+  <RoadNetwork>
+    <LogicFile filepath="../../../OpenDRIVE/NCAP/StraightRoad_NCAP_noRoadmarks.xodr" />
+  </RoadNetwork>
+  <Entities>
+    <ScenarioObject name="Ego">
+      <CatalogReference entryName="VW_Golf_Sportsvan_2015" catalogName="Vehicles" />
+    </ScenarioObject>
+    <ScenarioObject name="GVT">
+      <CatalogReference entryName="NCAP_GlobalVehicleTarget" catalogName="Vehicles" />
+    </ScenarioObject>
+  </Entities>
+  <Storyboard>
+    <Init>
+      <Actions>
+        <Private entityRef="Ego">
+          <PrivateAction>
+            <TeleportAction>
+              <Position>
+                <LanePosition roadId="0" laneId="-1" s="$Ego_initS">
+                </LanePosition>
+              </Position>
+            </TeleportAction>
+          </PrivateAction>
+          <PrivateAction>
+            <LongitudinalAction>
+              <SpeedAction>
+                <SpeedActionDynamics dynamicsDimension="time" dynamicsShape="step" value="0" />
+                <SpeedActionTarget>
+                  <AbsoluteTargetSpeed value="$_Ego_speed" />
+                </SpeedActionTarget>
+              </SpeedAction>
+            </LongitudinalAction>
+          </PrivateAction>
+        </Private>
+        <Private entityRef="GVT">
+          <PrivateAction>
+            <TeleportAction>
+              <Position>
+                <RelativeLanePosition entityRef="Ego" dLane="0" offset="$_GVT_offset" ds="${$Ego_initTimeHeadway*$_Ego_speed}" />
+              </Position>
+            </TeleportAction>
+          </PrivateAction>
+          <PrivateAction>
+            <LongitudinalAction>
+              <SpeedAction>
+                <SpeedActionDynamics dynamicsDimension="time" dynamicsShape="step" value="0" />
+                <SpeedActionTarget>
+                  <AbsoluteTargetSpeed value="$_GVT_init_speed" />
+                </SpeedActionTarget>
+              </SpeedAction>
+            </LongitudinalAction>
+          </PrivateAction>
+        </Private>
+      </Actions>
+    </Init>
+    <Story name="Set_Variables">
+      <Act name="Set_Variables">
+        <ManeuverGroup name="Set_Variables" maximumExecutionCount="1">
+          <Actors selectTriggeringEntities="false">
+          </Actors>
+          <CatalogReference catalogName="ManeuverCatalog" entryName="LogAndSetVariables">
+            <ParameterAssignments>
+              <ParameterAssignment parameterRef="collidingEntity" value="GVT" />
+            </ParameterAssignments>
+          </CatalogReference>
+        </ManeuverGroup>
+      </Act>
+    </Story>
+    <Story name="GVT_Braking_CCRb_only">
+      <Act name="TeleportAndBrake_Act">
+        <ManeuverGroup name="GVT_TeleportAndBrake" maximumExecutionCount="1">
+          <Actors selectTriggeringEntities="false">
+            <EntityRef entityRef="GVT" />
+          </Actors>
+          <Maneuver name="GVT_Teleport">
+          <!--set correct position with LongitudinalDistanceAction to account for vehicle length immediately after init-->
+            <Event name="GVT_TeleportEvent" priority="override">
+              <Action name="GVT_LongitudinalDistanceAction">
+                <PrivateAction>
+                  <LongitudinalAction>
+                    <LongitudinalDistanceAction freespace="true" continuous="false" entityRef="Ego" distance="$GVT_headway" displacement="leadingReferencedEntity" coordinateSystem="entity" />
+                  </LongitudinalAction>
+                </PrivateAction>
+              </Action>
+            </Event>
+          </Maneuver>
+          <Maneuver name="GVT_DelayedBraking">
+            <Event name="GVT_DelayedBrakingEvent" priority="override">
+              <Action name="GVT_BrakingAction">
+                <PrivateAction>
+                  <LongitudinalAction>
+                    <SpeedAction>
+                      <SpeedActionDynamics dynamicsDimension="rate" dynamicsShape="linear" value="$GVT_deceleration" />
+                      <SpeedActionTarget>
+                        <AbsoluteTargetSpeed value="${$_GVT_final_speed}" />
+                      </SpeedActionTarget>
+                    </SpeedAction>
+                  </LongitudinalAction>
+                </PrivateAction>
+              </Action>
+              <StartTrigger>
+                <ConditionGroup>
+                  <Condition name="delay" delay="$GVT_braking_delay" conditionEdge="none">
+                    <ByValueCondition>
+                      <StoryboardElementStateCondition storyboardElementType="maneuver" storyboardElementRef="GVT_Teleport" state="completeState" />
+                    </ByValueCondition>
+                  </Condition>
+                </ConditionGroup>
+              </StartTrigger>
+            </Event>
+          </Maneuver>
+        </ManeuverGroup>
+        <StartTrigger>
+          <ConditionGroup>
+            <Condition name="isCCRb" delay="0" conditionEdge="none">
+              <ByValueCondition>
+                <ParameterCondition parameterRef="isCCRbraking" rule="equalTo" value="true" />
+              </ByValueCondition>
+            </Condition>
+          </ConditionGroup>
+        </StartTrigger>
+      </Act>
+    </Story>
+    <StopTrigger>
+      <ConditionGroup>
+        <Condition name="StopAfterCollision" delay="1" conditionEdge="none">
+          <ByValueCondition>
+            <VariableCondition variableRef="collisionDetected" rule="equalTo" value="true" />
+          </ByValueCondition>
+        </Condition>
+      </ConditionGroup>
+      <ConditionGroup>
+        <Condition name="EgoSpeedReached" delay="1" conditionEdge="none">
+          <ByValueCondition>
+            <VariableCondition variableRef="egoSpeedReached" rule="greaterThan" value="0" />
+          </ByValueCondition>
+        </Condition>
+        <Condition name="StopWhenStandstill" delay="1" conditionEdge="none">
+          <ByEntityCondition>
+            <TriggeringEntities triggeringEntitiesRule="any">
+              <EntityRef entityRef="Ego" />
+            </TriggeringEntities>
+            <EntityCondition>
+              <SpeedCondition value="0.01" rule="lessThan" />
+            </EntityCondition>
+          </ByEntityCondition>
+        </Condition>
+      </ConditionGroup>
+      <ConditionGroup>
+        <Condition name="EgoSpeedReached2" delay="1" conditionEdge="none">
+          <ByValueCondition>
+            <VariableCondition variableRef="egoSpeedReached" rule="greaterThan" value="0" />
+          </ByValueCondition>
+        </Condition>
+        <Condition name="StopWhenBelowGVTSpeed" delay="1" conditionEdge="none">
+          <ByEntityCondition>
+            <TriggeringEntities triggeringEntitiesRule="any">
+              <EntityRef entityRef="Ego" />
+            </TriggeringEntities>
+            <EntityCondition>
+              <SpeedCondition value="${$_GVT_init_speed*0.8}" rule="lessThan" />
+            </EntityCondition>
+          </ByEntityCondition>
+        </Condition>
+      </ConditionGroup>
+    </StopTrigger>
+  </Storyboard>
+</OpenSCENARIO>

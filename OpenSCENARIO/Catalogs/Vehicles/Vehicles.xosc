@@ -1,0 +1,1076 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenSCENARIO>
+  <FileHeader author="Vector Informatik GmbH" date="2024-06-19T14:15:29" description="Vehicle Catalog for DYNA4 9.0.0" revMajor="1" revMinor="3" />
+  <Catalog name="Vehicles">
+    <Vehicle name="NCAP_Balloon_Car" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="0.073" y="0" z="0.675" />
+        <Dimensions height="1.35" length="1.35" width="1.6" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/NCAP/NCAP_Balloon_Car.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.573" trackWidth="1.454" positionX="0.1" positionZ="0.287" />
+        <RearAxle maxSteering="0" wheelDiameter="0.573" trackWidth="1.454" positionX="0" positionZ="0.287" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Bicycle" vehicleCategory="bicycle">
+      <BoundingBox>
+        <Center x="0.542" y="0" z="0.515" />
+        <Dimensions height="1.03" length="1.753" width="0.528" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/Bicycle/Bicycle.dapx" />
+      </Properties>
+      <Performance maxSpeed="14" maxAcceleration="2" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.66" trackWidth="0" positionX="1.09" positionZ="0.33" />
+        <RearAxle maxSteering="0" wheelDiameter="0.66" trackWidth="0" positionX="0" positionZ="0.33" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Bicycle_City" vehicleCategory="bicycle">
+      <BoundingBox>
+        <Center x="0.496" y="0" z="0.561" />
+        <Dimensions height="1.122" length="1.655" width="0.664" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/Bicycle/Bicycle_City.dapx" />
+      </Properties>
+      <Performance maxSpeed="14" maxAcceleration="2" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.664" trackWidth="0" positionX="0.991" positionZ="0.332" />
+        <RearAxle maxSteering="0" wheelDiameter="0.664" trackWidth="0" positionX="0" positionZ="0.332" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Bicycle_Mountain" vehicleCategory="bicycle">
+      <BoundingBox>
+        <Center x="0.526" y="0" z="0.489" />
+        <Dimensions height="0.978" length="1.7" width="0.657" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/Bicycle/Bicycle_Mountain.dapx" />
+      </Properties>
+      <Performance maxSpeed="14" maxAcceleration="2" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.648" trackWidth="0" positionX="1.052" positionZ="0.324" />
+        <RearAxle maxSteering="0" wheelDiameter="0.648" trackWidth="0" positionX="0" positionZ="0.324" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="NCAP_Bicycle" vehicleCategory="bicycle">
+      <BoundingBox>
+        <Center x="0.605" y="0" z="0.6" />
+        <Dimensions height="1.2" length="1.89" width="0.5" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/NCAP/NCAP_Bicycle.dapx" />
+      </Properties>
+      <Performance maxSpeed="14" maxAcceleration="2" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.68" trackWidth="0" positionX="1.21" positionZ="0.34" />
+        <RearAxle maxSteering="0" wheelDiameter="0.68" trackWidth="0" positionX="0" positionZ="0.34" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Bicycle_Racing" vehicleCategory="bicycle">
+      <BoundingBox>
+        <Center x="0.496" y="-0.001" z="0.464" />
+        <Dimensions height="0.928" length="1.649" width="0.371" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/Bicycle/Bicycle_Racing.dapx" />
+      </Properties>
+      <Performance maxSpeed="14" maxAcceleration="2" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.658" trackWidth="0" positionX="0.991" positionZ="0.329" />
+        <RearAxle maxSteering="0" wheelDiameter="0.658" trackWidth="0" positionX="0" positionZ="0.329" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Bicycle_TerraTrike_Rover_Recumbant" vehicleCategory="bicycle">
+      <BoundingBox>
+        <Center x="0.696" y="0.012" z="0.34" />
+        <Dimensions height="0.679" length="1.899" width="0.875" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/Bicycle/Bicycle_TerraTrike_Rover_Recumbant.dapx" />
+      </Properties>
+      <Performance maxSpeed="14" maxAcceleration="2" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.506" trackWidth="0.819" positionX="1.019" positionZ="0.253" />
+        <RearAxle maxSteering="0" wheelDiameter="0.506" trackWidth="0" positionX="0" positionZ="0.253" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Bicycle_Zigo_Leader_X2_AdultTricycle_2009" vehicleCategory="bicycle">
+      <BoundingBox>
+        <Center x="0.918" y="0" z="0.563" />
+        <Dimensions height="1.126" length="2.409" width="0.984" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/Bicycle/Bicycle_Zigo_Leader_X2_AdultTricycle_2009.dapx" />
+      </Properties>
+      <Performance maxSpeed="14" maxAcceleration="2" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.44" trackWidth="0.866" positionX="1.25" positionZ="0.22" />
+        <RearAxle maxSteering="0" wheelDiameter="0.504" trackWidth="0" positionX="0" positionZ="0.252" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Motorcycle_Honda_CB_500_F_2019" vehicleCategory="motorbike">
+      <BoundingBox>
+        <Center x="0.673" y="0" z="0.53" />
+        <Dimensions height="1.06" length="2.08" width="0.79" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/Motorcycle/Motorcycle_Honda_CB_500_F_2019.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="8" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.606" trackWidth="0" positionX="1.41" positionZ="0.303" />
+        <RearAxle maxSteering="0" wheelDiameter="0.62" trackWidth="0" positionX="0" positionZ="0.31" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Motorcycle_Honda_Metropolitan_CHF50_2013" vehicleCategory="motorbike">
+      <BoundingBox>
+        <Center x="0.531" y="0" z="0.6" />
+        <Dimensions height="1.201" length="1.641" width="0.749" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/Motorcycle/Motorcycle_Honda_Metropolitan_CHF50_2013.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="8" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.386" trackWidth="0" positionX="1.16" positionZ="0.193" />
+        <RearAxle maxSteering="0" wheelDiameter="0.386" trackWidth="0" positionX="0" positionZ="0.193" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Motorcycle_Honda_Unicorn_160_2017" vehicleCategory="motorbike">
+      <BoundingBox>
+        <Center x="0.603" y="0" z="0.619" />
+        <Dimensions height="1.238" length="2.034" width="0.725" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/Motorcycle/Motorcycle_Honda_Unicorn_160_2017.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="8" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.592" trackWidth="0" positionX="1.324" positionZ="0.296" />
+        <RearAxle maxSteering="0" wheelDiameter="0.606" trackWidth="0" positionX="0" positionZ="0.303" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="NCAP_2018_ObstructionVehicle_Large" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.399" y="0" z="0.766" />
+        <Dimensions height="1.533" length="4.418" width="1.82" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/NCAP/NCAP_2018_ObstructionVehicle_Large.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.74" trackWidth="1.54" positionX="2.703" positionZ="0.37" />
+        <RearAxle maxSteering="0" wheelDiameter="0.74" trackWidth="1.532" positionX="0" positionZ="0.37" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="NCAP_2018_ObstructionVehicle_Small" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.368" y="0" z="0.74" />
+        <Dimensions height="1.48" length="4.316" width="1.79" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/NCAP/NCAP_2018_ObstructionVehicle_Small.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.662" trackWidth="1.48" positionX="2.638" positionZ="0.331" />
+        <RearAxle maxSteering="0" wheelDiameter="0.662" trackWidth="1.46" positionX="0" positionZ="0.331" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="NCAP_GlobalVehicleTarget" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.328" y="0" z="0.714" />
+        <Dimensions height="1.427" length="4.023" width="1.712" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/NCAP/NCAP_GlobalVehicleTarget.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.656" trackWidth="1.434" positionX="2.475" positionZ="0.328" />
+        <RearAxle maxSteering="0" wheelDiameter="0.656" trackWidth="1.434" positionX="0" positionZ="0.328" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="NCAP_Motorcycle" vehicleCategory="motorbike">
+      <BoundingBox>
+        <Center x="0.673" y="0" z="0.53" />
+        <Dimensions height="1.06" length="2.08" width="0.79" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/NCAP/NCAP_Motorcycle.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="8" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.606" trackWidth="0" positionX="1.41" positionZ="0.303" />
+        <RearAxle maxSteering="0" wheelDiameter="0.62" trackWidth="0" positionX="0" positionZ="0.31" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="StandUpScooter_Tier_2022" vehicleCategory="bicycle">
+      <BoundingBox>
+        <Center x="0.456" y="0" z="0.618" />
+        <Dimensions height="1.235" length="1.197" width="0.527" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/Bicycle/StandUpScooter_Tier_2022.dapx" />
+      </Properties>
+      <Performance maxSpeed="14" maxAcceleration="2" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.3" trackWidth="0" positionX="0.906" positionZ="0.15" />
+        <RearAxle maxSteering="0" wheelDiameter="0.257" trackWidth="0" positionX="0" positionZ="0.128" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Audi_A8_Sedan_2018" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.412" y="0" z="0.746" />
+        <Dimensions height="1.491" length="5.141" width="1.923" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_Audi_A8_Sedan_2018.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.712" trackWidth="1.64" positionX="2.995" positionZ="0.356" />
+        <RearAxle maxSteering="0" wheelDiameter="0.712" trackWidth="1.59" positionX="0" positionZ="0.356" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Audi_R8_Coupe_2006_V8" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.408" y="0" z="0.638" />
+        <Dimensions height="1.276" length="4.437" width="1.898" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_Audi_R8_Coupe_2006_V8.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.658" trackWidth="1.616" positionX="2.634" positionZ="0.329" />
+        <RearAxle maxSteering="0" wheelDiameter="0.658" trackWidth="1.616" positionX="0" positionZ="0.329" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="BMW_3series_Convertible_1986" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.222" y="0" z="0.65" />
+        <Dimensions height="1.3" length="4.363" width="1.75" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_BMW_3series_Convertible_1986.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.614" trackWidth="1.452" positionX="2.683" positionZ="0.307" />
+        <RearAxle maxSteering="0" wheelDiameter="0.614" trackWidth="1.452" positionX="0" positionZ="0.307" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="BMW_6series_Coupe_2003" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.321" y="0" z="0.678" />
+        <Dimensions height="1.355" length="4.812" width="1.873" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_BMW_6series_Coupe_2003.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.686" trackWidth="1.55" positionX="2.775" positionZ="0.343" />
+        <RearAxle maxSteering="0" wheelDiameter="0.686" trackWidth="1.55" positionX="0" positionZ="0.343" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="BMW_i8_SportsCar_2013" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.436" y="0" z="0.615" />
+        <Dimensions height="1.23" length="4.299" width="1.965" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_BMW_i8_SportsCar_2013.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.763" trackWidth="1.62" positionX="2.804" positionZ="0.381" />
+        <RearAxle maxSteering="0" wheelDiameter="0.763" trackWidth="1.636" positionX="0" positionZ="0.381" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="BMW_X3_SUV_2003" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.334" y="0" z="0.849" />
+        <Dimensions height="1.698" length="4.575" width="1.817" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_BMW_X3_SUV_2003.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.698" trackWidth="1.49" positionX="2.807" positionZ="0.349" />
+        <RearAxle maxSteering="0" wheelDiameter="0.698" trackWidth="1.5" positionX="0" positionZ="0.349" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="BMW_Z4_Roadster_2009" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.262" y="0" z="0.66" />
+        <Dimensions height="1.321" length="4.115" width="1.928" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_BMW_Z4_Roadster_2009.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.667" trackWidth="1.568" positionX="2.493" positionZ="0.333" />
+        <RearAxle maxSteering="0" wheelDiameter="0.667" trackWidth="1.596" positionX="0" positionZ="0.333" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Caterpillar_Excavator_2007" vehicleCategory="truck">
+      <BoundingBox>
+        <Center x="3.844" y="-0.104" z="2.783" />
+        <Dimensions height="5.567" length="10.553" width="2.739" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/ConstructionVehicle/Vehicle_Caterpillar_Excavator_2007.dapx" />
+      </Properties>
+      <Performance maxSpeed="35" maxAcceleration="2" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.82" trackWidth="1.902" positionX="3.161" positionZ="0.41" />
+        <RearAxle maxSteering="0" wheelDiameter="0.82" trackWidth="1.902" positionX="0" positionZ="0.41" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Chrysler_Pacifica_Hybrid_Minivan_2017" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.474" y="0" z="0.886" />
+        <Dimensions height="1.771" length="5.183" width="1.959" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_Chrysler_Pacifica_Hybrid_Minivan_2017.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.744" trackWidth="1.668" positionX="3.084" positionZ="0.372" />
+        <RearAxle maxSteering="0" wheelDiameter="0.744" trackWidth="1.652" positionX="0" positionZ="0.372" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Fiatallis_FR130_Front_Loader_1990" vehicleCategory="truck">
+      <BoundingBox>
+        <Center x="1.989" y="0" z="1.721" />
+        <Dimensions height="3.443" length="7.098" width="2.798" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/ConstructionVehicle/Vehicle_Fiatallis_FR130_Front_Loader_1990.dapx" />
+      </Properties>
+      <Performance maxSpeed="35" maxAcceleration="2" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="1.561" trackWidth="2.112" positionX="2.937" positionZ="0.78" />
+        <RearAxle maxSteering="0" wheelDiameter="1.561" trackWidth="2.112" positionX="0" positionZ="0.78" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Fiat-Hitachi_FH200_Excavator_1990" vehicleCategory="truck">
+      <BoundingBox>
+        <Center x="3.046" y="0" z="2.613" />
+        <Dimensions height="5.226" length="7.868" width="2.648" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/ConstructionVehicle/Vehicle_Fiat-Hitachi_FH200_Excavator_1990.dapx" />
+      </Properties>
+      <Performance maxSpeed="35" maxAcceleration="2" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.988" trackWidth="1.97" positionX="3.368" positionZ="0.494" />
+        <RearAxle maxSteering="0" wheelDiameter="0.988" trackWidth="1.97" positionX="0" positionZ="0.494" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Ford_F150_Pickup_2008" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.858" y="0" z="0.947" />
+        <Dimensions height="1.894" length="6.297" width="2.182" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_Ford_F150_Pickup_2008.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.791" trackWidth="1.708" positionX="3.975" positionZ="0.396" />
+        <RearAxle maxSteering="0" wheelDiameter="0.742" trackWidth="1.708" positionX="0" positionZ="0.371" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Ford_Focus_ST-Line_Hatchback_2018" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.422" y="0" z="0.73" />
+        <Dimensions height="1.459" length="4.424" width="1.775" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_Ford_Focus_ST-Line_Hatchback_2018.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.648" trackWidth="1.566" positionX="2.697" positionZ="0.324" />
+        <RearAxle maxSteering="0" wheelDiameter="0.648" trackWidth="1.52" positionX="0" positionZ="0.324" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Front_Loader_2007" vehicleCategory="truck">
+      <BoundingBox>
+        <Center x="1.502" y="0" z="1.199" />
+        <Dimensions height="2.397" length="5.636" width="2.209" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/ConstructionVehicle/Vehicle_Front_Loader_2007.dapx" />
+      </Properties>
+      <Performance maxSpeed="35" maxAcceleration="2" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="1.08" trackWidth="1.506" positionX="2.312" positionZ="0.54" />
+        <RearAxle maxSteering="0" wheelDiameter="1.08" trackWidth="1.506" positionX="0" positionZ="0.54" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Genesis_G90_Sedan_2016" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.408" y="0" z="0.747" />
+        <Dimensions height="1.494" length="5.232" width="1.913" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_Genesis_G90_Sedan_2016.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.702" trackWidth="1.564" positionX="3.154" positionZ="0.351" />
+        <RearAxle maxSteering="0" wheelDiameter="0.702" trackWidth="1.574" positionX="0" positionZ="0.351" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Hyundai_Santa_Fe_SUV_2017" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.304" y="0" z="0.864" />
+        <Dimensions height="1.729" length="4.88" width="1.886" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_Hyundai_Santa_Fe_SUV_2017.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.741" trackWidth="1.615" positionX="2.787" positionZ="0.37" />
+        <RearAxle maxSteering="0" wheelDiameter="0.741" trackWidth="1.615" positionX="0" positionZ="0.37" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="International_LT_2018" vehicleCategory="truck">
+      <BoundingBox>
+        <Center x="2.841" y="0" z="1.934" />
+        <Dimensions height="3.869" length="8.444" width="2.54" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/TractorTruck/Vehicle_International_LT_2018.dapx" />
+      </Properties>
+      <Performance maxSpeed="35" maxAcceleration="2" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="1.006" trackWidth="1.956" positionX="6.499" positionZ="0.503" />
+        <RearAxle maxSteering="0" wheelDiameter="1.006" trackWidth="2.258" positionX="0" positionZ="0.503" />
+        <AdditionalAxle maxSteering="0" wheelDiameter="1.006" trackWidth="2.258" positionX="1.306" positionZ="0.503" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="IVECO_Daily_Van_2014" vehicleCategory="van">
+      <BoundingBox>
+        <Center x="1.66" y="0" z="1.226" />
+        <Dimensions height="2.451" length="5.436" width="2.036" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/CommercialVehicle/Vehicle_IVECO_Daily_Van_2014.dapx" />
+      </Properties>
+      <Performance maxSpeed="50" maxAcceleration="3" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.669" trackWidth="1.752" positionX="3.451" positionZ="0.334" />
+        <RearAxle maxSteering="0" wheelDiameter="0.669" trackWidth="1.772" positionX="0" positionZ="0.334" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Jeep_Renegade_2015" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.317" y="0" z="0.866" />
+        <Dimensions height="1.731" length="4.154" width="1.809" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_Jeep_Renegade_2015.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.718" trackWidth="1.5" positionX="2.583" positionZ="0.359" />
+        <RearAxle maxSteering="0" wheelDiameter="0.718" trackWidth="1.5" positionX="0" positionZ="0.359" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="JLG_G12-55Ap_Forklift_2006" vehicleCategory="truck">
+      <BoundingBox>
+        <Center x="3.319" y="0.02" z="1.362" />
+        <Dimensions height="2.723" length="8.05" width="2.492" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/CommercialVehicle/Vehicle_JLG_G12-55Ap_Forklift_2006.dapx" />
+      </Properties>
+      <Performance maxSpeed="50" maxAcceleration="2" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="1.346" trackWidth="2.115" positionX="3.805" positionZ="0.673" />
+        <RearAxle maxSteering="0" wheelDiameter="1.346" trackWidth="2.115" positionX="0" positionZ="0.673" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="John_Deere_Forage_Harvester" vehicleCategory="truck">
+      <BoundingBox>
+        <Center x="2.767" y="0" z="2.072" />
+        <Dimensions height="4.145" length="9.466" width="6.6" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/CommercialVehicle/Vehicle_John_Deere_Forage_Harvester.dapx" />
+      </Properties>
+      <Performance maxSpeed="35" maxAcceleration="2" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="1.984" trackWidth="2.628" positionX="3.066" positionZ="0.992" />
+        <RearAxle maxSteering="0" wheelDiameter="1.473" trackWidth="2.619" positionX="0" positionZ="0.736" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="MAN_TGX_Tractor_Truck_2012" vehicleCategory="truck">
+      <BoundingBox>
+        <Center x="2.102" y="0" z="1.978" />
+        <Dimensions height="3.955" length="5.807" width="2.5" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/TractorTruck/Vehicle_MAN_TGX_Tractor_Truck_2012.dapx" />
+      </Properties>
+      <Performance maxSpeed="35" maxAcceleration="2" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="1.016" trackWidth="2.08" positionX="3.55" positionZ="0.508" />
+        <RearAxle maxSteering="0" wheelDiameter="1.016" trackWidth="2.18" positionX="0" positionZ="0.508" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Mercedes_A-class_AMG_Line_Hatchback_2018" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.556" y="0" z="0.77" />
+        <Dimensions height="1.54" length="4.761" width="1.863" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_Mercedes_A-class_AMG_Line_Hatchback_2018.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.718" trackWidth="1.518" positionX="2.898" positionZ="0.359" />
+        <RearAxle maxSteering="0" wheelDiameter="0.718" trackWidth="1.518" positionX="0" positionZ="0.359" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Mercedes_Actros_Truck_1996" vehicleCategory="truck">
+      <BoundingBox>
+        <Center x="1.93" y="0" z="1.795" />
+        <Dimensions height="3.591" length="8.883" width="2.49" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/CommercialVehicle/Vehicle_Mercedes_Actros_Truck_1996.dapx" />
+      </Properties>
+      <Performance maxSpeed="50" maxAcceleration="2" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.998" trackWidth="2.158" positionX="5.719" positionZ="0.499" />
+        <RearAxle maxSteering="0" wheelDiameter="0.998" trackWidth="2.15" positionX="0" positionZ="0.499" />
+        <AdditionalAxle maxSteering="0" wheelDiameter="0.998" trackWidth="2.15" positionX="1.315" positionZ="0.499" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Mercedes_Actros_Truck_2008" vehicleCategory="truck">
+      <BoundingBox>
+        <Center x="1.866" y="0" z="2.028" />
+        <Dimensions height="4.056" length="8.605" width="2.765" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/CommercialVehicle/Vehicle_Mercedes_Actros_Truck_2008.dapx" />
+      </Properties>
+      <Performance maxSpeed="50" maxAcceleration="2" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="1.038" trackWidth="2.232" positionX="5.213" positionZ="0.519" />
+        <RearAxle maxSteering="0" wheelDiameter="1.038" trackWidth="2.37" positionX="0" positionZ="0.519" />
+        <AdditionalAxle maxSteering="0" wheelDiameter="1.038" trackWidth="2.37" positionX="1.152" positionZ="0.519" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Mercedes_C-class_2014" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.308" y="0" z="0.745" />
+        <Dimensions height="1.49" length="4.686" width="1.81" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_Mercedes_C-class_2014.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.674" trackWidth="1.588" positionX="2.84" positionZ="0.337" />
+        <RearAxle maxSteering="0" wheelDiameter="0.674" trackWidth="1.57" positionX="0" positionZ="0.337" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Mercedes_Citaro_CityBus_1997" vehicleCategory="bus">
+      <BoundingBox>
+        <Center x="2.552" y="0" z="1.52" />
+        <Dimensions height="3.04" length="12.03" width="2.581" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/Bus/Vehicle_Mercedes_Citaro_CityBus_1997.dapx" />
+      </Properties>
+      <Performance maxSpeed="50" maxAcceleration="2" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.968" trackWidth="2.254" positionX="5.944" positionZ="0.484" />
+        <RearAxle maxSteering="0" wheelDiameter="0.968" trackWidth="2.254" positionX="0" positionZ="0.484" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Mercedes_eActros_600_2023" vehicleCategory="truck">
+      <BoundingBox>
+        <Center x="2.26" y="0" z="1.978" />
+        <Dimensions height="3.955" length="6.452" width="2.57" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/TractorTruck/Vehicle_Mercedes_eActros_600_2023.dapx" />
+      </Properties>
+      <Performance maxSpeed="35" maxAcceleration="2" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.964" trackWidth="2.154" positionX="4" positionZ="0.482" />
+        <RearAxle maxSteering="0" wheelDiameter="0.964" trackWidth="2.154" positionX="0" positionZ="0.482" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Mercedes_E-class_Sedan_2017" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.408" y="0" z="0.754" />
+        <Dimensions height="1.508" length="5.211" width="1.911" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_Mercedes_E-class_Sedan_2017.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.692" trackWidth="1.68" positionX="3.157" positionZ="0.346" />
+        <RearAxle maxSteering="0" wheelDiameter="0.692" trackWidth="1.68" positionX="0" positionZ="0.346" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Mercedes_EQS_AMG_Line_2022" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.523" y="0" z="0.756" />
+        <Dimensions height="1.512" length="5.216" width="1.926" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_Mercedes_EQS_AMG_Line_2022.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.75" trackWidth="1.626" positionX="3.21" positionZ="0.375" />
+        <RearAxle maxSteering="0" wheelDiameter="0.75" trackWidth="1.626" positionX="0" positionZ="0.375" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Mercedes_GLA-class_SUV_2014" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.399" y="0" z="0.766" />
+        <Dimensions height="1.533" length="4.418" width="1.82" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_Mercedes_GLA-class_SUV_2014.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.74" trackWidth="1.54" positionX="2.703" positionZ="0.37" />
+        <RearAxle maxSteering="0" wheelDiameter="0.74" trackWidth="1.532" positionX="0" positionZ="0.37" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Mercedes_S-class_AMG_Line_Sedan_2017" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.423" y="0" z="0.765" />
+        <Dimensions height="1.53" length="5.32" width="1.9" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_Mercedes_S-class_AMG_Line_Sedan_2017.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.694" trackWidth="1.64" positionX="3.157" positionZ="0.347" />
+        <RearAxle maxSteering="0" wheelDiameter="0.694" trackWidth="1.662" positionX="0" positionZ="0.347" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Mercedes_Sprinter_Mobility_23_2022" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.712" y="0" z="1.425" />
+        <Dimensions height="2.85" length="5.932" width="2.02" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_Mercedes_Sprinter_Mobility_23_2022.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.706" trackWidth="1.704" positionX="3.665" positionZ="0.353" />
+        <RearAxle maxSteering="0" wheelDiameter="0.706" trackWidth="1.704" positionX="0" positionZ="0.353" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Neoplan_Skyliner_2015" vehicleCategory="bus">
+      <BoundingBox>
+        <Center x="3.126" y="0" z="2" />
+        <Dimensions height="4" length="14" width="2.55" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/Bus/Vehicle_Neoplan_Skyliner_2015.dapx" />
+      </Properties>
+      <Performance maxSpeed="50" maxAcceleration="2" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="1.004" trackWidth="2.152" positionX="8.172" positionZ="0.502" />
+        <RearAxle maxSteering="0" wheelDiameter="1.004" trackWidth="2.088" positionX="0" positionZ="0.502" />
+        <AdditionalAxle maxSteering="0" wheelDiameter="1.004" trackWidth="2.088" positionX="1.468" positionZ="0.502" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="NIO_ES8_SUV_2018" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.418" y="0" z="0.878" />
+        <Dimensions height="1.755" length="5.026" width="1.962" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_NIO_ES8_SUV_2018.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.763" trackWidth="1.682" positionX="2.999" positionZ="0.382" />
+        <RearAxle maxSteering="0" wheelDiameter="0.763" trackWidth="1.682" positionX="0" positionZ="0.382" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Porsche_CarreraGT_SportsCar_2006" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.397" y="0" z="0.581" />
+        <Dimensions height="1.162" length="4.63" width="2.209" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_Porsche_CarreraGT_SportsCar_2006.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.684" trackWidth="1.814" positionX="2.712" positionZ="0.342" />
+        <RearAxle maxSteering="0" wheelDiameter="0.684" trackWidth="1.818" positionX="0" positionZ="0.342" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Porsche_Taycan_GTS_2024" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.418" y="0" z="0.69" />
+        <Dimensions height="1.381" length="4.963" width="1.966" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_Porsche_Taycan_GTS_2024.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.738" trackWidth="1.648" positionX="2.9" positionZ="0.369" />
+        <RearAxle maxSteering="0" wheelDiameter="0.738" trackWidth="1.648" positionX="0" positionZ="0.369" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Rimac_Nevera_2022" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.513" y="0" z="0.604" />
+        <Dimensions height="1.208" length="4.75" width="1.986" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_Rimac_Nevera_2022.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.72" trackWidth="1.68" positionX="2.745" positionZ="0.36" />
+        <RearAxle maxSteering="0" wheelDiameter="0.72" trackWidth="1.68" positionX="0" positionZ="0.36" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Rosenbauer_Simba_8x8_Fire_Truck_1986" vehicleCategory="truck">
+      <BoundingBox>
+        <Center x="3.29" y="0" z="1.853" />
+        <Dimensions height="3.707" length="12.068" width="3.35" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/EmergencyVehicle/Vehicle_Rosenbauer_Simba_8x8_Fire_Truck_1986.dapx" />
+      </Properties>
+      <Performance maxSpeed="35" maxAcceleration="2" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="1.493" trackWidth="2.798" positionX="7.919" positionZ="0.746" />
+        <RearAxle maxSteering="0" wheelDiameter="1.493" trackWidth="2.798" positionX="0" positionZ="0.746" />
+        <AdditionalAxle maxSteering="0" wheelDiameter="1.493" trackWidth="2.798" positionX="1.616" positionZ="0.746" />
+        <AdditionalAxle maxSteering="0" wheelDiameter="1.493" trackWidth="2.798" positionX="6.321" positionZ="0.746" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Scania_P270_Truck_2011" vehicleCategory="truck">
+      <BoundingBox>
+        <Center x="2.145" y="0" z="2.073" />
+        <Dimensions height="4.146" length="8.568" width="2.678" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/CommercialVehicle/Vehicle_Scania_P270_Truck_2011.dapx" />
+      </Properties>
+      <Performance maxSpeed="50" maxAcceleration="2" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="1.241" trackWidth="2.23" positionX="4.809" positionZ="0.621" />
+        <RearAxle maxSteering="0" wheelDiameter="1.241" trackWidth="2.249" positionX="0" positionZ="0.621" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Tesla_Model_X_2016" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.402" y="0" z="0.84" />
+        <Dimensions height="1.68" length="5.057" width="1.999" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_Tesla_Model_X_2016.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.776" trackWidth="1.638" positionX="2.965" positionZ="0.388" />
+        <RearAxle maxSteering="0" wheelDiameter="0.776" trackWidth="1.6" positionX="0" positionZ="0.388" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Tractor_2020" vehicleCategory="truck">
+      <BoundingBox>
+        <Center x="2.047" y="0" z="2.028" />
+        <Dimensions height="4.056" length="6.864" width="3.271" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/CommercialVehicle/Vehicle_Tractor_2020.dapx" />
+      </Properties>
+      <Performance maxSpeed="35" maxAcceleration="2" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="1.71" trackWidth="2.344" positionX="3.221" positionZ="0.855" />
+        <RearAxle maxSteering="0" wheelDiameter="2.322" trackWidth="2.204" positionX="0" positionZ="1.161" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="TUM_Visio_M_2015" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.064" y="0" z="0.652" />
+        <Dimensions height="1.305" length="3.635" width="1.554" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_TUM_Visio_M_2015.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.564" trackWidth="1.358" positionX="2.121" positionZ="0.282" />
+        <RearAxle maxSteering="0" wheelDiameter="0.564" trackWidth="1.358" positionX="0" positionZ="0.282" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Vector_Sedan_2019" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.464" y="0" z="0.726" />
+        <Dimensions height="1.453" length="4.92" width="2.042" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_Vector_Sedan_2019.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.763" trackWidth="1.655" positionX="3.023" positionZ="0.382" />
+        <RearAxle maxSteering="0" wheelDiameter="0.763" trackWidth="1.655" positionX="0" positionZ="0.382" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="VinFast_VF_8_e35_2022" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.459" y="0" z="0.834" />
+        <Dimensions height="1.667" length="4.75" width="1.934" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_VinFast_VF_8_e35_2022.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.712" trackWidth="1.52" positionX="2.95" positionZ="0.356" />
+        <RearAxle maxSteering="0" wheelDiameter="0.712" trackWidth="1.52" positionX="0" positionZ="0.356" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="Volvo_XC90_SUV_2015" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.395" y="0" z="0.887" />
+        <Dimensions height="1.774" length="4.952" width="1.942" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_Volvo_XC90_SUV_2015.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.78" trackWidth="1.578" positionX="2.989" positionZ="0.39" />
+        <RearAxle maxSteering="0" wheelDiameter="0.78" trackWidth="1.6" positionX="0" positionZ="0.39" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="VW_Arteon_R_Shooting_Brake_2021" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.302" y="0" z="0.731" />
+        <Dimensions height="1.462" length="4.866" width="1.871" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_VW_Arteon_R_Shooting_Brake_2021.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.668" trackWidth="1.604" positionX="2.838" positionZ="0.334" />
+        <RearAxle maxSteering="0" wheelDiameter="0.668" trackWidth="1.604" positionX="0" positionZ="0.334" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="VW_Golf_2020" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.368" y="0" z="0.74" />
+        <Dimensions height="1.48" length="4.316" width="1.79" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_VW_Golf_2020.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.662" trackWidth="1.48" positionX="2.638" positionZ="0.331" />
+        <RearAxle maxSteering="0" wheelDiameter="0.662" trackWidth="1.46" positionX="0" positionZ="0.331" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="VW_Golf_Sportsvan_2015" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.349" y="0" z="0.788" />
+        <Dimensions height="1.577" length="4.358" width="1.815" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_VW_Golf_Sportsvan_2015.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.659" trackWidth="1.52" positionX="2.67" positionZ="0.329" />
+        <RearAxle maxSteering="0" wheelDiameter="0.659" trackWidth="1.526" positionX="0" positionZ="0.329" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="VW_GolfGTI_Compact_2005" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.368" y="0" z="0.77" />
+        <Dimensions height="1.539" length="4.219" width="1.77" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_VW_GolfGTI_Compact_2005.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.668" trackWidth="1.46" positionX="2.578" positionZ="0.334" />
+        <RearAxle maxSteering="0" wheelDiameter="0.668" trackWidth="1.428" positionX="0" positionZ="0.334" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="VW_GolfGTI_Compact_2014" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.362" y="0" z="0.711" />
+        <Dimensions height="1.422" length="4.255" width="1.792" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_VW_GolfGTI_Compact_2014.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.638" trackWidth="1.56" positionX="2.625" positionZ="0.319" />
+        <RearAxle maxSteering="0" wheelDiameter="0.638" trackWidth="1.548" positionX="0" positionZ="0.319" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="VW_ID.3_2020" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.37" y="0" z="0.776" />
+        <Dimensions height="1.552" length="4.261" width="1.809" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_VW_ID.3_2020.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.7" trackWidth="1.536" positionX="2.764" positionZ="0.35" />
+        <RearAxle maxSteering="0" wheelDiameter="0.7" trackWidth="1.513" positionX="0" positionZ="0.35" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="VW_ID.4_2020" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.299" y="0" z="0.806" />
+        <Dimensions height="1.612" length="4.584" width="1.852" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_VW_ID.4_2020.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.735" trackWidth="1.588" positionX="2.766" positionZ="0.367" />
+        <RearAxle maxSteering="0" wheelDiameter="0.735" trackWidth="1.566" positionX="0" positionZ="0.367" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="VW_ID.5_Pro_2022" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.344" y="0" z="0.808" />
+        <Dimensions height="1.615" length="4.599" width="1.852" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_VW_ID.5_Pro_2022.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.754" trackWidth="1.558" positionX="2.766" positionZ="0.377" />
+        <RearAxle maxSteering="0" wheelDiameter="0.754" trackWidth="1.528" positionX="0" positionZ="0.377" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="VW_ID.6_X_Prime_2022" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.419" y="0" z="0.84" />
+        <Dimensions height="1.68" length="4.876" width="1.848" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_VW_ID.6_X_Prime_2022.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.754" trackWidth="1.564" positionX="2.965" positionZ="0.377" />
+        <RearAxle maxSteering="0" wheelDiameter="0.754" trackWidth="1.564" positionX="0" positionZ="0.377" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="VW_ID_Buzz_2023" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.444" y="0" z="0.944" />
+        <Dimensions height="1.887" length="4.755" width="1.985" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_VW_ID_Buzz_2023.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.732" trackWidth="1.66" positionX="2.989" positionZ="0.366" />
+        <RearAxle maxSteering="0" wheelDiameter="0.732" trackWidth="1.66" positionX="0" positionZ="0.366" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="VW_ID_Space_Vizzion_2023" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.392" y="0" z="0.764" />
+        <Dimensions height="1.529" length="4.958" width="1.897" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_VW_ID_Space_Vizzion_2023.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.728" trackWidth="1.566" positionX="2.965" positionZ="0.364" />
+        <RearAxle maxSteering="0" wheelDiameter="0.728" trackWidth="1.566" positionX="0" positionZ="0.364" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="VW_Passat_Variant_2020" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.264" y="0" z="0.758" />
+        <Dimensions height="1.516" length="4.773" width="1.832" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_VW_Passat_Variant_2020.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.694" trackWidth="1.556" positionX="2.786" positionZ="0.347" />
+        <RearAxle maxSteering="0" wheelDiameter="0.694" trackWidth="1.588" positionX="0" positionZ="0.347" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="VW_T6_2016" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.48" y="0" z="0.985" />
+        <Dimensions height="1.97" length="4.904" width="1.904" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_VW_T6_2016.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.714" trackWidth="1.57" positionX="3.018" positionZ="0.357" />
+        <RearAxle maxSteering="0" wheelDiameter="0.714" trackWidth="1.57" positionX="0" positionZ="0.357" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="VW_Tiguan_R_2021" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.349" y="0" z="0.834" />
+        <Dimensions height="1.668" length="4.514" width="1.859" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/PassengerCar/Vehicle_VW_Tiguan_R_2021.dapx" />
+      </Properties>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.746" trackWidth="1.546" positionX="2.678" positionZ="0.373" />
+        <RearAxle maxSteering="0" wheelDiameter="0.746" trackWidth="1.546" positionX="0" positionZ="0.373" />
+      </Axles>
+    </Vehicle>
+  </Catalog>
+</OpenSCENARIO>

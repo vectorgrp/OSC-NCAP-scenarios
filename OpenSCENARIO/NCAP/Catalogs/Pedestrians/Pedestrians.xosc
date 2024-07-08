@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<OpenSCENARIO>
+  <!--Copyright (c) 2024, Vector Informatik GmbH--><FileHeader author="Vector Informatik GmbH" date="2024-07-08T13:20:36" description="Pedestrian Catalog for NCAP Scenarios" revMajor="1" revMinor="3"><License name="Mozilla Public License Version 2.0" resource="https://www.mozilla.org/en-US/MPL/2.0/" spdxId="MPL-2.0" /></FileHeader>
+  <Catalog name="Pedestrians">
+    <Pedestrian name="NCAP_Adult" pedestrianCategory="pedestrian" mass="0">
+      <BoundingBox>
+        <Center x="0" y="0" z="0.9" />
+        <Dimensions height="1.8" length="0.6" width="0.5" />
+      </BoundingBox>
+      </Pedestrian>
+    <Pedestrian name="NCAP_Child" pedestrianCategory="pedestrian" mass="0">
+      <BoundingBox>
+        <Center x="0" y="0" z="0.577" />
+        <Dimensions height="1.154" length="0.711" width="0.298" />
+      </BoundingBox>
+      </Pedestrian>
+    </Catalog>
+</OpenSCENARIO>

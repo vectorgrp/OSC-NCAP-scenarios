@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='utf-8'?>
+<OpenSCENARIO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="OpenSCENARIO.xsd">
+  <!--Copyright (c) 2024, Vector Informatik GmbH--><FileHeader revMajor="1" revMinor="3" date="2024-07-08T13:20:36" description="Pedestrian Catalog for NCAP Scenarios" author="Vector Informatik GmbH"><License name="Mozilla Public License Version 2.0" resource="https://www.mozilla.org/en-US/MPL/2.0/" spdxId="MPL-2.0" /></FileHeader>
+  <Catalog name="RouteCatalog">
+    <Route closed="false" name="VRU_Intersection_Farside">
+      <Waypoint routeStrategy="shortest">
+        <Position>
+          <LanePosition s="0" roadId="1" laneId="-1" offset="0">
+          </LanePosition>
+        </Position>
+      </Waypoint>
+      <Waypoint routeStrategy="shortest">
+        <Position>
+          <LanePosition s="0" roadId="3" laneId="1" offset="0" />
+        </Position>
+      </Waypoint>
+    </Route>
+    <Route closed="false" name="VRU_Intersection_Nearside">
+      <Waypoint routeStrategy="shortest">
+        <Position>
+          <LanePosition s="0" roadId="3" laneId="-1" offset="0">
+          </LanePosition>
+        </Position>
+      </Waypoint>
+      <Waypoint routeStrategy="shortest">
+        <Position>
+          <LanePosition s="0" roadId="1" laneId="1" offset="0" />
+        </Position>
+      </Waypoint>
+    </Route>
+    <Route closed="false" name="Ego_Intersection">
+      <Waypoint routeStrategy="shortest">
+        <Position>
+          <LanePosition s="0" roadId="0" laneId="-1" offset="0" />
+        </Position>
+      </Waypoint>
+      <Waypoint routeStrategy="shortest">
+        <Position>
+          <LanePosition s="70" roadId="2" laneId="-1" offset="0" />
+        </Position>
+      </Waypoint>
+    </Route>
+  </Catalog>
+</OpenSCENARIO>

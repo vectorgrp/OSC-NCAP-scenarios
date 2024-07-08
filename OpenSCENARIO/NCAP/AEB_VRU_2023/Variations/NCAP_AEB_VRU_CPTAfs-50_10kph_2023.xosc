@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='utf-8'?>
+<OpenSCENARIO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../Schema/OpenSCENARIO.xsd">
+  <!--Copyright (c) 2024, Vector Informatik GmbH--><FileHeader revMajor="1" revMinor="3" date="2024-07-08T13:20:36" description="Single Parameter Set with Ego Speed = 10 kph for NCAP AEB VRU CPTAfs 2023" author="Vector Informatik GmbH"><License name="Mozilla Public License Version 2.0" resource="https://www.mozilla.org/en-US/MPL/2.0/" spdxId="MPL-2.0" /></FileHeader>
+  <ParameterValueDistribution>
+    <ScenarioFile filepath="../NCAP_AEB_VRU_CPTA_2023.xosc" />
+    <Deterministic>
+      <DeterministicSingleParameterDistribution parameterName="Scenario_ID">
+        <DistributionSet>
+          <Element value="CPTAfs" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="Ego_turningDirection">
+        <DistributionSet>
+          <Element value="1" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="VRU_trajectoryDirection">
+        <DistributionSet>
+          <Element value="-1" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicMultiParameterDistribution>
+        <ValueSetDistribution>
+          <ParameterValueSet>
+            <ParameterAssignment value="10" parameterRef="Ego_speed_kph" />
+            <ParameterAssignment value="1500" parameterRef="Trajectory_R1" />
+            <ParameterAssignment value="9" parameterRef="Trajectory_R2" />
+            <ParameterAssignment value="20.62" parameterRef="Trajectory_alpha" />
+            <ParameterAssignment value="48.76" parameterRef="Trajectory_beta" />
+            <ParameterAssignment value="9.5" parameterRef="VRU_centerlineOffset" />
+            <ParameterAssignment value="9.5" parameterRef="VRU_collisionDist" />
+          </ParameterValueSet>
+        </ValueSetDistribution>
+      </DeterministicMultiParameterDistribution>
+    </Deterministic>
+  </ParameterValueDistribution>
+</OpenSCENARIO>

@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='utf-8'?>
+<OpenSCENARIO>
+  <!--Copyright (c) 2024, Vector Informatik GmbH--><FileHeader author="Vector Informatik GmbH" date="2024-07-08T13:20:36" description="Pedestrian Catalog for NCAP Scenarios" revMajor="1" revMinor="3"><License name="Mozilla Public License Version 2.0" resource="https://www.mozilla.org/en-US/MPL/2.0/" spdxId="MPL-2.0" /></FileHeader>
+  <Catalog name="Vehicles">
+    <Vehicle name="NCAP_Balloon_Car" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="0.073" y="0" z="0.675" />
+        <Dimensions height="1.35" length="1.35" width="1.6" />
+      </BoundingBox>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.573" trackWidth="1.454" positionX="0.1" positionZ="0.287" />
+        <RearAxle maxSteering="0" wheelDiameter="0.573" trackWidth="1.454" positionX="0" positionZ="0.287" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="NCAP_Bicycle" vehicleCategory="bicycle">
+      <BoundingBox>
+        <Center x="0.605" y="0" z="0.6" />
+        <Dimensions height="1.2" length="1.89" width="0.5" />
+      </BoundingBox>
+      <Performance maxSpeed="14" maxAcceleration="2" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.68" trackWidth="0" positionX="1.21" positionZ="0.34" />
+        <RearAxle maxSteering="0" wheelDiameter="0.68" trackWidth="0" positionX="0" positionZ="0.34" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="NCAP_2018_ObstructionVehicle_Large" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.399" y="0" z="0.766" />
+        <Dimensions height="1.533" length="4.418" width="1.82" />
+      </BoundingBox>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.74" trackWidth="1.54" positionX="2.703" positionZ="0.37" />
+        <RearAxle maxSteering="0" wheelDiameter="0.74" trackWidth="1.532" positionX="0" positionZ="0.37" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="NCAP_2018_ObstructionVehicle_Small" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.368" y="0" z="0.74" />
+        <Dimensions height="1.48" length="4.316" width="1.79" />
+      </BoundingBox>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.662" trackWidth="1.48" positionX="2.638" positionZ="0.331" />
+        <RearAxle maxSteering="0" wheelDiameter="0.662" trackWidth="1.46" positionX="0" positionZ="0.331" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="NCAP_GlobalVehicleTarget" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.328" y="0" z="0.714" />
+        <Dimensions height="1.427" length="4.023" width="1.712" />
+      </BoundingBox>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.656" trackWidth="1.434" positionX="2.475" positionZ="0.328" />
+        <RearAxle maxSteering="0" wheelDiameter="0.656" trackWidth="1.434" positionX="0" positionZ="0.328" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="NCAP_Motorcycle" vehicleCategory="motorbike">
+      <BoundingBox>
+        <Center x="0.673" y="0" z="0.53" />
+        <Dimensions height="1.06" length="2.08" width="0.79" />
+      </BoundingBox>
+      <Performance maxSpeed="70" maxAcceleration="8" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.606" trackWidth="0" positionX="1.41" positionZ="0.303" />
+        <RearAxle maxSteering="0" wheelDiameter="0.62" trackWidth="0" positionX="0" positionZ="0.31" />
+      </Axles>
+    </Vehicle>
+    <Vehicle name="VW_Golf_Sportsvan_2015" vehicleCategory="car">
+      <BoundingBox>
+        <Center x="1.349" y="0" z="0.788" />
+        <Dimensions height="1.577" length="4.358" width="1.815" />
+      </BoundingBox>
+      <Performance maxSpeed="70" maxAcceleration="5" maxDeceleration="10" />
+      <Axles>
+        <FrontAxle maxSteering="0.5" wheelDiameter="0.659" trackWidth="1.52" positionX="2.67" positionZ="0.329" />
+        <RearAxle maxSteering="0" wheelDiameter="0.659" trackWidth="1.526" positionX="0" positionZ="0.329" />
+      </Axles>
+    </Vehicle>
+    </Catalog>
+</OpenSCENARIO>

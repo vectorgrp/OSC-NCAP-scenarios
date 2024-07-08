@@ -1,0 +1,266 @@
+<?xml version='1.0' encoding='utf-8'?>
+<OpenSCENARIO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="OpenSCENARIO.xsd">
+  <!--Copyright (c) 2024, Vector Informatik GmbH--><FileHeader revMajor="1" revMinor="3" date="2024-07-08T13:20:36" author="Vector Informatik GmbH" description="Base Scenario for NCAP 2023 AEB VRU CBNA"><License name="Mozilla Public License Version 2.0" resource="https://www.mozilla.org/en-US/MPL/2.0/" spdxId="MPL-2.0" /></FileHeader>
+  <ParameterDeclarations>
+    <ParameterDeclaration name="Ego_speed_kph" parameterType="double" value="30" />
+    <ParameterDeclaration name="Ego_initTTC" parameterType="double" value="6"><!--time-to-collision for speed-dependent adjustment of initial distance to intersection-->
+      <ConstraintGroup>
+        <ValueConstraint value="5" rule="greaterThan" /><!--set TTC large enough to avoid starting too close to junction-->
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Ego_length" parameterType="double" value="4.358" />
+    <ParameterDeclaration name="Ego_width" parameterType="double" value="1.815"><!--required when impact location is not 50% -->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Ego_BBcenter_x" parameterType="double" value="1.349" />
+    <ParameterDeclaration name="VRU_length" parameterType="double" value="1.89" />
+    <ParameterDeclaration name="VRU_width" parameterType="double" value="0.5" />
+    <ParameterDeclaration name="VRU_BBcenter_x" parameterType="double" value="0.605" />
+    <ParameterDeclaration name="VRU_finalSpeed_kph" parameterType="double" value="15" />
+    <ParameterDeclaration name="VRU_steadyStateDist" parameterType="double" value="17"><!--steady state distance D as defined in NCAP protocol-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="VRU_collisionPointOffset" parameterType="double" value="0.62"><!--distance from origin (rear axle) to crank shaft-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="VRU_lateralDist" parameterType="double" value="1"><!--lateral distance to obstructing vehicles-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="ObstructionLarge_length" parameterType="double" value="4.418">
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterOrEqual" value="4.3" />
+        <ValueConstraint rule="lessOrEqual" value="4.7" />
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="ObstructionLarge_width" parameterType="double" value="1.82">
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterOrEqual" value="1.75" />
+        <ValueConstraint rule="lessOrEqual" value="1.9" />
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="ObstructionLarge_BBcenter_x" parameterType="double" value="1.399" />
+    <ParameterDeclaration name="ObstructionSmall_width" parameterType="double" value="1.79">
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterOrEqual" value="1.7" />
+        <ValueConstraint rule="lessOrEqual" value="1.9" />
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Obstruction_gap" parameterType="double" value="0.2">
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterThan" value="0.1" />
+        <ValueConstraint rule="lessThan" value="0.3" />
+      </ConstraintGroup><!--distance between obstructing vehicles defined as 0.1m...0.3m in NCAP protocol-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Road_armLength" parameterType="double" value="150" />
+    <ParameterDeclaration name="Road_laneWidth" parameterType="double" value="3.5"><!--lane width as defined by NCAP protocol-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Road_radius" parameterType="double" value="8"><!--road radius as defined by NCAP protocol-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Scenario_ID" parameterType="string" value="CBNA-50"><!--this parameter is not used within the scenario but may support the assessment-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Road_radiusCenter" parameterType="double" value="${$Road_radius+$Road_laneWidth}"><!--road radius as defined by OpenDRIVE-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Road_collisionPointAE" parameterType="double" value="${$Road_armLength+$_Road_radiusCenter-$Road_laneWidth/2}"><!--collision s-coordinate along the VRU route (A-axis) E as defined in NCAP protocol-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_VRU_laneOffset" parameterType="double" value="${$Road_laneWidth-$ObstructionLarge_width/2-$VRU_lateralDist-$VRU_width/2}"><!--VRU laneOffset used to achieve desired distance to obstructing vehicles-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Road_collisionPointBE" parameterType="double" value="${$Road_armLength+$_Road_radiusCenter+$Road_laneWidth/2-$_VRU_laneOffset-$VRU_width/2}"><!--collision s-coordinate along the Ego route (B-axis) E as defined in NCAP protocol-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Ego_frontBumperLon" parameterType="double" value="${$Ego_BBcenter_x+($Ego_length/2)}"><!--distance from rear axle to front end (bumper) of the bounding box -->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Ego_speed" parameterType="double" value="${$Ego_speed_kph/3.6}"><!--allows kph as unit in variation definition as in NCAP protocol -->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Ego_initS" parameterType="double" value="${$Road_armLength-$_Ego_speed*$Ego_initTTC}"><!--not actual time-to-collision but conservative estimate to intersection start-->
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterThan" value="0" /><!--negative numbers not valid-->
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_VRU_finalSpeed" parameterType="double" value="${$VRU_finalSpeed_kph/3.6}"><!--allows kph as unit in variation definition as in NCAP protocol -->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_VRU_initS" parameterType="double" value="${$_Road_collisionPointAE-$VRU_steadyStateDist-7}"><!--placing VRU somewhere behind obstruction vehicles with < 8m according to NCAP protocol-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_ObstructionLarge_rearOverhang" parameterType="double" value="${$ObstructionLarge_length/2-$ObstructionLarge_BBcenter_x}" />
+  </ParameterDeclarations>
+  <VariableDeclarations>
+    <VariableDeclaration name="collisionDetected" variableType="boolean" value="false" />
+    <VariableDeclaration name="egoSpeedReached" variableType="double" value="0.0" />
+  </VariableDeclarations>
+  <CatalogLocations>
+    <VehicleCatalog>
+      <Directory path="../Catalogs/Vehicles" />
+    </VehicleCatalog>
+    <RouteCatalog>
+      <Directory path="../Catalogs/Routes" />
+    </RouteCatalog>
+    <ManeuverCatalog>
+      <Directory path="../Catalogs/Maneuver" />
+    </ManeuverCatalog>
+  </CatalogLocations>
+  <RoadNetwork>
+    <LogicFile filepath="../../../OpenDRIVE/NCAP/X-Intersection_NCAP_noRoadmarks.xodr" />
+  </RoadNetwork>
+  <Entities>
+    <ScenarioObject name="Ego">
+      <CatalogReference entryName="VW_Golf_Sportsvan_2015" catalogName="Vehicles" />
+    </ScenarioObject>
+    <ScenarioObject name="VRU">
+      <CatalogReference entryName="NCAP_Bicycle" catalogName="Vehicles" />
+    </ScenarioObject>
+    <ScenarioObject name="ObstructionSmall">
+      <CatalogReference catalogName="Vehicles" entryName="NCAP_2018_ObstructionVehicle_Small" />
+    </ScenarioObject>
+    <ScenarioObject name="ObstructionLarge">
+      <CatalogReference catalogName="Vehicles" entryName="NCAP_2018_ObstructionVehicle_Large" />
+    </ScenarioObject>
+  </Entities>
+  <Storyboard>
+    <Init>
+      <Actions>
+        <Private entityRef="Ego">
+          <PrivateAction>
+            <TeleportAction>
+              <Position>
+                <RoutePosition>
+                  <RouteRef>
+                    <CatalogReference entryName="Ego_Intersection" catalogName="RouteCatalog" />
+                  </RouteRef>
+                  <InRoutePosition>
+                    <FromLaneCoordinates laneId="-1" pathS="$_Ego_initS" laneOffset="0" />
+                  </InRoutePosition>
+                </RoutePosition>
+              </Position>
+            </TeleportAction>
+          </PrivateAction>
+          <PrivateAction>
+            <LongitudinalAction>
+              <SpeedAction>
+                <SpeedActionDynamics dynamicsDimension="time" dynamicsShape="step" value="0" />
+                <SpeedActionTarget>
+                  <AbsoluteTargetSpeed value="$_Ego_speed" />
+                </SpeedActionTarget>
+              </SpeedAction>
+            </LongitudinalAction>
+          </PrivateAction>
+          <PrivateAction>
+            <RoutingAction>
+              <AssignRouteAction>
+                <CatalogReference entryName="Ego_Intersection" catalogName="RouteCatalog" />
+              </AssignRouteAction>
+            </RoutingAction>
+          </PrivateAction>
+        </Private>
+        <Private entityRef="VRU">
+          <PrivateAction>
+            <TeleportAction>
+              <Position>
+                <RoutePosition>
+                  <RouteRef>
+                    <CatalogReference entryName="VRU_Intersection_Nearside" catalogName="RouteCatalog" />
+                  </RouteRef>
+                  <InRoutePosition>
+                    <FromLaneCoordinates laneId="-1" pathS="$_VRU_initS" laneOffset="$_VRU_laneOffset" />
+                  </InRoutePosition>
+                </RoutePosition>
+              </Position>
+            </TeleportAction>
+          </PrivateAction>
+          <PrivateAction>
+            <RoutingAction>
+              <AssignRouteAction>
+                <CatalogReference entryName="VRU_Intersection_Nearside" catalogName="RouteCatalog" />
+              </AssignRouteAction>
+            </RoutingAction>
+          </PrivateAction>
+        </Private>
+        <Private entityRef="ObstructionLarge">
+          <PrivateAction>
+            <TeleportAction>
+              <Position>
+                <RoutePosition>
+                  <RouteRef>
+                    <CatalogReference catalogName="RouteCatalog" entryName="VRU_Intersection_Farside" />
+                  </RouteRef>
+                  <InRoutePosition>
+                    <FromLaneCoordinates laneId="-1" pathS="${$Road_armLength+$_Road_radiusCenter+$Road_laneWidth/2+$VRU_steadyStateDist+$_ObstructionLarge_rearOverhang}" />
+                  </InRoutePosition>
+                </RoutePosition>
+              </Position>
+            </TeleportAction>
+          </PrivateAction>
+        </Private>
+        <Private entityRef="ObstructionSmall">
+          <PrivateAction>
+            <TeleportAction>
+              <Position>
+                <RelativeObjectPosition entityRef="ObstructionLarge" dx="${$ObstructionLarge_length+$Obstruction_gap}" dy="${-1*($ObstructionSmall_width/2-$ObstructionLarge_width/2)}">
+                </RelativeObjectPosition>
+              </Position>
+            </TeleportAction>
+          </PrivateAction>
+        </Private>
+      </Actions>
+    </Init>
+    <Story name="NCAP_AEB_VRU_CBNA_2023">
+      <Act name="Collision_Act">
+        <ManeuverGroup name="Synchronization_CollisionDetection" maximumExecutionCount="1">
+          <Actors selectTriggeringEntities="false">
+            <EntityRef entityRef="VRU" />
+          </Actors>
+          <CatalogReference catalogName="ManeuverCatalog" entryName="LogAndSetVariables" />
+          <Maneuver name="VRU_Synchronization">
+            <Event name="VRU_SynchronizeEvent" priority="override">
+              <Action name="VRU_SynchronizeAction">
+                <PrivateAction>
+                  <SynchronizeAction masterEntityRef="Ego">
+                    <TargetPositionMaster>
+                      <RoutePosition>
+                        <RouteRef>
+                          <CatalogReference catalogName="RouteCatalog" entryName="Ego_Intersection" />
+                        </RouteRef>
+                        <InRoutePosition>
+                          <FromRoadCoordinates t="0" pathS="${$_Road_collisionPointBE-$_Ego_frontBumperLon}" />
+                        </InRoutePosition>
+                      </RoutePosition>
+                    </TargetPositionMaster>
+                    <TargetPosition>
+                      <RoutePosition>
+                        <RouteRef>
+                          <CatalogReference catalogName="RouteCatalog" entryName="VRU_Intersection_Nearside" />
+                        </RouteRef>
+                        <InRoutePosition>
+                          <FromRoadCoordinates t="0" pathS="${$_Road_collisionPointAE-$VRU_collisionPointOffset}" />
+                        </InRoutePosition>
+                      </RoutePosition>
+                    </TargetPosition>
+                    <FinalSpeed>
+                      <AbsoluteSpeed value="$_VRU_finalSpeed">
+                        <TargetDistanceSteadyState distance="$VRU_steadyStateDist" /><!--crank shaft offset already included in target position-->
+                      </AbsoluteSpeed>
+                    </FinalSpeed>
+                  </SynchronizeAction>
+                </PrivateAction>
+              </Action>
+            </Event>
+          </Maneuver>
+        </ManeuverGroup>
+      </Act>
+    </Story>
+    <StopTrigger>
+      <ConditionGroup>
+        <Condition name="StopAfterCollision" delay="1" conditionEdge="none">
+          <ByValueCondition>
+            <VariableCondition variableRef="collisionDetected" rule="equalTo" value="true" />
+          </ByValueCondition>
+        </Condition>
+      </ConditionGroup>
+      <ConditionGroup>
+        <Condition name="StopAfterVRUCrossed" delay="0" conditionEdge="none">
+          <ByEntityCondition>
+            <TriggeringEntities triggeringEntitiesRule="any">
+              <EntityRef entityRef="VRU" />
+            </TriggeringEntities>
+            <EntityCondition>
+              <TraveledDistanceCondition value="${$Road_armLength+25-$_VRU_initS}" />
+            </EntityCondition>
+          </ByEntityCondition>
+        </Condition>
+      </ConditionGroup>
+    </StopTrigger>
+  </Storyboard>
+</OpenSCENARIO>

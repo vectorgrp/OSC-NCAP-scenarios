@@ -45,9 +45,16 @@ You only need to clone the repository to get the OpenSCENARIO XML and OpenDRIVE 
 ### Notes for users of [Vector DYNA4](https://www.vector.com/dyna4)
 
 - As OpenSCENARIO XML 1.3 is used, DYNA4 R9 or greater needs to be used.
-- DYNA4 already comes with an example project 'Demo_NCAP'. However, the files in this repository may be updated independent of DYNA4 releases. To make use of the updates here we recommend to:
-  - Except for the vehicle and pedestrian catalogs overwrite the files in the DYNAdatabase and/or your Simulation Project with the ones provided in this repository.
+- DYNA4 already comes with an example project 'Demo_NCAP'. The most important differences of the files in this repository compared to the DYNA4 delivery are as follows:
+  - relative paths between files are used instead of absolute paths using the DYNA4 Content-Management Prefix
+  - Vehicle Catalog and Pedestrian Catalog contain only entities that are used within the scenarios of this repository
+  - Vehicle Catalog and Pedestrian Catalog are contained in the 'NCAP/Catalogs' folder instead of the 'OpenSCENARIO/Catalogs' folder
+  - entities in 'VehicleCatalog' and 'PedestrianCatalog' do not reference a 3D model for visualization
+- The files in this repository may be updated independent of DYNA4 releases. To make use of the updates here we recommend to:
+  - Make sure that you didn't alter the delivered NCAP OpenSCENARIO and OpenDRIVE files or versioned them properly to avoid any data loss at the next step.
+  - Overwrite the files in the DYNAdatabase and/or your Simulation Project with the ones provided in this repository.
   - Create new Scenarios and Tasks in DYNA4 in case additional NCAP scenarios are covered compared to your DYNA4 installation. Simply duplicate an existing one and load the newly added OpenSCENARIO file.
+  - You may want to change the 'CatalogLocations' of 'VehicleCatalog' and 'PedestrianCatalog' back to 'OpenSCENARIO/Catalogs/Vehicles' and 'OpenSCENARIO/Catalogs/Pedestrians' as in the files delivered with DYNA4 to get a proper visualization of the entities.
 
 ## Legal
 

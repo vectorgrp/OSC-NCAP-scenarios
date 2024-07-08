@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenSCENARIO>
+  <FileHeader author="Vector Informatik GmbH" date="2024-04-29T11:16:20" description="Vehicle Catalog for DYNA4 9.0.0" revMajor="1" revMinor="3" />
+  <Catalog name="Pedestrians">
+    <Pedestrian name="Bull" pedestrianCategory="animal" mass="0">
+      <BoundingBox>
+        <Center x="0" y="0" z="0.971" />
+        <Dimensions height="1.942" length="3.035" width="1.021" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/Animal/Animal_Bull.dapx" />
+      </Properties>
+    </Pedestrian>
+    <Pedestrian name="Business_Male" pedestrianCategory="pedestrian" mass="0">
+      <BoundingBox>
+        <Center x="0" y="0" z="0.906" />
+        <Dimensions height="1.812" length="0.917" width="0.588" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/Pedestrian/Pedestrian_Business_Male.dapx" />
+      </Properties>
+    </Pedestrian>
+    <Pedestrian name="Business_Young_Female" pedestrianCategory="pedestrian" mass="0">
+      <BoundingBox>
+        <Center x="0" y="0" z="0.879" />
+        <Dimensions height="1.758" length="0.992" width="0.47" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/Pedestrian/Pedestrian_Business_Young_Female.dapx" />
+      </Properties>
+    </Pedestrian>
+    <Pedestrian name="Casual_Young_Female" pedestrianCategory="pedestrian" mass="0">
+      <BoundingBox>
+        <Center x="0" y="0" z="0.879" />
+        <Dimensions height="1.758" length="1.01" width="0.47" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/Pedestrian/Pedestrian_Casual_Young_Female.dapx" />
+      </Properties>
+    </Pedestrian>
+    <Pedestrian name="Casual_Young_Female_Long_Sleeved_Clothing" pedestrianCategory="pedestrian" mass="0">
+      <BoundingBox>
+        <Center x="0" y="0" z="0.928" />
+        <Dimensions height="1.855" length="1.01" width="0.47" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/Pedestrian/Pedestrian_Casual_Young_Female_Long_Sleeved_Clothing.dapx" />
+      </Properties>
+    </Pedestrian>
+    <Pedestrian name="Casual_Young_Male" pedestrianCategory="pedestrian" mass="0">
+      <BoundingBox>
+        <Center x="0" y="0" z="0.926" />
+        <Dimensions height="1.851" length="0.891" width="0.57" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/Pedestrian/Pedestrian_Casual_Young_Male.dapx" />
+      </Properties>
+    </Pedestrian>
+    <Pedestrian name="Casual_Young_Male_Bob" pedestrianCategory="pedestrian" mass="0">
+      <BoundingBox>
+        <Center x="0" y="0" z="0.906" />
+        <Dimensions height="1.813" length="0.927" width="0.591" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/Pedestrian/Pedestrian_Casual_Young_Male_Bob.dapx" />
+      </Properties>
+    </Pedestrian>
+    <Pedestrian name="Casual_Young_Male_Frank" pedestrianCategory="pedestrian" mass="0">
+      <BoundingBox>
+        <Center x="0" y="0" z="0.906" />
+        <Dimensions height="1.813" length="0.927" width="0.591" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/Pedestrian/Pedestrian_Casual_Young_Male_Frank.dapx" />
+      </Properties>
+    </Pedestrian>
+    <Pedestrian name="Cat" pedestrianCategory="animal" mass="0">
+      <BoundingBox>
+        <Center x="0" y="0" z="0.241" />
+        <Dimensions height="0.482" length="0.986" width="0.179" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/Animal/Animal_Cat.dapx" />
+      </Properties>
+    </Pedestrian>
+    <Pedestrian name="Child_Male" pedestrianCategory="pedestrian" mass="0">
+      <BoundingBox>
+        <Center x="0" y="0" z="0.725" />
+        <Dimensions height="1.45" length="0.69" width="0.468" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/Pedestrian/Pedestrian_Child_Male.dapx" />
+      </Properties>
+    </Pedestrian>
+    <Pedestrian name="Child_Male_Fin" pedestrianCategory="pedestrian" mass="0">
+      <BoundingBox>
+        <Center x="0" y="0" z="0.764" />
+        <Dimensions height="1.527" length="0.726" width="0.468" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/Pedestrian/Pedestrian_Child_Male_Fin.dapx" />
+      </Properties>
+    </Pedestrian>
+    <Pedestrian name="Child_Male_Fin_Long_Sleeved_Clothing" pedestrianCategory="pedestrian" mass="0">
+      <BoundingBox>
+        <Center x="0" y="0" z="0.818" />
+        <Dimensions height="1.636" length="0.724" width="0.468" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/Pedestrian/Pedestrian_Child_Male_Fin_Long_Sleeved_Clothing.dapx" />
+      </Properties>
+    </Pedestrian>
+    <Pedestrian name="Child_Male_Tom" pedestrianCategory="pedestrian" mass="0">
+      <BoundingBox>
+        <Center x="0" y="0" z="0.623" />
+        <Dimensions height="1.246" length="0.546" width="0.363" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/Pedestrian/Pedestrian_Child_Male_Tom.dapx" />
+      </Properties>
+    </Pedestrian>
+    <Pedestrian name="ConstructionWorker_Male" pedestrianCategory="pedestrian" mass="0">
+      <BoundingBox>
+        <Center x="0" y="0" z="0.926" />
+        <Dimensions height="1.852" length="0.912" width="0.614" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/Pedestrian/Pedestrian_ConstructionWorker_Male.dapx" />
+      </Properties>
+    </Pedestrian>
+    <Pedestrian name="Cow" pedestrianCategory="animal" mass="0">
+      <BoundingBox>
+        <Center x="0" y="0" z="0.846" />
+        <Dimensions height="1.691" length="2.84" width="0.752" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/Animal/Animal_Cow.dapx" />
+      </Properties>
+    </Pedestrian>
+    <Pedestrian name="Cow_with_horns" pedestrianCategory="animal" mass="0">
+      <BoundingBox>
+        <Center x="0" y="0" z="0.846" />
+        <Dimensions height="1.691" length="2.84" width="0.752" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/Animal/Animal_Cow_with_horns.dapx" />
+      </Properties>
+    </Pedestrian>
+    <Pedestrian name="Deer" pedestrianCategory="animal" mass="0">
+      <BoundingBox>
+        <Center x="0" y="0" z="0.542" />
+        <Dimensions height="1.084" length="1.471" width="0.424" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/Animal/Animal_Deer.dapx" />
+      </Properties>
+    </Pedestrian>
+    <Pedestrian name="Doctor_Male" pedestrianCategory="pedestrian" mass="0">
+      <BoundingBox>
+        <Center x="0" y="0" z="0.906" />
+        <Dimensions height="1.812" length="0.917" width="0.614" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/Pedestrian/Pedestrian_Doctor_Male.dapx" />
+      </Properties>
+    </Pedestrian>
+    <Pedestrian name="German_Shepherd" pedestrianCategory="animal" mass="0">
+      <BoundingBox>
+        <Center x="0" y="0" z="0.446" />
+        <Dimensions height="0.891" length="1.412" width="0.335" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/Animal/Animal_German_Shepherd.dapx" />
+      </Properties>
+    </Pedestrian>
+    <Pedestrian name="Goat" pedestrianCategory="animal" mass="0">
+      <BoundingBox>
+        <Center x="0" y="0" z="0.435" />
+        <Dimensions height="0.87" length="1.148" width="0.356" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/Animal/Animal_Goat.dapx" />
+      </Properties>
+    </Pedestrian>
+    <Pedestrian name="Horse" pedestrianCategory="animal" mass="0">
+      <BoundingBox>
+        <Center x="0" y="0" z="1.07" />
+        <Dimensions height="2.141" length="2.821" width="0.599" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/Animal/Animal_Horse.dapx" />
+      </Properties>
+    </Pedestrian>
+    <Pedestrian name="Horse_with_saddle" pedestrianCategory="animal" mass="0">
+      <BoundingBox>
+        <Center x="0" y="0" z="1.085" />
+        <Dimensions height="2.17" length="2.821" width="0.7" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/Animal/Animal_Horse_with_saddle.dapx" />
+      </Properties>
+    </Pedestrian>
+    <Pedestrian name="MiddleEast_Female" pedestrianCategory="pedestrian" mass="0">
+      <BoundingBox>
+        <Center x="0" y="0" z="0.879" />
+        <Dimensions height="1.758" length="1" width="0.483" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/Pedestrian/Pedestrian_MiddleEast_Female.dapx" />
+      </Properties>
+    </Pedestrian>
+    <Pedestrian name="NCAP_Adult" pedestrianCategory="pedestrian" mass="0">
+      <BoundingBox>
+        <Center x="0" y="0" z="0.9" />
+        <Dimensions height="1.8" length="0.6" width="0.5" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/NCAP/NCAP_Adult.dapx" />
+      </Properties>
+    </Pedestrian>
+    <Pedestrian name="NCAP_Child" pedestrianCategory="pedestrian" mass="0">
+      <BoundingBox>
+        <Center x="0" y="0" z="0.577" />
+        <Dimensions height="1.154" length="0.711" width="0.298" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/NCAP/NCAP_Child.dapx" />
+      </Properties>
+    </Pedestrian>
+    <Pedestrian name="Pig" pedestrianCategory="animal" mass="0">
+      <BoundingBox>
+        <Center x="0" y="0" z="0.5" />
+        <Dimensions height="1" length="1.631" width="0.533" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/Animal/Animal_Pig.dapx" />
+      </Properties>
+    </Pedestrian>
+    <Pedestrian name="Rabbit" pedestrianCategory="animal" mass="0">
+      <BoundingBox>
+        <Center x="0" y="0" z="0.23" />
+        <Dimensions height="0.461" length="0.683" width="0.25" />
+      </BoundingBox>
+      <Properties>
+        <Property name="AnimationFile" value="cms:/$(database)/TrafficDatabase/Basics/TrafficModules/TrafficObjects/Animal/Animal_Rabbit.dapx" />
+      </Properties>
+    </Pedestrian>
+  </Catalog>
+</OpenSCENARIO>

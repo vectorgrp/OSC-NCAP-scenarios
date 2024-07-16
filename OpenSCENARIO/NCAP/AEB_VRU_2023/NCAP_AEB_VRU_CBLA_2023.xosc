@@ -1,0 +1,191 @@
+<?xml version='1.0' encoding='utf-8'?>
+<OpenSCENARIO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="OpenSCENARIO.xsd">
+  <!--Copyright (c) 2024, Vector Informatik GmbH--><FileHeader revMajor="1" revMinor="3" date="2024-07-08T13:20:36" author="Vector Informatik GmbH" description="Base Scenario for NCAP AEB VRU CBLA-50 and (through variations) CBLA-25, CPLA-50, CPLA-25"><License name="Mozilla Public License Version 2.0" resource="https://www.mozilla.org/en-US/MPL/2.0/" spdxId="MPL-2.0" /></FileHeader>
+  <ParameterDeclarations>
+    <ParameterDeclaration name="VRU_catalogName" parameterType="string" value="Vehicles">
+    </ParameterDeclaration>
+    <ParameterDeclaration name="VRU_catalogEntry" parameterType="string" value="NCAP_Bicycle">
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Overlap" parameterType="double" value="50"><!--overlap in percent at collision as defined in NCAP protocol-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Ego_speed_kph" parameterType="double" value="25" />
+    <ParameterDeclaration name="Ego_initS" parameterType="double" value="50"><!--initial advance of Ego entity-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Ego_initTTC" parameterType="double" value="6"><!--time-to-collision to adjust initial distance additional to triggering distance-->
+      <ConstraintGroup>
+        <ValueConstraint value="2.5" rule="greaterThan" /><!--set TTC at least greater than critical values-->
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Ego_width" parameterType="double" value="1.815"><!--required when impact location is not 50% -->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="VRU_finalSpeed_kph" parameterType="double" value="15" />
+    <ParameterDeclaration name="VRU_accelerationDist" parameterType="double" value="3.5"><!--acceleration distance Q / R as defined in NCAP protocol -->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="VRU_steadyStateDist" parameterType="double" value="28"><!--steady state distance to impact S as defined in NCAP protocol -->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Scenario_ID" parameterType="string" value="CBLA-50"><!--this parameter is not used within the scenario but may support the assessment-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Ego_speed" parameterType="double" value="${$Ego_speed_kph/3.6}"><!--allows kph as unit in variation definition as in NCAP protocol -->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_VRU_finalSpeed" parameterType="double" value="${$VRU_finalSpeed_kph/3.6}"><!--allows kph as unit in variation definition as in NCAP protocol -->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_triggerDist" parameterType="double" value="${$_Ego_speed/$_VRU_finalSpeed*(2*$VRU_accelerationDist+$VRU_steadyStateDist)-($VRU_accelerationDist+$VRU_steadyStateDist)}"><!--net distance between Ego and VRU to trigger acceleration-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_VRU_latOffset" parameterType="double" value="${$Ego_width*(($Overlap-50)/100)}"><!--VRU offset to account for desired collision overlap-->
+    </ParameterDeclaration>
+  </ParameterDeclarations>
+  <VariableDeclarations>
+    <VariableDeclaration name="collisionDetected" variableType="boolean" value="false" />
+    <VariableDeclaration name="egoSpeedReached" variableType="double" value="0.0" />
+  </VariableDeclarations>
+  <CatalogLocations>
+    <VehicleCatalog>
+      <Directory path="../Catalogs/Vehicles" />
+    </VehicleCatalog>
+    <PedestrianCatalog>
+      <Directory path="../Catalogs/Pedestrians" />
+    </PedestrianCatalog>
+    <ManeuverCatalog>
+      <Directory path="../Catalogs/Maneuver" />
+    </ManeuverCatalog>
+  </CatalogLocations>
+  <RoadNetwork>
+    <LogicFile filepath="../../../OpenDRIVE/NCAP/StraightRoad_NCAP_noRoadmarks.xodr" />
+  </RoadNetwork>
+  <Entities>
+    <ScenarioObject name="Ego">
+      <CatalogReference entryName="VW_Golf_Sportsvan_2015" catalogName="Vehicles" />
+    </ScenarioObject>
+    <ScenarioObject name="VRU">
+      <CatalogReference entryName="$VRU_catalogEntry" catalogName="$VRU_catalogName" />
+    </ScenarioObject>
+  </Entities>
+  <Storyboard>
+    <Init>
+      <Actions>
+        <Private entityRef="Ego">
+          <PrivateAction>
+            <TeleportAction>
+              <Position>
+                <LanePosition roadId="0" laneId="-1" s="$Ego_initS">
+                </LanePosition>
+              </Position>
+            </TeleportAction>
+          </PrivateAction>
+          <PrivateAction>
+            <LongitudinalAction>
+              <SpeedAction>
+                <SpeedActionDynamics dynamicsDimension="time" dynamicsShape="step" value="0" />
+                <SpeedActionTarget>
+                  <AbsoluteTargetSpeed value="$_Ego_speed" />
+                </SpeedActionTarget>
+              </SpeedAction>
+            </LongitudinalAction>
+          </PrivateAction>
+        </Private>
+        <Private entityRef="VRU">
+          <PrivateAction>
+            <TeleportAction>
+              <Position>
+                <RelativeLanePosition entityRef="Ego" dLane="0" offset="$_VRU_latOffset" ds="${$_Ego_speed*$Ego_initTTC+$_triggerDist}" />
+              </Position>
+            </TeleportAction>
+          </PrivateAction>
+        </Private>
+      </Actions>
+    </Init>
+    <Story name="NCAP_AEB_VRU_CBLA_2023">
+      <Act name="Collision_Act">
+        <ManeuverGroup name="AccelerationVRU_CollisionDetection" maximumExecutionCount="1">
+          <Actors selectTriggeringEntities="false">
+            <EntityRef entityRef="VRU" />
+          </Actors>
+          <CatalogReference catalogName="ManeuverCatalog" entryName="LogAndSetVariables" />
+          <Maneuver name="VRU_Acceleration">
+            <Event name="Accelerate_Ego_Approaching" priority="override">
+              <Action name="VRU_SpeedAction">
+                <PrivateAction>
+                  <LongitudinalAction>
+                    <SpeedAction>
+                      <SpeedActionDynamics dynamicsDimension="time" dynamicsShape="linear" value="${2*$VRU_accelerationDist/$_VRU_finalSpeed}" />
+                      <SpeedActionTarget>
+                        <AbsoluteTargetSpeed value="$_VRU_finalSpeed" />
+                      </SpeedActionTarget><!--using acceleration over time instead of distance to ensure constant acceleration and simplified subsequent calculations-->
+                    </SpeedAction>
+                  </LongitudinalAction>
+                </PrivateAction>
+              </Action>
+              <StartTrigger>
+                <ConditionGroup>
+                  <Condition name="AtEgoApproaching" delay="0.0" conditionEdge="rising">
+                    <ByEntityCondition>
+                      <TriggeringEntities triggeringEntitiesRule="any">
+                        <EntityRef entityRef="Ego" />
+                      </TriggeringEntities>
+                      <EntityCondition>
+                        <RelativeDistanceCondition freespace="true" relativeDistanceType="longitudinal" value="$_triggerDist" rule="lessOrEqual" entityRef="VRU" /><!--use freespace to avoid dependencies on entity lengths-->
+                      </EntityCondition>
+                    </ByEntityCondition>
+                  </Condition>
+                </ConditionGroup>
+              </StartTrigger>
+            </Event>
+          </Maneuver>
+        </ManeuverGroup>
+      </Act>
+    </Story>
+    <StopTrigger>
+      <ConditionGroup>
+        <Condition name="StopAfterCollision" delay="1" conditionEdge="none">
+          <ByValueCondition>
+            <VariableCondition variableRef="collisionDetected" rule="equalTo" value="true" />
+          </ByValueCondition>
+        </Condition>
+      </ConditionGroup>
+      <ConditionGroup>
+        <Condition name="StopAtSameSpeed" delay="0" conditionEdge="rising">
+          <ByEntityCondition>
+            <TriggeringEntities triggeringEntitiesRule="any">
+              <EntityRef entityRef="VRU" />
+            </TriggeringEntities>
+            <EntityCondition>
+              <RelativeSpeedCondition value="2" rule="greaterThan" entityRef="Ego" /><!--could stop at same speed according to NCAP but using safety margin of 2 m/s difference-->
+            </EntityCondition>
+          </ByEntityCondition>
+        </Condition>
+        <Condition name="EnsureTraveledDistance" delay="0" conditionEdge="none">
+          <ByEntityCondition>
+            <TriggeringEntities triggeringEntitiesRule="any">
+              <EntityRef entityRef="Ego" />
+            </TriggeringEntities>
+            <EntityCondition>
+              <TraveledDistanceCondition value="${$_Ego_speed*$Ego_initTTC+$_triggerDist}" /><!--travel at least to VRU init position-->
+            </EntityCondition>
+          </ByEntityCondition>
+        </Condition>
+      </ConditionGroup>
+      <ConditionGroup>
+        <Condition name="StopAtStandstill" delay="0" conditionEdge="rising">
+          <ByEntityCondition>
+            <TriggeringEntities triggeringEntitiesRule="any">
+              <EntityRef entityRef="Ego" />
+            </TriggeringEntities>
+            <EntityCondition>
+              <SpeedCondition value="0.1" rule="lessThan" />
+            </EntityCondition>
+          </ByEntityCondition>
+        </Condition>
+        <Condition name="EnsureTraveledDistance2" delay="0" conditionEdge="none">
+          <ByEntityCondition>
+            <TriggeringEntities triggeringEntitiesRule="any">
+              <EntityRef entityRef="Ego" />
+            </TriggeringEntities>
+            <EntityCondition>
+              <TraveledDistanceCondition value="${$_Ego_speed*$Ego_initTTC+$_triggerDist}" /><!--travel at least to VRU init position-->
+            </EntityCondition>
+          </ByEntityCondition>
+        </Condition>
+      </ConditionGroup>
+    </StopTrigger>
+  </Storyboard>
+</OpenSCENARIO>

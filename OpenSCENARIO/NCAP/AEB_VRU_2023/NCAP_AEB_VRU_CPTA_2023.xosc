@@ -1,0 +1,318 @@
+<?xml version='1.0' encoding='utf-8'?>
+<OpenSCENARIO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="OpenSCENARIO.xsd">
+  <!--Copyright (c) 2024, Vector Informatik GmbH--><FileHeader revMajor="1" revMinor="3" date="2024-07-08T13:20:36" author="Vector Informatik GmbH" description="Base Scenario for NCAP AEB VRU CPTA"><License name="Mozilla Public License Version 2.0" resource="https://www.mozilla.org/en-US/MPL/2.0/" spdxId="MPL-2.0" /></FileHeader>
+  <ParameterDeclarations>
+    <ParameterDeclaration name="Ego_speed_kph" parameterType="double" value="10" />
+    <ParameterDeclaration name="Ego_initS" parameterType="double" value="90"><!--initial advance of Ego entity-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Ego_initTTC" parameterType="double" value="6"><!--time-to-collision to adjust initial distance additional to triggering distance-->
+      <ConstraintGroup>
+        <ValueConstraint value="2.5" rule="greaterThan" /><!--set TTC at least greater than critical values-->
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Ego_length" parameterType="double" value="4.358" />
+    <ParameterDeclaration name="Ego_BBcenter_x" parameterType="double" value="1.349" />
+    <ParameterDeclaration name="Ego_turningDirection" parameterType="int" value="1"><!--direction of the Ego trajectory to switch between farside turn (1) and nearside turn (-1)-->
+      <ConstraintGroup>
+        <ValueConstraint value="-1" rule="equalTo" />
+      </ConstraintGroup>
+      <ConstraintGroup>
+        <ValueConstraint value="1" rule="equalTo" />
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="VRU_catalogName" parameterType="string" value="Pedestrians">
+    </ParameterDeclaration>
+    <ParameterDeclaration name="VRU_catalogEntry" parameterType="string" value="NCAP_Adult">
+    </ParameterDeclaration>
+    <ParameterDeclaration name="VRU_width" parameterType="double" value="0.5" />
+    <ParameterDeclaration name="VRU_collisionPointOffset" parameterType="double" value="${0.6/2-0.36}"><!--distance from origin (center of bounding box) to impact point according to NCAP protocol--><!--half of VRU length minus impact position from the front of the bounding box-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="VRU_finalSpeed_kph" parameterType="double" value="5" />
+    <ParameterDeclaration name="VRU_accelerationDist" parameterType="double" value="1" />
+    <ParameterDeclaration name="VRU_collisionDist" parameterType="double" value="9.5"><!--distance E of VRU to collision point K as defined in NCAP protocol--><!--distance from initial position to intersection of VRU and Ego trajectories, not to center of lane-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="VRU_centerlineOffset" parameterType="double" value="9.5"><!--distance of VRU to centerline of Ego road as defined in NCAP protocol-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="VRU_trajectoryDirection" parameterType="int" value="-1"><!--orientation of the VRUs trajectory to switch between opposite (1) and same direction (-1) as Ego-->
+      <ConstraintGroup>
+        <ValueConstraint value="-1" rule="equalTo" />
+      </ConstraintGroup>
+      <ConstraintGroup>
+        <ValueConstraint value="1" rule="equalTo" />
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Road_armLength" parameterType="double" value="150" />
+    <ParameterDeclaration name="Road_laneWidth" parameterType="double" value="3.5" />
+    <ParameterDeclaration name="Road_radius" parameterType="double" value="8"><!--road radius as defined by NCAP-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Trajectory_R1" parameterType="double" value="1500"><!--(large) radius at start of clothoid of trajectory defined as R1 in NCAP protocol-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Trajectory_R2" parameterType="double" value="9"><!--(small) radius at clothoid end and arc of trajectory defined as R2 in NCAP protocol-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Trajectory_alpha" parameterType="double" value="20.62"><!--angle covered by clothoid defined as alpha (deg) in NCAP protocol-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Trajectory_beta" parameterType="double" value="48.76"><!--angle covered by arc defined as beta (deg) in NCAP protocol-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Scenario_ID" parameterType="string" value="CPTAfs"><!--this parameter is not used within the scenario but may support the assessment-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Ego_speed" parameterType="double" value="${$Ego_speed_kph/3.6}"><!--allows kph as unit in variation definition as in NCAP protocol -->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Ego_frontBumperLon" parameterType="double" value="${$Ego_BBcenter_x+($Ego_length/2)}"><!--distance from rear axle to front end (bumper) of the bounding box -->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_VRU_finalSpeed" parameterType="double" value="${$VRU_finalSpeed_kph/3.6}"><!--allows kph as unit in variation definition as in NCAP protocol -->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_VRU_steadyStateDist" parameterType="double" value="${$VRU_collisionDist-$VRU_accelerationDist}" />
+    <ParameterDeclaration name="_Trajectory_kappa1" parameterType="double" value="${1/$Trajectory_R1}"><!--curvature at R1-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Trajectory_kappa2" parameterType="double" value="${1/$Trajectory_R2}"><!--curvature at R2-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Trajectory_alpha_rad" parameterType="double" value="${$Trajectory_alpha*pi/180}" />
+    <ParameterDeclaration name="_Trajectory_beta_rad" parameterType="double" value="${$Trajectory_beta*pi/180}" />
+    <ParameterDeclaration name="_Trajectory_clothoidLength" parameterType="double" value="${((2*$_Trajectory_kappa2*$_Trajectory_alpha_rad)/($_Trajectory_kappa2*$_Trajectory_kappa2-$_Trajectory_kappa1*$_Trajectory_kappa1))*(1-$_Trajectory_kappa1/$_Trajectory_kappa2)}"><!--length of the clothoid with different start and end curvature-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Trajectory_arcLength" parameterType="double" value="${$_Trajectory_beta_rad*$Trajectory_R2}"><!--length of the arc-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Trajectory_clothoidDeltaLong" parameterType="double" value="${$_Trajectory_clothoidLength}"><!--approximation for the projection of the clothoid (long axis) (X ~ L)-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Trajectory_clothoidDeltaShort" parameterType="double" value="${($_Trajectory_clothoidLength*$_Trajectory_clothoidLength)/(6*$Trajectory_R2)}"><!--approximation for the projection of the clothoid (short axis) (Y ~ L^2 / (6*R))--><!--assuming clothoid is starting from straight-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Trajectory_arcDelta" parameterType="double" value="${2*$Trajectory_R2*cos(pi/4)*sin($_Trajectory_beta_rad/2)}"><!--projection of the arc to X and Y-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Trajectory_totalDelta" parameterType="double" value="${$_Trajectory_arcDelta+$_Trajectory_clothoidDeltaShort+$_Trajectory_clothoidDeltaLong}"><!--total covered distance of the curved trajectory part projected to one axis-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Trajectory_straightLength" parameterType="double" value="${$Road_armLength-$Ego_initS-$_Trajectory_totalDelta+$Road_radius+$Road_laneWidth*(1+$Ego_turningDirection/2)}"><!--length of the straight part of the trajectory --><!--needs to be fitted to ensure trajectory is exiting intersection at distance declared in NCAP protocol--><!--last term takes into account that intersection needs to be crossed (farside turn) or not (nearside turn)-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Trajectory_distanceCollisionPoint" parameterType="double" value="${$_Trajectory_totalDelta-($VRU_centerlineOffset+($Ego_turningDirection*$Road_laneWidth/2))}"><!--distance from collision point to end of curved part of trajectory--><!--ego turning direction decides whether half lane width needs to be added or substracted-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Trajectory_collisionOffset" parameterType="double" value="${($_Trajectory_distanceCollisionPoint*$_Trajectory_distanceCollisionPoint)/(6*$Trajectory_R2)}"><!--offset of Ego trajectory from lane center due to trajectory bend at collision point-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Trajectory_tStart" parameterType="double" value="${($VRU_collisionDist+$VRU_trajectoryDirection*$Ego_turningDirection*$Road_laneWidth/2+$VRU_collisionPointOffset)*$VRU_trajectoryDirection+($_Trajectory_collisionOffset*$VRU_trajectoryDirection*-1)*$VRU_trajectoryDirection}"><!--tStart of the VRU trajectory measured to center lane of road to be crossed-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Ego_syncS" parameterType="double" value="${$_Trajectory_straightLength+2*$_Trajectory_clothoidLength+$_Trajectory_arcLength-$_Trajectory_distanceCollisionPoint-$_Ego_frontBumperLon-$VRU_width/2}"><!--distance from collision point to end of curved part of trajectory-->
+    </ParameterDeclaration>
+  </ParameterDeclarations>
+  <VariableDeclarations>
+    <VariableDeclaration name="collisionDetected" variableType="boolean" value="false" />
+    <VariableDeclaration name="egoSpeedReached" variableType="double" value="0.0" />
+  </VariableDeclarations>
+  <CatalogLocations>
+    <VehicleCatalog>
+      <Directory path="../Catalogs/Vehicles" />
+    </VehicleCatalog>
+    <PedestrianCatalog>
+      <Directory path="../Catalogs/Pedestrians" />
+    </PedestrianCatalog>
+    <TrajectoryCatalog>
+      <Directory path="../Catalogs/Trajectories" />
+    </TrajectoryCatalog>
+    <RouteCatalog>
+      <Directory path="../Catalogs/Routes" />
+    </RouteCatalog>
+    <ManeuverCatalog>
+      <Directory path="../Catalogs/Maneuver" />
+    </ManeuverCatalog>
+  </CatalogLocations>
+  <RoadNetwork>
+    <LogicFile filepath="../../../OpenDRIVE/NCAP/X-Intersection_NCAP.xodr" />
+  </RoadNetwork>
+  <Entities>
+    <ScenarioObject name="Ego">
+      <CatalogReference entryName="VW_Golf_Sportsvan_2015" catalogName="Vehicles" />
+      <ObjectController>
+        <Controller name="FrontAxleControlPoint">
+          <Properties>
+            <Property name="Driver.ControlPoint.Mode" value="FrontAxle" /><!--OpenSCENARIO specifies control point in center of rear axle but center of front axle is specified by NCAP protocol-->
+          </Properties>
+        </Controller>
+      </ObjectController>
+    </ScenarioObject>
+    <ScenarioObject name="VRU">
+      <CatalogReference entryName="$VRU_catalogEntry" catalogName="$VRU_catalogName" />
+    </ScenarioObject>
+  </Entities>
+  <Storyboard>
+    <Init>
+      <Actions>
+        <Private entityRef="Ego">
+          <PrivateAction>
+            <RoutingAction>
+              <FollowTrajectoryAction>
+                <TimeReference>
+                  <None />
+                </TimeReference>
+                <TrajectoryFollowingMode followingMode="follow" />
+                <TrajectoryRef>
+                  <CatalogReference catalogName="TrajectoryCatalog" entryName="Ego_CxTx">
+                    <ParameterAssignments>
+                      <ParameterAssignment value="${$Ego_turningDirection*$_Trajectory_kappa1}" parameterRef="kappa1" />
+                      <ParameterAssignment value="${$Ego_turningDirection*$_Trajectory_kappa2}" parameterRef="kappa2" />
+                      <ParameterAssignment value="$_Trajectory_clothoidLength" parameterRef="clothoidLength" />
+                      <ParameterAssignment value="$_Trajectory_arcLength" parameterRef="arcLength" />
+                      <ParameterAssignment value="$Ego_initS" parameterRef="start_s" />
+                      <ParameterAssignment value="$_Trajectory_straightLength" parameterRef="straight_length" />
+                    </ParameterAssignments>
+                  </CatalogReference>
+                </TrajectoryRef>
+              </FollowTrajectoryAction>
+            </RoutingAction>
+          </PrivateAction>
+          <PrivateAction>
+            <LongitudinalAction>
+              <SpeedAction>
+                <SpeedActionDynamics dynamicsDimension="time" dynamicsShape="step" value="0" />
+                <SpeedActionTarget>
+                  <AbsoluteTargetSpeed value="$_Ego_speed" />
+                </SpeedActionTarget>
+              </SpeedAction>
+            </LongitudinalAction>
+          </PrivateAction>
+        </Private>
+        <Private entityRef="VRU">
+          <PrivateAction>
+            <RoutingAction>
+              <FollowTrajectoryAction>
+                <TimeReference>
+                  <None />
+                </TimeReference>
+                <TrajectoryFollowingMode followingMode="position" />
+                <TrajectoryRef>
+                  <CatalogReference catalogName="TrajectoryCatalog" entryName="VRU_CxTfx">
+                    <ParameterAssignments>
+                      <ParameterAssignment value="$Road_laneWidth" parameterRef="laneWidth" />
+                      <ParameterAssignment value="$Road_armLength" parameterRef="armLength" />
+                      <ParameterAssignment value="$Road_radius" parameterRef="roadRadius" />
+                      <ParameterAssignment value="$_Trajectory_tStart" parameterRef="tStart" />
+                      <ParameterAssignment value="${$VRU_centerlineOffset*$Ego_turningDirection}" parameterRef="centerlineOffset" />
+                      <ParameterAssignment value="$VRU_trajectoryDirection" parameterRef="trajectoryOrientation" />
+                    </ParameterAssignments>
+                  </CatalogReference>
+                </TrajectoryRef>
+              </FollowTrajectoryAction>
+            </RoutingAction>
+          </PrivateAction>
+        </Private>
+      </Actions>
+    </Init>
+    <Story name="NCAP_AEB_VRU_CPTA_2023">
+      <Act name="Collision_Act">
+        <ManeuverGroup name="Synchronization_CollisionDetection" maximumExecutionCount="1">
+          <Actors selectTriggeringEntities="false">
+            <EntityRef entityRef="VRU" />
+          </Actors>
+          <CatalogReference catalogName="ManeuverCatalog" entryName="LogAndSetVariables" />
+          <Maneuver name="VRU_Synchronization">
+            <Event name="VRU_SynchronizeEvent" priority="override">
+              <Action name="VRU_SynchronizeAction">
+                <PrivateAction>
+                  <SynchronizeAction masterEntityRef="Ego">
+                    <TargetPositionMaster>
+                      <TrajectoryPosition s="$_Ego_syncS">
+                        <TrajectoryRef>
+                          <CatalogReference catalogName="TrajectoryCatalog" entryName="Ego_CxTx">
+                            <ParameterAssignments>
+                              <ParameterAssignment value="${$Ego_turningDirection*$_Trajectory_kappa1}" parameterRef="kappa1" />
+                              <ParameterAssignment value="${$Ego_turningDirection*$_Trajectory_kappa2}" parameterRef="kappa2" />
+                              <ParameterAssignment value="$_Trajectory_clothoidLength" parameterRef="clothoidLength" />
+                              <ParameterAssignment value="$_Trajectory_arcLength" parameterRef="arcLength" />
+                              <ParameterAssignment value="$Ego_initS" parameterRef="start_s" />
+                              <ParameterAssignment value="$_Trajectory_straightLength" parameterRef="straight_length" />
+                            </ParameterAssignments>
+                          </CatalogReference>
+                        </TrajectoryRef>
+                      </TrajectoryPosition>
+                    </TargetPositionMaster>
+                    <TargetPosition>
+                      <TrajectoryPosition s="$VRU_collisionDist">
+                        <TrajectoryRef>
+                          <CatalogReference catalogName="TrajectoryCatalog" entryName="VRU_CxTfx">
+                            <ParameterAssignments>
+                              <ParameterAssignment value="$Road_laneWidth" parameterRef="laneWidth" />
+                              <ParameterAssignment value="$Road_armLength" parameterRef="armLength" />
+                              <ParameterAssignment value="$Road_radius" parameterRef="roadRadius" />
+                              <ParameterAssignment value="$_Trajectory_tStart" parameterRef="tStart" />
+                              <ParameterAssignment value="${$VRU_centerlineOffset*$Ego_turningDirection}" parameterRef="centerlineOffset" />
+                              <ParameterAssignment value="$VRU_trajectoryDirection" parameterRef="trajectoryOrientation" />
+                            </ParameterAssignments>
+                          </CatalogReference>
+                        </TrajectoryRef>
+                      </TrajectoryPosition>
+                    </TargetPosition>
+                    <FinalSpeed>
+                      <AbsoluteSpeed value="$_VRU_finalSpeed">
+                        <TargetDistanceSteadyState distance="$_VRU_steadyStateDist" />
+                      </AbsoluteSpeed>
+                    </FinalSpeed>
+                  </SynchronizeAction>
+                </PrivateAction>
+              </Action>
+            </Event>
+          </Maneuver>
+        </ManeuverGroup>
+        <StartTrigger>
+          <ConditionGroup>
+            <Condition name="SimulationStart" delay="0" conditionEdge="rising">
+              <ByValueCondition>
+                <SimulationTimeCondition value="5" rule="greaterThan" />
+              </ByValueCondition>
+            </Condition>
+          </ConditionGroup>
+        </StartTrigger>
+      </Act>
+    </Story>
+    <StopTrigger>
+      <ConditionGroup>
+        <Condition name="StopAfterCollision" delay="3" conditionEdge="none">
+          <ByValueCondition>
+            <VariableCondition variableRef="collisionDetected" rule="equalTo" value="true" />
+          </ByValueCondition>
+        </Condition>
+      </ConditionGroup>
+      <ConditionGroup>
+        <Condition name="StopAtStandstill" delay="0" conditionEdge="rising">
+          <ByEntityCondition>
+            <TriggeringEntities triggeringEntitiesRule="any">
+              <EntityRef entityRef="Ego" />
+            </TriggeringEntities>
+            <EntityCondition>
+              <SpeedCondition value="0.1" rule="lessThan" />
+            </EntityCondition>
+          </ByEntityCondition>
+        </Condition>
+        <Condition name="EnsureTraveledDistance" delay="0" conditionEdge="none">
+          <ByEntityCondition>
+            <TriggeringEntities triggeringEntitiesRule="any">
+              <EntityRef entityRef="Ego" />
+            </TriggeringEntities>
+            <EntityCondition>
+              <TraveledDistanceCondition value="$_Trajectory_straightLength" /><!--travel at least to intersection-->
+            </EntityCondition>
+          </ByEntityCondition>
+        </Condition>
+      </ConditionGroup>
+      <ConditionGroup>
+        <Condition name="StopPastVRU" delay="0" conditionEdge="none">
+          <ByEntityCondition>
+            <TriggeringEntities triggeringEntitiesRule="any">
+              <EntityRef entityRef="Ego" />
+            </TriggeringEntities>
+            <EntityCondition>
+              <TraveledDistanceCondition value="${$_Trajectory_straightLength+2*$_Trajectory_clothoidLength+$_Trajectory_arcLength+3*$Ego_length}" /><!--travel behind collision point-->
+            </EntityCondition>
+          </ByEntityCondition>
+        </Condition>
+      </ConditionGroup>
+      <ConditionGroup>
+        <Condition name="StopVRUCrossed" delay="0" conditionEdge="none">
+          <ByEntityCondition>
+            <TriggeringEntities triggeringEntitiesRule="any">
+              <EntityRef entityRef="VRU" />
+            </TriggeringEntities>
+            <EntityCondition>
+              <TraveledDistanceCondition value="${2*$VRU_collisionDist}" /><!--consider VRU crossed after twice the distance to collision-->
+            </EntityCondition>
+          </ByEntityCondition>
+        </Condition>
+      </ConditionGroup>
+    </StopTrigger>
+  </Storyboard>
+</OpenSCENARIO>

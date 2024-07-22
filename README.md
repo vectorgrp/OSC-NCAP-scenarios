@@ -39,22 +39,22 @@ You only need to clone the repository to get the OpenSCENARIO XML and OpenDRIVE 
 | **Car-to-Car Rear Moving (CCRm)** | [AEB Car-to-Car systems v4.3.1](https://www.euroncap.com/media/80155/euro-ncap-aeb-c2c-test-protocol-v431.pdf) | CCRs |
 | **Car-to-Car Rear Braking (CCRb)** | [AEB Car-to-Car systems v4.3.1](https://www.euroncap.com/media/80155/euro-ncap-aeb-c2c-test-protocol-v431.pdf) | CCRs |
 
-- OpenSCENARIO XML in version 1.3 is used as certain features like 'ClothoidSpline' for the description of trajectories for turning maneuvers are required. Other updates on the standard are incorporated as well such as the absence of 'StartTrigger' elements where applicable. In short: your simulator must support OpenSCENARIO XML 1.3 to be able to use the provided scenarios.
+- OpenSCENARIO XML in version 1.3 is used as certain features like 'ClothoidSpline' for the description of trajectories for turning maneuvers are required. Other updates on the standard are incorporated as well such as the absence of 'StartTrigger' elements where applicable. In short: **your simulator must support OpenSCENARIO XML 1.3 to be able to use the provided scenarios**.
 - For scenarios in which the ego vehicle turns, [Euro NCAP](https://www.euroncap.com/) specifies a trajectory to be followed. While the OpenSCENARIO XML feature 'ClothoidSpline' allows to describe such trajectories, OpenSCENARIO specifies the center of the rear axle as the control point to follow these trajectories. [Euro NCAP](https://www.euroncap.com/) however specifies the center of the front axle as the control point. Therefore, the affected scenarios contain a proprietary yet standard-conform key-value pair within a 'Controller' to adjust the control point to the center of the front axle. As of now, this key-value pair is only interpreted by [Vector DYNA4](https://www.vector.com/dyna4) but may be standardized in a similar way within future versions of OpenSCENARIO XML.
 
 ### Notes for users of [Vector DYNA4](https://www.vector.com/dyna4)
 
-- As OpenSCENARIO XML 1.3 is used, DYNA4 R9 or greater needs to be used.
+- As OpenSCENARIO XML 1.3 is used, DYNA4 Release 9 or greater needs to be used.
 - DYNA4 already comes with an example project 'Demo_NCAP'. The most important differences of the files in this repository compared to the DYNA4 delivery are as follows:
-  - relative paths between files are used instead of absolute paths using the DYNA4 Content-Management Prefix
+  - relative paths between files are used instead of DYNA4 database paths using DYNA4's content management prefix
   - Vehicle Catalog and Pedestrian Catalog contain only entities that are used within the scenarios of this repository
   - Vehicle Catalog and Pedestrian Catalog are contained in the 'NCAP/Catalogs' folder instead of the 'OpenSCENARIO/Catalogs' folder
   - entities in 'VehicleCatalog' and 'PedestrianCatalog' do not reference a 3D model for visualization
-- The files in this repository may be updated independent of DYNA4 releases. To make use of the updates here we recommend to:
-  - Make sure that you didn't alter the delivered NCAP OpenSCENARIO and OpenDRIVE files or versioned them properly to avoid any data loss at the next step.
-  - Overwrite the files in the DYNAdatabase and/or your Simulation Project with the ones provided in this repository.
-  - Create new Scenarios and Tasks in DYNA4 in case additional NCAP scenarios are covered compared to your DYNA4 installation. Simply duplicate an existing one and load the newly added OpenSCENARIO file.
-  - You may want to change the 'CatalogLocations' of 'VehicleCatalog' and 'PedestrianCatalog' back to 'OpenSCENARIO/Catalogs/Vehicles' and 'OpenSCENARIO/Catalogs/Pedestrians' as in the files delivered with DYNA4 to get a proper visualization of the entities.
+- The files in this repository may be updated independently of DYNA4 releases. To make use any updates in this repository that are not yet included in your DYNA4 release version we recommend to:
+  - Generate a new and unmodified instance of the Demo_NCAP example project.
+  - Overwrite the folder contents of OpenSCENARIO and OpenDRIVE in the simulation project's database with the contents from this repository.
+  - Create new Scenarios and Tasks for any NCAP scenarios that are newly covered compared to your DYNA4 release version.
+  - You may want to change the 'CatalogLocations' of 'VehicleCatalog' and 'PedestrianCatalog' in each XOSC back to 'OpenSCENARIO/Catalogs/Vehicles' and 'OpenSCENARIO/Catalogs/Pedestrians', respectively, to get a proper visualization of the entities with the 3D models from the DYNA4 animation database.
 
 ## Citation
 

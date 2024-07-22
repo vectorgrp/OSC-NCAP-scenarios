@@ -50,7 +50,7 @@ You only need to clone the repository to get the OpenSCENARIO XML and OpenDRIVE 
   - Vehicle Catalog and Pedestrian Catalog contain only entities that are used within the scenarios of this repository
   - Vehicle Catalog and Pedestrian Catalog are contained in the 'NCAP/Catalogs' folder instead of the 'OpenSCENARIO/Catalogs' folder
   - entities in 'VehicleCatalog' and 'PedestrianCatalog' do not reference a 3D model for visualization
-- The files in this repository may be updated independently of DYNA4 releases. To make use any updates in this repository that are not yet included in your DYNA4 release version we recommend to:
+- The files in this repository may be updated independently of DYNA4 releases. To use any updates in this repository that are not yet included in your DYNA4 release version we recommend to:
   - Generate a new and unmodified instance of the Demo_NCAP example project.
   - Overwrite the folder contents of OpenSCENARIO and OpenDRIVE in the simulation project's database with the contents from this repository.
   - Create new Scenarios and Tasks for any NCAP scenarios that are newly covered compared to your DYNA4 release version.

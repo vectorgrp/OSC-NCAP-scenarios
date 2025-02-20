@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <OpenSCENARIO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="OpenSCENARIO.xsd">
-  <!--Copyright (c) 2024, Vector Informatik GmbH--><FileHeader revMajor="1" revMinor="3" date="2024-07-08T13:20:36" author="Vector Informatik GmbH" description="Base Scenario for NCAP 2023 AEB VRU CBFA-50"><License name="Mozilla Public License Version 2.0" resource="https://www.mozilla.org/en-US/MPL/2.0/" spdxId="MPL-2.0" /></FileHeader>
+  <!--Copyright (c) 2024-2025, Vector Informatik GmbH--><FileHeader revMajor="1" revMinor="3" date="2025-02-20T09:09:29" author="Vector Informatik GmbH" description="Base Scenario for NCAP 2023 AEB VRU CBFA-50"><License name="Mozilla Public License Version 2.0" resource="https://www.mozilla.org/en-US/MPL/2.0/" spdxId="MPL-2.0" /></FileHeader>
   <ParameterDeclarations>
     <ParameterDeclaration name="Ego_speed_kph" parameterType="double" value="30" />
     <ParameterDeclaration name="Ego_initTTC" parameterType="double" value="6"><!--time-to-collision for speed-dependent adjustment of initial distance to intersection-->
@@ -9,12 +9,8 @@
       </ConstraintGroup>
     </ParameterDeclaration>
     <ParameterDeclaration name="Ego_length" parameterType="double" value="4.358" />
-    <ParameterDeclaration name="Ego_width" parameterType="double" value="1.815"><!--required when impact location is not 50% -->
-    </ParameterDeclaration>
     <ParameterDeclaration name="Ego_BBcenter_x" parameterType="double" value="1.349" />
-    <ParameterDeclaration name="VRU_length" parameterType="double" value="1.89" />
     <ParameterDeclaration name="VRU_width" parameterType="double" value="0.5" />
-    <ParameterDeclaration name="VRU_BBcenter_x" parameterType="double" value="0.605" />
     <ParameterDeclaration name="VRU_finalSpeed_kph" parameterType="double" value="20" />
     <ParameterDeclaration name="VRU_steadyStateDist" parameterType="double" value="22" />
     <ParameterDeclaration name="VRU_collisionPointOffset" parameterType="double" value="0.62"><!--distance from origin (rear axle) to crank shaft-->
@@ -87,6 +83,9 @@
     <ManeuverCatalog>
       <Directory path="../Catalogs/Maneuver" />
     </ManeuverCatalog>
+    <EnvironmentCatalog>
+      <Directory path="../Catalogs/Environments" />
+    </EnvironmentCatalog>
   </CatalogLocations>
   <RoadNetwork>
     <LogicFile filepath="../../../OpenDRIVE/NCAP/X-Intersection_NCAP_noRoadmarks.xodr" />
@@ -108,6 +107,11 @@
   <Storyboard>
     <Init>
       <Actions>
+        <GlobalAction>
+          <EnvironmentAction>
+            <CatalogReference catalogName="Environments" entryName="Sunny" />
+          </EnvironmentAction>
+        </GlobalAction>
         <Private entityRef="Ego">
           <PrivateAction>
             <TeleportAction>
@@ -199,7 +203,11 @@
           <Actors selectTriggeringEntities="false">
             <EntityRef entityRef="VRU" />
           </Actors>
-          <CatalogReference catalogName="ManeuverCatalog" entryName="LogAndSetVariables" />
+          <CatalogReference catalogName="ManeuverCatalog" entryName="LogAndSetVariables">
+            <ParameterAssignments>
+              <ParameterAssignment parameterRef="egoSpeed" value="$_Ego_speed" />
+            </ParameterAssignments>
+          </CatalogReference>
           <Maneuver name="VRU_Synchronization">
             <Event name="VRU_SynchronizeEvent" priority="override">
               <Action name="VRU_SynchronizeAction">

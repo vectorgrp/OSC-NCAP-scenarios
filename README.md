@@ -29,12 +29,18 @@ You only need to clone the repository to get the OpenSCENARIO XML and OpenDRIVE 
 | **Car-to-Pedestrian Nearside Child Obstructed 50% (CPNCO-50)** | [AEB/LSS VRU systems v4.5.1](https://www.euroncap.com/media/80156/euro-ncap-aeb-lss-vru-test-protocol-v451.pdf) | CPNCO-50 |
 | **Car-to-Pedestrian Longitudinal Adult 25% (CPLA-25)** | [AEB/LSS VRU systems v4.5.1](https://www.euroncap.com/media/80156/euro-ncap-aeb-lss-vru-test-protocol-v451.pdf) | CBLA-50 |
 | **Car-to-Pedestrian Longitudinal Adult 50% (CPLA-50)** | [AEB/LSS VRU systems v4.5.1](https://www.euroncap.com/media/80156/euro-ncap-aeb-lss-vru-test-protocol-v451.pdf) | CBLA-50 |
+| **Car-to-Pedestrian Reverse Adult/Child moving 50% (CPRA/Cm-50)** | [AEB/LSS VRU systems v4.5.1](https://www.euroncap.com/media/80156/euro-ncap-aeb-lss-vru-test-protocol-v451.pdf) | CPRA/Cm-50 |
+| **Car-to-Pedestrian Reverse Adult/Child stationary (CPRA/Cs)** | [AEB/LSS VRU systems v4.5.1](https://www.euroncap.com/media/80156/euro-ncap-aeb-lss-vru-test-protocol-v451.pdf) | CPRA/Cs |
 | **Car-to-Pedestrian Turning Adult 50% (CPTA-50)** | [AEB/LSS VRU systems v4.5.1](https://www.euroncap.com/media/80156/euro-ncap-aeb-lss-vru-test-protocol-v451.pdf) | CPTA-50 |
 | **Car-to-Bicyclist Nearside Adult 50% (CBNA-50)** | [AEB/LSS VRU systems v4.5.1](https://www.euroncap.com/media/80156/euro-ncap-aeb-lss-vru-test-protocol-v451.pdf) | CBNA-50 |
 | **Car-to-Bicyclist Nearside Adult Obstructed 50% (CBNAO-50)** | [AEB/LSS VRU systems v4.5.1](https://www.euroncap.com/media/80156/euro-ncap-aeb-lss-vru-test-protocol-v451.pdf) | CBNAO-50 |
 | **Car-to-Bicyclist Farside Adult 50% (CBFA-50)** | [AEB/LSS VRU systems v4.5.1](https://www.euroncap.com/media/80156/euro-ncap-aeb-lss-vru-test-protocol-v451.pdf) | CBFA-50 |
 | **Car-to-Bicyclist Longitudinal Adult 25% (CBLA-25)** | [AEB/LSS VRU systems v4.5.1](https://www.euroncap.com/media/80156/euro-ncap-aeb-lss-vru-test-protocol-v451.pdf) | CBLA-50 |
 | **Car-to-Bicyclist Longitudinal Adult 50% (CBLA-50)** | [AEB/LSS VRU systems v4.5.1](https://www.euroncap.com/media/80156/euro-ncap-aeb-lss-vru-test-protocol-v451.pdf) | CBLA-50 |
+| **Car-to-Motorcyclist Front Turn Across Path (CMFtap)** | [AEB/LSS VRU systems v4.5.1](https://www.euroncap.com/media/80156/euro-ncap-aeb-lss-vru-test-protocol-v451.pdf) | CCFtap |
+| **Car-to-Car Front Head-On Lane change (CCFhol)** | [AEB Car-to-Car systems v4.3.1](https://www.euroncap.com/media/80155/euro-ncap-aeb-c2c-test-protocol-v431.pdf) | CCFhol |
+| **Car-to-Car Front Head-On Straight (CCFhos)** | [AEB Car-to-Car systems v4.3.1](https://www.euroncap.com/media/80155/euro-ncap-aeb-c2c-test-protocol-v431.pdf) | CCFhos |
+| **Car-to-Car Front Turn-Across-Path (CCFtap)** | [AEB Car-to-Car systems v4.3.1](https://www.euroncap.com/media/80155/euro-ncap-aeb-c2c-test-protocol-v431.pdf) | CCFtap |
 | **Car-to-Car Rear Stationary (CCRs)** | [AEB Car-to-Car systems v4.3.1](https://www.euroncap.com/media/80155/euro-ncap-aeb-c2c-test-protocol-v431.pdf) | CCRs |
 | **Car-to-Car Rear Moving (CCRm)** | [AEB Car-to-Car systems v4.3.1](https://www.euroncap.com/media/80155/euro-ncap-aeb-c2c-test-protocol-v431.pdf) | CCRs |
 | **Car-to-Car Rear Braking (CCRb)** | [AEB Car-to-Car systems v4.3.1](https://www.euroncap.com/media/80155/euro-ncap-aeb-c2c-test-protocol-v431.pdf) | CCRs |
@@ -44,7 +50,7 @@ You only need to clone the repository to get the OpenSCENARIO XML and OpenDRIVE 
 
 ### Notes for users of [Vector DYNA4](https://www.vector.com/dyna4)
 
-- As OpenSCENARIO XML 1.3 is used, DYNA4 Release 9 or greater needs to be used.
+- We recommend to use DYNA4 Release 9 SP1.
 - DYNA4 already comes with an example project 'Demo_NCAP'. The most important differences of the files in this repository compared to the DYNA4 delivery are as follows:
   - relative paths between files are used instead of DYNA4 database paths using DYNA4's content management prefix
   - Vehicle Catalog and Pedestrian Catalog contain only entities that are used within the scenarios of this repository
@@ -58,7 +64,7 @@ You only need to clone the repository to get the OpenSCENARIO XML and OpenDRIVE 
 
 ## Citation
 
-If you want to refer to this work in publications, please cite "Automated NCAP tests with ASAM OpenSCENARIO"; Jakob Kaths, Benedikt Schott, Hannah Bernauer, Markus Pielmeier, André Pinnel. AutoTest Technical Conference, 2024 [In Press].
+If you want to refer to this work in publications, please cite "Automated NCAP tests with ASAM OpenSCENARIO"; Jakob Kaths, Benedikt Schott, Hannah Bernauer, Markus Pielmeier, André Pinnel. AutoTest Technical Conference, 2024.
 
 ## Legal
 

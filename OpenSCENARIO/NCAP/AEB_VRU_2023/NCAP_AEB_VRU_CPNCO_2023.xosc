@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <OpenSCENARIO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="OpenSCENARIO.xsd">
-  <!--Copyright (c) 2024, Vector Informatik GmbH--><FileHeader revMajor="1" revMinor="3" date="2024-07-08T13:20:36" author="Vector Informatik GmbH" description="Base Scenario for NCAP 2023 AEB VRU CPNCO"><License name="Mozilla Public License Version 2.0" resource="https://www.mozilla.org/en-US/MPL/2.0/" spdxId="MPL-2.0" /></FileHeader>
+  <!--Copyright (c) 2024-2025, Vector Informatik GmbH--><FileHeader revMajor="1" revMinor="3" date="2025-02-20T09:09:29" author="Vector Informatik GmbH" description="Base Scenario for NCAP 2023 AEB VRU CPNCO"><License name="Mozilla Public License Version 2.0" resource="https://www.mozilla.org/en-US/MPL/2.0/" spdxId="MPL-2.0" /></FileHeader>
   <ParameterDeclarations>
     <ParameterDeclaration name="Overlap" parameterType="double" value="50"><!--overlap in percent at collision as defined in NCAP protocol-->
     </ParameterDeclaration>
@@ -45,12 +45,6 @@
       </ConstraintGroup>
     </ParameterDeclaration>
     <ParameterDeclaration name="ObstructionLarge_BBcenter_x" parameterType="double" value="1.399" />
-    <ParameterDeclaration name="ObstructionSmall_width" parameterType="double" value="1.79">
-      <ConstraintGroup>
-        <ValueConstraint rule="greaterOrEqual" value="1.7" />
-        <ValueConstraint rule="lessOrEqual" value="1.9" />
-      </ConstraintGroup>
-    </ParameterDeclaration>
     <ParameterDeclaration name="ObstructionSmall_length" parameterType="double" value="4.316">
       <ConstraintGroup>
         <ValueConstraint rule="greaterOrEqual" value="4.1" />
@@ -103,6 +97,9 @@
     <ManeuverCatalog>
       <Directory path="../Catalogs/Maneuver" />
     </ManeuverCatalog>
+    <EnvironmentCatalog>
+      <Directory path="../Catalogs/Environments" />
+    </EnvironmentCatalog>
   </CatalogLocations>
   <RoadNetwork>
     <LogicFile filepath="../../../OpenDRIVE/NCAP/StraightRoad_NCAP_noRoadmarks.xodr" />
@@ -124,6 +121,11 @@
   <Storyboard>
     <Init>
       <Actions>
+        <GlobalAction>
+          <EnvironmentAction>
+            <CatalogReference catalogName="Environments" entryName="Sunny" />
+          </EnvironmentAction>
+        </GlobalAction>
         <Private entityRef="Ego">
           <PrivateAction>
             <TeleportAction>
@@ -189,7 +191,11 @@
           <Actors selectTriggeringEntities="false">
             <EntityRef entityRef="VRU" />
           </Actors>
-          <CatalogReference catalogName="ManeuverCatalog" entryName="LogAndSetVariables" />
+          <CatalogReference catalogName="ManeuverCatalog" entryName="LogAndSetVariables">
+            <ParameterAssignments>
+              <ParameterAssignment parameterRef="egoSpeed" value="$_Ego_speed" />
+            </ParameterAssignments>
+          </CatalogReference>
           <Maneuver name="VRU_Synchronization">
             <Event name="VRU_SynchronizeEvent" priority="override">
               <Action name="VRU_SynchronizeAction">

@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <OpenSCENARIO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="OpenSCENARIO.xsd">
-  <!--Copyright (c) 2024, Vector Informatik GmbH--><FileHeader revMajor="1" revMinor="3" date="2024-07-08T13:20:36" description="Pedestrian Catalog for NCAP Scenarios" author="Vector Informatik GmbH"><License name="Mozilla Public License Version 2.0" resource="https://www.mozilla.org/en-US/MPL/2.0/" spdxId="MPL-2.0" /></FileHeader>
+  <!--Copyright (c) 2024-2025, Vector Informatik GmbH--><FileHeader revMajor="1" revMinor="3" date="2025-02-20T09:09:29" description="Pedestrian Catalog for NCAP Scenarios" author="Vector Informatik GmbH"><License name="Mozilla Public License Version 2.0" resource="https://www.mozilla.org/en-US/MPL/2.0/" spdxId="MPL-2.0" /></FileHeader>
   <Catalog name="TrajectoryCatalog">
     <Trajectory closed="false" name="VRU_CPx">
       <ParameterDeclarations>
@@ -31,8 +31,6 @@
       <ParameterDeclarations>
         <ParameterDeclaration name="start_roadID" parameterType="int" value="0" />
         <ParameterDeclaration name="start_laneID" parameterType="string" value="-1" />
-        <ParameterDeclaration name="straight_roadID" parameterType="int" value="2" />
-        <ParameterDeclaration name="straight_laneID" parameterType="string" value="-1" />
         <ParameterDeclaration name="straight_length" parameterType="double" value="100" />
         <ParameterDeclaration name="start_s" parameterType="double" value="150" />
         <ParameterDeclaration name="kappa1" parameterType="double" value="${1/1500}" />
@@ -54,6 +52,47 @@
           <ClothoidSplineSegment curvatureEnd="0" curvatureStart="0" length="$straight_length" />
         </ClothoidSpline>
       </Shape><!--Trajectory for Ego vehicle turning on intersection suitable vor CPTAx, CBTAx, CMFtap, CCFtap-->
+    </Trajectory>
+    <Trajectory closed="false" name="Ego_CPRx">
+      <ParameterDeclarations>
+        <ParameterDeclaration name="roadID" parameterType="int" value="0" />
+        <ParameterDeclaration name="start_S" parameterType="double" value="100" />
+      </ParameterDeclarations>
+      <Shape>
+        <Polyline>
+          <Vertex>
+            <Position>
+              <RoadPosition roadId="$roadID" s="$start_S" t="0" />
+            </Position>
+          </Vertex>
+          <Vertex>
+            <Position>
+              <RoadPosition roadId="$roadID" s="0" t="0" />
+            </Position>
+          </Vertex>
+        </Polyline>
+      </Shape><!--Trajectory for Ego vehicle driving backwards for CPRA/Cm/s-->
+    </Trajectory>
+    <Trajectory closed="false" name="VRU_CPRx">
+      <ParameterDeclarations>
+        <ParameterDeclaration name="roadID" parameterType="int" value="0" />
+        <ParameterDeclaration name="start_s" parameterType="double" value="100" />
+        <ParameterDeclaration name="start_t" parameterType="double" value="-4" />
+      </ParameterDeclarations>
+      <Shape>
+        <Polyline>
+          <Vertex>
+            <Position>
+              <RoadPosition roadId="$roadID" s="$start_s" t="$start_t" />
+            </Position>
+          </Vertex>
+          <Vertex>
+            <Position>
+              <RoadPosition roadId="$roadID" s="$start_s" t="${-1*$start_t}" />
+            </Position>
+          </Vertex>
+        </Polyline>
+      </Shape><!--Trajectory for VRUs for CPRA/Cm-->
     </Trajectory>
     <Trajectory closed="false" name="VRU_CxTfx">
       <ParameterDeclarations>
@@ -118,6 +157,55 @@
                 </TrajectoryRef>
                 <Orientation h="${$trajectoryOrientation*-1*pi/2}" type="relative" />
               </TrajectoryPosition>
+            </Position>
+          </Vertex>
+        </Polyline>
+      </Shape>
+    </Trajectory>
+    <Trajectory closed="false" name="GVT_CCFhol_50">
+      <Shape>
+        <ClothoidSpline>
+          <ClothoidSplineSegment curvatureEnd="0.008" curvatureStart="0.008" length="15" />
+          <ClothoidSplineSegment curvatureEnd="0.006" curvatureStart="0.006" length="1" />
+          <ClothoidSplineSegment curvatureEnd="0.001" curvatureStart="0.001" length="1" />
+          <ClothoidSplineSegment curvatureEnd="0" curvatureStart="0" length="10" />
+          <ClothoidSplineSegment curvatureEnd="-0.006" curvatureStart="-0.006" length="1" />
+          <ClothoidSplineSegment curvatureEnd="-0.008" curvatureStart="-0.008" length="15" />
+          <ClothoidSplineSegment curvatureEnd="0" curvatureStart="0" length="100" />
+        </ClothoidSpline>
+      </Shape>
+    </Trajectory>
+    <Trajectory closed="false" name="GVT_CCFhol_70">
+      <Shape>
+        <ClothoidSpline>
+          <ClothoidSplineSegment curvatureEnd="0.004" curvatureStart="0.004" length="24" />
+          <ClothoidSplineSegment curvatureEnd="0.001" curvatureStart="0.001" length="1" />
+          <ClothoidSplineSegment curvatureEnd="0" curvatureStart="0" length="10" />
+          <ClothoidSplineSegment curvatureEnd="-0.001" curvatureStart="-0.001" length="1" />
+          <ClothoidSplineSegment curvatureEnd="-0.004" curvatureStart="-0.004" length="24" />
+          <ClothoidSplineSegment curvatureEnd="0" curvatureStart="0" length="100" />
+        </ClothoidSpline>
+      </Shape>
+    </Trajectory>
+    <Trajectory closed="false" name="Target_straightAcross">
+      <ParameterDeclarations>
+        <ParameterDeclaration name="armLength" parameterType="double" value="150" />
+        <ParameterDeclaration name="start_roadID" parameterType="int" value="2" />
+        <ParameterDeclaration name="straight_roadID" parameterType="int" value="0" />
+        <ParameterDeclaration name="lateralOffset" parameterType="double" value="1.75" />
+      </ParameterDeclarations>
+      <Shape>
+        <Polyline>
+          <Vertex>
+            <Position>
+              <RoadPosition roadId="$start_roadID" s="$armLength" t="$lateralOffset">
+                <Orientation h="${-pi}" type="relative" />
+              </RoadPosition>
+            </Position>
+          </Vertex>
+          <Vertex>
+            <Position>
+              <RoadPosition roadId="$straight_roadID" s="0" t="$lateralOffset" />
             </Position>
           </Vertex>
         </Polyline>

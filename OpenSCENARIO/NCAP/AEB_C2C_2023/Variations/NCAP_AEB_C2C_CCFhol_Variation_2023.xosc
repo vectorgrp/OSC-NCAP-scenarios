@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<OpenSCENARIO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="OpenSCENARIO.xsd">
+  <!--Copyright (c) 2025, Vector Informatik GmbH--><FileHeader author="Vector Informatik GmbH" date="2025-02-20T09:09:29" description="Parameter Variations for NCAP AEB CCFhol" revMajor="1" revMinor="3"><License name="Mozilla Public License Version 2.0" resource="https://www.mozilla.org/en-US/MPL/2.0/" spdxId="MPL-2.0" /></FileHeader>
+  <ParameterValueDistribution>
+    <ScenarioFile filepath="../NCAP_AEB_C2C_CCFhol_2023.xosc" />
+    <Deterministic>
+      <DeterministicSingleParameterDistribution parameterName="Scenario_ID">
+        <DistributionSet>
+          <Element value="CCFhol" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicMultiParameterDistribution>
+        <ValueSetDistribution>
+          <ParameterValueSet>
+            <ParameterAssignment parameterRef="Trajectory_laneChangeDistance" value="44" />
+            <ParameterAssignment parameterRef="Trajectory_catalogEntry" value="GVT_CCFhol_50" />
+            <ParameterAssignment parameterRef="Ego_speed_kph" value="50" />
+            <ParameterAssignment parameterRef="GVT_followingDistance" value="13.9" />
+          </ParameterValueSet>
+          <ParameterValueSet>
+            <ParameterAssignment parameterRef="Trajectory_laneChangeDistance" value="60" />
+            <ParameterAssignment parameterRef="Trajectory_catalogEntry" value="GVT_CCFhol_70" />
+            <ParameterAssignment parameterRef="Ego_speed_kph" value="70" />
+            <ParameterAssignment parameterRef="GVT_followingDistance" value="19.4" />
+          </ParameterValueSet>
+        </ValueSetDistribution>
+      </DeterministicMultiParameterDistribution>
+    </Deterministic>
+  </ParameterValueDistribution>
+</OpenSCENARIO>

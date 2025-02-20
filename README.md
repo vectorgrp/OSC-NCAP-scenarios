@@ -50,7 +50,7 @@ You only need to clone the repository to get the OpenSCENARIO XML and OpenDRIVE 
 
 ### Notes for users of [Vector DYNA4](https://www.vector.com/dyna4)
 
-- We recommend to use DYNA4 Release 9 SP1.
+- We recommend to use DYNA4 Release 9 Service Pack 1.
 - DYNA4 already comes with an example project 'Demo_NCAP'. The most important differences of the files in this repository compared to the DYNA4 delivery are as follows:
   - relative paths between files are used instead of DYNA4 database paths using DYNA4's content management prefix
   - Vehicle Catalog and Pedestrian Catalog contain only entities that are used within the scenarios of this repository

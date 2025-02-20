@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='utf-8'?>
+<OpenSCENARIO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../Schema/OpenSCENARIO.xsd">
+  <!--Copyright (c) 2025, Vector Informatik GmbH--><FileHeader revMajor="1" revMinor="3" date="2025-02-20T09:09:29" description="Parameter Variations for NCAP AEB VRU CMFtap 2023" author="Vector Informatik GmbH"><License name="Mozilla Public License Version 2.0" resource="https://www.mozilla.org/en-US/MPL/2.0/" spdxId="MPL-2.0" /></FileHeader>
+  <ParameterValueDistribution>
+    <ScenarioFile filepath="../../AEB_C2C_2023/NCAP_AEB_C2C_CCFtap_2023.xosc" />
+    <Deterministic>
+      <DeterministicSingleParameterDistribution parameterName="Scenario_ID">
+        <DistributionSet>
+          <Element value="CMFtap" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="Target_catalogName">
+        <DistributionSet>
+          <Element value="Vehicles" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="Target_catalogEntry">
+        <DistributionSet>
+          <Element value="NCAP_Motorcycle" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="Target_length">
+        <DistributionSet>
+          <Element value="2.08" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="Target_width">
+        <DistributionSet>
+          <Element value="0" />
+        </DistributionSet><!--setting width to 0 as center of motorcycle is targeted and not corner of its bounding box-->
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="Target_BBcenter_x">
+        <DistributionSet>
+          <Element value="0.673" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="Target_finalSpeed_kph">
+        <DistributionSet>
+          <Element value="30" />
+          <Element value="45" />
+          <Element value="60" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicMultiParameterDistribution>
+        <ValueSetDistribution>
+          <ParameterValueSet>
+            <ParameterAssignment value="10" parameterRef="Ego_speed_kph" />
+            <ParameterAssignment value="1500" parameterRef="Trajectory_R1" />
+            <ParameterAssignment value="9" parameterRef="Trajectory_R2" />
+            <ParameterAssignment value="20.62" parameterRef="Trajectory_alpha" />
+            <ParameterAssignment value="48.76" parameterRef="Trajectory_beta" />
+          </ParameterValueSet>
+          <ParameterValueSet>
+            <ParameterAssignment value="15" parameterRef="Ego_speed_kph" />
+            <ParameterAssignment value="1500" parameterRef="Trajectory_R1" />
+            <ParameterAssignment value="11.75" parameterRef="Trajectory_R2" />
+            <ParameterAssignment value="20.93" parameterRef="Trajectory_alpha" />
+            <ParameterAssignment value="48.14" parameterRef="Trajectory_beta" />
+          </ParameterValueSet>
+          <ParameterValueSet>
+            <ParameterAssignment value="20" parameterRef="Ego_speed_kph" />
+            <ParameterAssignment value="1500" parameterRef="Trajectory_R1" />
+            <ParameterAssignment value="14.75" parameterRef="Trajectory_R2" />
+            <ParameterAssignment value="21.79" parameterRef="Trajectory_alpha" />
+            <ParameterAssignment value="46.42" parameterRef="Trajectory_beta" />
+          </ParameterValueSet>
+        </ValueSetDistribution>
+      </DeterministicMultiParameterDistribution>
+    </Deterministic>
+  </ParameterValueDistribution>
+</OpenSCENARIO>

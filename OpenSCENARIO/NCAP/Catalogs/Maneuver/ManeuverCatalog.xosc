@@ -1,10 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
 <OpenSCENARIO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="OpenSCENARIO.xsd">
-  <!--Copyright (c) 2024, Vector Informatik GmbH--><FileHeader author="Vector Informatik GmbH" date="2024-07-08T13:20:36" description="Pedestrian Catalog for NCAP Scenarios" revMajor="1" revMinor="3"><License name="Mozilla Public License Version 2.0" resource="https://www.mozilla.org/en-US/MPL/2.0/" spdxId="MPL-2.0" /></FileHeader>
+  <!--Copyright (c) 2024-2025, Vector Informatik GmbH--><FileHeader author="Vector Informatik GmbH" date="2025-02-20T09:09:29" description="Pedestrian Catalog for NCAP Scenarios" revMajor="1" revMinor="3"><License name="Mozilla Public License Version 2.0" resource="https://www.mozilla.org/en-US/MPL/2.0/" spdxId="MPL-2.0" /></FileHeader>
   <Catalog name="ManeuverCatalog">
     <Maneuver name="LogAndSetVariables">
       <ParameterDeclarations>
         <ParameterDeclaration name="collidingEntity" parameterType="string" value="VRU" />
+        <ParameterDeclaration name="egoSpeed" parameterType="double" value="0" />
       </ParameterDeclarations>
       <Event name="AtCollision" priority="parallel" maximumExecutionCount="1">
         <Action name="SetCollisionVariable">
@@ -35,7 +36,7 @@
         <Action name="SetSpeedVariable">
           <GlobalAction>
             <VariableAction variableRef="egoSpeedReached">
-              <SetAction value="$_Ego_speed" />
+              <SetAction value="$egoSpeed" />
             </VariableAction>
           </GlobalAction>
         </Action>
@@ -47,7 +48,7 @@
                   <EntityRef entityRef="Ego" />
                 </TriggeringEntities>
                 <EntityCondition>
-                  <SpeedCondition value="${$_Ego_speed*0.98}" rule="greaterThan" />
+                  <SpeedCondition value="${$egoSpeed*0.98}" rule="greaterThan" />
                 </EntityCondition>
               </ByEntityCondition>
             </Condition>

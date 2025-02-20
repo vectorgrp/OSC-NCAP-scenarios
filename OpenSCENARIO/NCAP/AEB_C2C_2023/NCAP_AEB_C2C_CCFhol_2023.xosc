@@ -1,0 +1,290 @@
+<?xml version='1.0' encoding='utf-8'?>
+<OpenSCENARIO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="OpenSCENARIO.xsd">
+  <!--Copyright (c) 2025, Vector Informatik GmbH--><FileHeader revMajor="1" revMinor="3" date="2025-02-20T09:09:29" author="Vector Informatik GmbH" description="Base Scenario for NCAP 2023 AEB C2C CCFhol"><License name="Mozilla Public License Version 2.0" resource="https://www.mozilla.org/en-US/MPL/2.0/" spdxId="MPL-2.0" /></FileHeader>
+  <ParameterDeclarations>
+    <ParameterDeclaration name="Trajectory_catalogEntry" parameterType="string" value="GVT_CCFhol_70" />
+    <ParameterDeclaration name="Trajectory_laneChangeDistance" parameterType="double" value="60"><!--lane change distance of GVT in m defined in NCAP protocol as L--><!--needs to be set explicitly as it cannot be derived from catalog trajectory-->
+      <ConstraintGroup>
+        <ValueConstraint rule="equalTo" value="60" />
+      </ConstraintGroup>
+      <ConstraintGroup>
+        <ValueConstraint rule="equalTo" value="44" />
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Scenario_ID" parameterType="string" value="CCFhol"><!--this parameter is not used within the scenario but may support the assessment-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Ego_initS" parameterType="double" value="50"><!--initial advance of Ego entity-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Ego_speed_kph" parameterType="double" value="70"><!--Ego test speed-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Ego_length" parameterType="double" value="4.358" />
+    <ParameterDeclaration name="Ego_BBcenter_x" parameterType="double" value="1.349" />
+    <ParameterDeclaration name="GVT_followingDistance" parameterType="double" value="19.4"><!--space headway in m defined in NCAP protocol as F-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="GVT_latDist" parameterType="double" value="3.5"><!--lateral distance of GVT to Ego in m defined in NCAP protocol as O-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="GVT_laneChangeTTC" parameterType="double" value="1.5"><!--TTC when lane change ends as defined in NCAP protocol-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="GVT_length" parameterType="double" value="4.023" />
+    <ParameterDeclaration name="GVT_BBcenter_x" parameterType="double" value="1.328" />
+    <ParameterDeclaration name="startupTime" parameterType="double" value="8"><!--time elapsed prior to lane change used for initial positioning of vehicles-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Ego_speed" parameterType="double" value="${$Ego_speed_kph/3.6}"><!--allows kph as unit in variation definition as in NCAP protocol -->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_GVT_speed" parameterType="double" value="$_Ego_speed"><!--GVT speed equals Ego speed according to NCAP protocol -->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Ego_frontBumperLon" parameterType="double" value="${$Ego_BBcenter_x+($Ego_length/2)}"><!--distance from rear axle to front end (bumper) of the bounding box -->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_GVT_frontBumperLon" parameterType="double" value="${$GVT_BBcenter_x+($GVT_length/2)}"><!--distance from rear axle to front end (bumper) of the bounding box -->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Trajectory_laneChangeTime" parameterType="double" value="${$Trajectory_laneChangeDistance/$_GVT_speed}"><!--time required to cover lane change distance-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Ego_syncS" parameterType="double" value="${$Ego_initS+$startupTime*$_Ego_speed-$_Ego_frontBumperLon}"><!--synchronization point of Ego vehicle along the road-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_GVT_syncS" parameterType="double" value="${$_Ego_syncS+($_Trajectory_laneChangeTime+$GVT_laneChangeTTC)*($_Ego_speed+$_GVT_speed)+$_GVT_frontBumperLon}"><!--synchronization point of GVT vehicle along the road-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_GVT_initS" parameterType="double" value="${$_GVT_syncS+$_GVT_speed*$startupTime}"><!--initial s coordinate of GVT along the road-->
+    </ParameterDeclaration>
+  </ParameterDeclarations>
+  <VariableDeclarations>
+    <VariableDeclaration name="collisionDetected" variableType="boolean" value="false" />
+    <VariableDeclaration name="egoSpeedReached" variableType="double" value="0.0" />
+  </VariableDeclarations>
+  <CatalogLocations>
+    <VehicleCatalog>
+      <Directory path="../Catalogs/Vehicles" />
+    </VehicleCatalog>
+    <ManeuverCatalog>
+      <Directory path="../Catalogs/Maneuver" />
+    </ManeuverCatalog>
+    <TrajectoryCatalog>
+      <Directory path="../Catalogs/Trajectories" />
+    </TrajectoryCatalog>
+    <PedestrianCatalog>
+      <Directory path="../Catalogs/Pedestrians" />
+    </PedestrianCatalog>
+    <EnvironmentCatalog>
+      <Directory path="../Catalogs/Environments" />
+    </EnvironmentCatalog>
+  </CatalogLocations>
+  <RoadNetwork>
+    <LogicFile filepath="../../../OpenDRIVE/NCAP/StraightRoad_NCAP_Roadmarks.xodr" />
+  </RoadNetwork>
+  <Entities>
+    <ScenarioObject name="Ego">
+      <CatalogReference entryName="VW_Golf_Sportsvan_2015" catalogName="Vehicles" />
+    </ScenarioObject>
+    <ScenarioObject name="GVT">
+      <CatalogReference entryName="NCAP_GlobalVehicleTarget" catalogName="Vehicles" />
+    </ScenarioObject>
+    <ScenarioObject name="SOV">
+      <CatalogReference entryName="NCAP_2018_ObstructionVehicle_Large" catalogName="Vehicles" />
+    </ScenarioObject>
+  </Entities>
+  <Storyboard>
+    <Init>
+      <Actions>
+        <GlobalAction>
+          <EnvironmentAction>
+            <CatalogReference catalogName="Environments" entryName="Sunny" />
+          </EnvironmentAction>
+        </GlobalAction>
+        <Private entityRef="Ego">
+          <PrivateAction>
+            <TeleportAction>
+              <Position>
+                <LanePosition roadId="0" laneId="-1" s="$Ego_initS">
+                </LanePosition>
+              </Position>
+            </TeleportAction>
+          </PrivateAction>
+          <PrivateAction>
+            <LongitudinalAction>
+              <SpeedAction>
+                <SpeedActionDynamics dynamicsDimension="time" dynamicsShape="step" value="0" />
+                <SpeedActionTarget>
+                  <AbsoluteTargetSpeed value="$_Ego_speed" />
+                </SpeedActionTarget>
+              </SpeedAction>
+            </LongitudinalAction>
+          </PrivateAction>
+        </Private>
+        <Private entityRef="GVT">
+          <PrivateAction>
+            <TeleportAction>
+              <Position>
+                <LanePosition roadId="0" laneId="-1" s="$_GVT_initS" offset="$GVT_latDist">
+                  <Orientation h="${pi}" />
+                </LanePosition>
+              </Position>
+            </TeleportAction>
+          </PrivateAction>
+          <PrivateAction>
+            <LongitudinalAction>
+              <SpeedAction>
+                <SpeedActionDynamics dynamicsDimension="time" dynamicsShape="step" value="0" />
+                <SpeedActionTarget>
+                  <AbsoluteTargetSpeed value="$_GVT_speed" />
+                </SpeedActionTarget>
+              </SpeedAction>
+            </LongitudinalAction>
+          </PrivateAction>
+        </Private>
+        <Private entityRef="SOV">
+          <PrivateAction>
+            <TeleportAction>
+              <Position>
+                <RelativeObjectPosition entityRef="GVT" dx="$GVT_followingDistance" dy="0" />
+              </Position><!--position only set roughly in teleport adjustment to freespace with longitudinal distance action-->
+            </TeleportAction>
+          </PrivateAction>
+          <PrivateAction>
+            <LongitudinalAction>
+              <LongitudinalDistanceAction freespace="true" continuous="true" entityRef="GVT" displacement="leadingReferencedEntity" coordinateSystem="road" distance="$GVT_followingDistance" />
+            </LongitudinalAction>
+          </PrivateAction>
+        </Private>
+      </Actions>
+    </Init>
+    <Story name="GVT_LaneChange">
+      <Act name="Collision_Act">
+        <ManeuverGroup name="GVT_Synchronize" maximumExecutionCount="1">
+          <Actors selectTriggeringEntities="false">
+            <EntityRef entityRef="GVT" />
+          </Actors>
+          <Maneuver name="GVT_Synchronize">
+            <Event name="GVT_Synchronize" priority="override">
+              <Action name="GVT_Synchronize">
+                <PrivateAction>
+                  <SynchronizeAction masterEntityRef="Ego">
+                    <TargetPositionMaster>
+                      <LanePosition roadId="0" laneId="-1" s="$_Ego_syncS" />
+                    </TargetPositionMaster>
+                    <TargetPosition>
+                      <LanePosition roadId="0" laneId="1" s="$_GVT_syncS" offset="$GVT_latDist">
+                        <Orientation h="${pi}" />
+                      </LanePosition>
+                    </TargetPosition>
+                    <FinalSpeed>
+                      <AbsoluteSpeed value="$_GVT_speed">
+                        <TargetTimeSteadyState time="${$startupTime/2}" />
+                      </AbsoluteSpeed>
+                    </FinalSpeed>
+                  </SynchronizeAction>
+                </PrivateAction>
+              </Action>
+            </Event>
+          </Maneuver>
+          <Maneuver name="GVT_LaneChange">
+            <Event name="GVT_LaneChange" priority="override">
+              <Action name="GVT_LaneChange">
+                <PrivateAction>
+                  <RoutingAction>
+                    <FollowTrajectoryAction>
+                      <TimeReference>
+                        <None />
+                      </TimeReference>
+                      <TrajectoryFollowingMode followingMode="position" />
+                      <TrajectoryRef>
+                        <CatalogReference catalogName="TrajectoryCatalog" entryName="$Trajectory_catalogEntry" />
+                      </TrajectoryRef>
+                    </FollowTrajectoryAction>
+                  </RoutingAction>
+                </PrivateAction>
+              </Action>
+              <StartTrigger>
+                <ConditionGroup>
+                  <Condition name="AfterSynchronization" delay="0" conditionEdge="none">
+                    <ByValueCondition>
+                      <StoryboardElementStateCondition storyboardElementType="maneuver" storyboardElementRef="GVT_Synchronize" state="completeState" />
+                    </ByValueCondition>
+                  </Condition>
+                </ConditionGroup>
+              </StartTrigger>
+            </Event>
+          </Maneuver>
+        </ManeuverGroup>
+        <ManeuverGroup name="SOV_ConstantSpeed" maximumExecutionCount="1">
+          <Actors selectTriggeringEntities="false">
+            <EntityRef entityRef="SOV" />
+          </Actors>
+          <Maneuver name="SOV_ConstantSpeed">
+            <Event name="SOV_ConstantSpeed" priority="override">
+              <Action name="SOV_ConstantSpeed">
+                <PrivateAction>
+                  <LongitudinalAction>
+                    <SpeedAction>
+                      <SpeedActionDynamics dynamicsDimension="time" dynamicsShape="step" value="0" />
+                      <SpeedActionTarget>
+                        <AbsoluteTargetSpeed value="$_GVT_speed" />
+                      </SpeedActionTarget>
+                    </SpeedAction>
+                  </LongitudinalAction>
+                </PrivateAction>
+              </Action>
+              <StartTrigger>
+                <ConditionGroup>
+                  <Condition name="AfterSynchronization" delay="0" conditionEdge="none">
+                    <ByValueCondition>
+                      <StoryboardElementStateCondition storyboardElementType="maneuver" storyboardElementRef="GVT_Synchronize" state="completeState" />
+                    </ByValueCondition>
+                  </Condition>
+                </ConditionGroup>
+              </StartTrigger>
+            </Event>
+          </Maneuver>
+        </ManeuverGroup>
+      </Act>
+      <Act name="Set_Variables">
+        <ManeuverGroup name="Set_Variables" maximumExecutionCount="1">
+          <Actors selectTriggeringEntities="false">
+          </Actors>
+          <CatalogReference catalogName="ManeuverCatalog" entryName="LogAndSetVariables">
+            <ParameterAssignments>
+              <ParameterAssignment parameterRef="collidingEntity" value="GVT" />
+              <ParameterAssignment parameterRef="egoSpeed" value="$_Ego_speed" />
+            </ParameterAssignments>
+          </CatalogReference>
+        </ManeuverGroup>
+      </Act>
+    </Story>
+    <StopTrigger>
+      <ConditionGroup>
+        <Condition name="StopAfterCollision" delay="1" conditionEdge="none">
+          <ByValueCondition>
+            <VariableCondition variableRef="collisionDetected" rule="equalTo" value="true" />
+          </ByValueCondition>
+        </Condition>
+      </ConditionGroup>
+      <ConditionGroup>
+        <Condition name="EgoSpeedReached" delay="1" conditionEdge="none">
+          <ByValueCondition>
+            <VariableCondition variableRef="egoSpeedReached" rule="greaterThan" value="0" />
+          </ByValueCondition>
+        </Condition>
+        <Condition name="StopWhenStandstill" delay="1" conditionEdge="none">
+          <ByEntityCondition>
+            <TriggeringEntities triggeringEntitiesRule="any">
+              <EntityRef entityRef="Ego" />
+            </TriggeringEntities>
+            <EntityCondition>
+              <SpeedCondition value="0.01" rule="lessThan" />
+            </EntityCondition>
+          </ByEntityCondition>
+        </Condition>
+      </ConditionGroup>
+      <ConditionGroup>
+        <Condition name="StopAfterTraveledDistance" delay="0" conditionEdge="none">
+          <ByEntityCondition>
+            <TriggeringEntities triggeringEntitiesRule="any">
+              <EntityRef entityRef="Ego" />
+            </TriggeringEntities>
+            <EntityCondition>
+              <TraveledDistanceCondition value="${$_GVT_syncS-$Ego_initS}" /><!--Ego travelled past initiation point of GVT lane change-->
+            </EntityCondition>
+          </ByEntityCondition>
+        </Condition>
+      </ConditionGroup>
+    </StopTrigger>
+  </Storyboard>
+</OpenSCENARIO>

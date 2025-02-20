@@ -1,0 +1,254 @@
+<?xml version='1.0' encoding='utf-8'?>
+<OpenSCENARIO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="OpenSCENARIO.xsd">
+  <!--Copyright (c) 2025, Vector Informatik GmbH--><FileHeader revMajor="1" revMinor="3" date="2025-02-20T09:09:29" author="Vector Informatik GmbH" description="Base Scenario for NCAP AEB VRU CPRAm and (through variation) CPRCm"><License name="Mozilla Public License Version 2.0" resource="https://www.mozilla.org/en-US/MPL/2.0/" spdxId="MPL-2.0" /></FileHeader>
+  <ParameterDeclarations>
+    <ParameterDeclaration name="Ego_speed_kph" parameterType="double" value="4" />
+    <ParameterDeclaration name="Ego_initDist" parameterType="double" value="10"><!--initial distance of Ego to collision point L as defined in NCAP protocol--><!--value not explicitly provided in NCAP protocol-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Ego_length" parameterType="double" value="4.358" />
+    <ParameterDeclaration name="Ego_BBcenter_x" parameterType="double" value="1.349" />
+    <ParameterDeclaration name="VRU_catalogName" parameterType="string" value="Pedestrians">
+    </ParameterDeclaration>
+    <ParameterDeclaration name="VRU_catalogEntry" parameterType="string" value="NCAP_Adult">
+    </ParameterDeclaration>
+    <ParameterDeclaration name="VRU_width" parameterType="double" value="0.5" />
+    <ParameterDeclaration name="VRU_collisionPointOffset" parameterType="double" value="${0.6/2-0.36}"><!--distance from origin (center of bounding box) to impact point according to NCAP protocol--><!--half of VRU length minus impact position from the front of the bounding box-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="VRU_finalSpeed_kph" parameterType="double" value="5" />
+    <ParameterDeclaration name="VRU_accelerationDist" parameterType="double" value="1.5"><!--distance F of VRU to reach final speed-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="VRU_collisionDist" parameterType="double" value="4"><!--distance D of VRU to collision point L as defined in NCAP protocol--><!--distance from initial position to intersection of VRU and Ego trajectories, not to center of lane-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Overlap" parameterType="double" value="50"><!--Impact location of the VRU in percent of the Ego width--><!--this parameter is not used within the scenario but may support the assessment-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="collisionPoint_S" parameterType="double" value="90"><!--position of collision point L as defined in NCAP protocol along the road-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Scenario_ID" parameterType="string" value="CPRA_Cm"><!--this parameter is not used within the scenario but may support the assessment-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Ego_speed" parameterType="double" value="${-1*$Ego_speed_kph/3.6}"><!--allows kph as unit in variation definition as in NCAP protocol -->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Ego_rearBumperLon" parameterType="double" value="${($Ego_length/2)-$Ego_BBcenter_x}"><!--distance from rear axle to rear end (bumper) of the bounding box -->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_VRU_finalSpeed" parameterType="double" value="${$VRU_finalSpeed_kph/3.6}"><!--allows kph as unit in variation definition as in NCAP protocol -->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_VRU_steadyStateDist" parameterType="double" value="${$VRU_collisionDist-$VRU_accelerationDist}" />
+    <ParameterDeclaration name="_Ego_syncS" parameterType="double" value="${$Ego_initDist-$_Ego_rearBumperLon}"><!--distance from start of Ego to collision point L-->
+    </ParameterDeclaration>
+  </ParameterDeclarations>
+  <VariableDeclarations>
+    <VariableDeclaration name="collisionDetected" variableType="boolean" value="false" />
+    <VariableDeclaration name="egoSpeedReached" variableType="double" value="0.0" />
+  </VariableDeclarations>
+  <CatalogLocations>
+    <VehicleCatalog>
+      <Directory path="../Catalogs/Vehicles" />
+    </VehicleCatalog>
+    <PedestrianCatalog>
+      <Directory path="../Catalogs/Pedestrians" />
+    </PedestrianCatalog>
+    <TrajectoryCatalog>
+      <Directory path="../Catalogs/Trajectories" />
+    </TrajectoryCatalog>
+    <RouteCatalog>
+      <Directory path="../Catalogs/Routes" />
+    </RouteCatalog>
+    <ManeuverCatalog>
+      <Directory path="../Catalogs/Maneuver" />
+    </ManeuverCatalog>
+    <EnvironmentCatalog>
+      <Directory path="../Catalogs/Environments" />
+    </EnvironmentCatalog>
+  </CatalogLocations>
+  <RoadNetwork>
+    <LogicFile filepath="../../../OpenDRIVE/NCAP/StraightRoad_NCAP_noRoadmarks.xodr" />
+  </RoadNetwork>
+  <Entities>
+    <ScenarioObject name="Ego">
+      <CatalogReference entryName="VW_Golf_Sportsvan_2015" catalogName="Vehicles" />
+    </ScenarioObject>
+    <ScenarioObject name="VRU">
+      <CatalogReference entryName="$VRU_catalogEntry" catalogName="$VRU_catalogName" />
+    </ScenarioObject>
+  </Entities>
+  <Storyboard>
+    <Init>
+      <Actions>
+        <GlobalAction>
+          <EnvironmentAction>
+            <CatalogReference catalogName="Environments" entryName="Sunny" />
+          </EnvironmentAction>
+        </GlobalAction>
+        <Private entityRef="Ego">
+          <PrivateAction>
+            <RoutingAction>
+              <FollowTrajectoryAction>
+                <TimeReference>
+                  <None />
+                </TimeReference>
+                <TrajectoryFollowingMode followingMode="follow" />
+                <TrajectoryRef>
+                  <CatalogReference catalogName="TrajectoryCatalog" entryName="Ego_CPRx">
+                    <ParameterAssignments>
+                      <ParameterAssignment parameterRef="start_S" value="${$collisionPoint_S+$Ego_initDist}" />
+                      <ParameterAssignment parameterRef="roadID" value="0" />
+                    </ParameterAssignments>
+                  </CatalogReference>
+                </TrajectoryRef>
+              </FollowTrajectoryAction>
+            </RoutingAction>
+          </PrivateAction>
+          <PrivateAction>
+            <LongitudinalAction>
+              <SpeedAction>
+                <SpeedActionDynamics dynamicsDimension="time" dynamicsShape="step" value="0" />
+                <SpeedActionTarget>
+                  <AbsoluteTargetSpeed value="$_Ego_speed" />
+                </SpeedActionTarget>
+              </SpeedAction>
+            </LongitudinalAction>
+          </PrivateAction>
+          <PrivateAction>
+            <TeleportAction>
+              <Position>
+                <RoadPosition roadId="0" s="${$collisionPoint_S+$Ego_initDist}" t="0" />
+              </Position>
+            </TeleportAction>
+          </PrivateAction>
+        </Private>
+        <Private entityRef="VRU">
+          <PrivateAction>
+            <RoutingAction>
+              <FollowTrajectoryAction>
+                <TimeReference>
+                  <None />
+                </TimeReference>
+                <TrajectoryFollowingMode followingMode="position" />
+                <TrajectoryRef>
+                  <CatalogReference catalogName="TrajectoryCatalog" entryName="VRU_CPRx">
+                    <ParameterAssignments>
+                      <ParameterAssignment parameterRef="start_t" value="${-1*$VRU_collisionDist}" />
+                      <ParameterAssignment parameterRef="start_s" value="${$collisionPoint_S-$VRU_width/2}" />
+                    </ParameterAssignments>
+                  </CatalogReference>
+                </TrajectoryRef>
+              </FollowTrajectoryAction>
+            </RoutingAction>
+          </PrivateAction>
+        </Private>
+      </Actions>
+    </Init>
+    <Story name="NCAP_AEB_VRU_CPRA_Cm_2023">
+      <Act name="Collision_Act">
+        <ManeuverGroup name="Synchronization_CollisionDetection" maximumExecutionCount="1">
+          <Actors selectTriggeringEntities="false">
+            <EntityRef entityRef="VRU" />
+          </Actors>
+          <CatalogReference catalogName="ManeuverCatalog" entryName="LogAndSetVariables">
+            <ParameterAssignments>
+              <ParameterAssignment parameterRef="egoSpeed" value="$_Ego_speed" />
+            </ParameterAssignments>
+          </CatalogReference>
+          <Maneuver name="VRU_Synchronization">
+            <Event name="VRU_SynchronizeEvent" priority="override">
+              <Action name="VRU_SynchronizeAction">
+                <PrivateAction>
+                  <SynchronizeAction masterEntityRef="Ego">
+                    <TargetPositionMaster>
+                      <TrajectoryPosition s="$_Ego_syncS">
+                        <TrajectoryRef>
+                          <CatalogReference catalogName="TrajectoryCatalog" entryName="Ego_CPRx">
+                            <ParameterAssignments>
+                              <ParameterAssignment parameterRef="start_S" value="${$collisionPoint_S+$Ego_initDist}" />
+                              <ParameterAssignment parameterRef="roadID" value="0" />
+                            </ParameterAssignments>
+                          </CatalogReference>
+                        </TrajectoryRef>
+                      </TrajectoryPosition>
+                    </TargetPositionMaster>
+                    <TargetPosition>
+                      <TrajectoryPosition s="${$VRU_collisionDist-$VRU_collisionPointOffset}">
+                        <TrajectoryRef>
+                          <CatalogReference catalogName="TrajectoryCatalog" entryName="VRU_CPRx">
+                            <ParameterAssignments>
+                              <ParameterAssignment parameterRef="start_t" value="${-1*$VRU_collisionDist}" />
+                              <ParameterAssignment parameterRef="start_s" value="$collisionPoint_S" />
+                            </ParameterAssignments>
+                          </CatalogReference>
+                        </TrajectoryRef>
+                      </TrajectoryPosition>
+                    </TargetPosition>
+                    <FinalSpeed>
+                      <AbsoluteSpeed value="$_VRU_finalSpeed">
+                        <TargetDistanceSteadyState distance="$_VRU_steadyStateDist" />
+                      </AbsoluteSpeed>
+                    </FinalSpeed>
+                  </SynchronizeAction>
+                </PrivateAction>
+              </Action>
+            </Event>
+          </Maneuver>
+        </ManeuverGroup>
+      </Act>
+    </Story>
+    <StopTrigger>
+      <ConditionGroup>
+        <Condition name="StopAfterCollision" delay="1" conditionEdge="none">
+          <ByValueCondition>
+            <VariableCondition variableRef="collisionDetected" rule="equalTo" value="true" />
+          </ByValueCondition>
+        </Condition>
+      </ConditionGroup>
+      <ConditionGroup>
+        <Condition name="StopAtStandstillNegative" delay="0" conditionEdge="none">
+          <ByEntityCondition>
+            <TriggeringEntities triggeringEntitiesRule="any">
+              <EntityRef entityRef="Ego" />
+            </TriggeringEntities>
+            <EntityCondition>
+              <SpeedCondition value="0.1" rule="lessThan" />
+            </EntityCondition>
+          </ByEntityCondition>
+        </Condition>
+        <Condition name="StopAtStandstillPositive" delay="0" conditionEdge="none">
+          <ByEntityCondition>
+            <TriggeringEntities triggeringEntitiesRule="any">
+              <EntityRef entityRef="Ego" />
+            </TriggeringEntities>
+            <EntityCondition>
+              <SpeedCondition value="-0.1" rule="greaterThan" />
+            </EntityCondition>
+          </ByEntityCondition>
+        </Condition>
+        <Condition name="EnsureSpeedWasReached" delay="0" conditionEdge="none">
+          <ByValueCondition>
+            <VariableCondition variableRef="egoSpeedReached" rule="equalTo" value="$_Ego_speed" />
+          </ByValueCondition>
+        </Condition>
+      </ConditionGroup>
+      <ConditionGroup>
+        <Condition name="StopPastVRU" delay="0" conditionEdge="none">
+          <ByEntityCondition>
+            <TriggeringEntities triggeringEntitiesRule="any">
+              <EntityRef entityRef="Ego" />
+            </TriggeringEntities>
+            <EntityCondition>
+              <TraveledDistanceCondition value="${$_Ego_syncS+3*$Ego_length}" /><!--travel behind collision point-->
+            </EntityCondition>
+          </ByEntityCondition>
+        </Condition>
+      </ConditionGroup>
+      <ConditionGroup>
+        <Condition name="StopVRUCrossed" delay="0" conditionEdge="none">
+          <ByEntityCondition>
+            <TriggeringEntities triggeringEntitiesRule="any">
+              <EntityRef entityRef="VRU" />
+            </TriggeringEntities>
+            <EntityCondition>
+              <TraveledDistanceCondition value="${2*$VRU_collisionDist}" /><!--consider VRU crossed after twice the distance to collision-->
+            </EntityCondition>
+          </ByEntityCondition>
+        </Condition>
+      </ConditionGroup>
+    </StopTrigger>
+  </Storyboard>
+</OpenSCENARIO>

@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<OpenSCENARIO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="OpenSCENARIO.xsd">
+  <!--Copyright (c) 2025, Vector Informatik GmbH--><FileHeader author="Vector Informatik GmbH" date="2025-02-20T09:09:29" description="Pedestrian Catalog for NCAP Scenarios" revMajor="1" revMinor="3"><License name="Mozilla Public License Version 2.0" resource="https://www.mozilla.org/en-US/MPL/2.0/" spdxId="MPL-2.0" /></FileHeader>
+  <Catalog name="Environments">
+    <Environment name="Sunny">
+      <Weather fractionalCloudCover="zeroOktas">
+        <Sun elevation="${65*pi/180}" azimuth="${172*pi/180}" illuminance="100000" />
+      </Weather><!--representing noon at summer solstice in Germany -->
+    </Environment>
+    <Environment name="Night">
+      <Weather fractionalCloudCover="zeroOktas">
+        <Sun elevation="${66*pi/180}" azimuth="${178*pi/180}" illuminance="0.1" />
+      </Weather><!--using sun to represent the moon with maximum elevation in Germany-->
+    </Environment>
+  </Catalog>
+</OpenSCENARIO>

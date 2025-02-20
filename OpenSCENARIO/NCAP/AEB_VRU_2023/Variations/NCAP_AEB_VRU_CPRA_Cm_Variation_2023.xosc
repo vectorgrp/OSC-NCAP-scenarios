@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<OpenSCENARIO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../Schema/OpenSCENARIO.xsd">
+  <!--Copyright (c) 2025, Vector Informatik GmbH--><FileHeader revMajor="1" revMinor="3" date="2025-02-20T09:09:29" description="Parameter Variations for NCAP AEB VRU CPRA/Cs 2023" author="Vector Informatik GmbH"><License name="Mozilla Public License Version 2.0" resource="https://www.mozilla.org/en-US/MPL/2.0/" spdxId="MPL-2.0" /></FileHeader>
+  <ParameterValueDistribution>
+    <ScenarioFile filepath="../NCAP_AEB_VRU_CPRA_Cm_2023.xosc" />
+    <Deterministic>
+      <DeterministicMultiParameterDistribution>
+        <ValueSetDistribution>
+          <ParameterValueSet>
+            <ParameterAssignment parameterRef="Ego_speed_kph" value="4" />
+            <ParameterAssignment parameterRef="VRU_catalogEntry" value="NCAP_Adult" />
+            <ParameterAssignment parameterRef="VRU_collisionPointOffset" value="${0.6/2-0.36}" /><ParameterAssignment parameterRef="VRU_width" value="0.5" />
+          </ParameterValueSet>
+          <ParameterValueSet>
+            <ParameterAssignment parameterRef="Ego_speed_kph" value="8" />
+            <ParameterAssignment parameterRef="VRU_catalogEntry" value="NCAP_Child" />
+            <ParameterAssignment parameterRef="VRU_collisionPointOffset" value="${0.711/2-0.396}" />
+          <ParameterAssignment parameterRef="VRU_width" value="0.298" /></ParameterValueSet>
+        </ValueSetDistribution>
+      </DeterministicMultiParameterDistribution>
+    </Deterministic>
+  </ParameterValueDistribution>
+</OpenSCENARIO>

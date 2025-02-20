@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='utf-8'?>
+<OpenDRIVE>
+  <!--Copyright (c) 2024-2025, Vector Informatik GmbH--><header date="2025-02-20T09:09:29" name="straight_road_roadmarks" revMajor="1" revMinor="8" north="0.0" south="0.0" east="0.0" west="0.0" vendor="Vector Informatik GmbH" />
+  <road id="0" junction="-1" length="1500" name="straight road">
+    <type s="0" type="motorway" />
+    <planView>
+      <geometry hdg="0" length="1500" s="0" x="0" y="0">
+        <line />
+      </geometry>
+    </planView>
+    <lanes>
+      <laneSection s="0">
+        <left>
+          <lane id="2" level="false" type="border">
+            <width a="0.3" b="0" c="0" d="0" sOffset="0" />
+            <roadMark color="standard" laneChange="both" sOffset="0" type="none" weight="standard" />
+          </lane>
+          <lane id="1" level="false" type="driving">
+            <width a="3.5" b="0" c="0" d="0" sOffset="0" />
+            <roadMark color="standard" laneChange="both" sOffset="0" type="solid" weight="standard" width="0.12" />
+          </lane>
+        </left>
+        <center>
+          <lane id="0" level="false" type="none">
+            <roadMark color="standard" laneChange="both" sOffset="0" type="broken" weight="standard" width="0.12" />
+          </lane>
+        </center>
+        <right>
+          <lane id="-1" level="false" type="driving">
+            <width a="3.5" b="0" c="0" d="0" sOffset="0" />
+            <roadMark color="standard" laneChange="both" sOffset="0" type="solid" weight="standard" width="0.12" />
+          </lane>
+          <lane id="-2" level="false" type="border">
+            <width a="0.3" b="0" c="0" d="0" sOffset="0" />
+            <roadMark color="standard" laneChange="both" sOffset="0" type="none" weight="standard" />
+          </lane>
+        </right>
+      </laneSection>
+    </lanes>
+  </road>
+</OpenDRIVE>

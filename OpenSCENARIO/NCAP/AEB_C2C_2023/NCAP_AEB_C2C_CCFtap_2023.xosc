@@ -165,7 +165,7 @@
         <Private entityRef="Target">
           <PrivateAction>
             <RoutingAction>
-              <FollowTrajectoryAction>
+              <FollowTrajectoryAction initialDistanceOffset="$Target_initS">
                 <TimeReference>
                   <None />
                 </TimeReference>
@@ -176,18 +176,6 @@
                 </TrajectoryRef>
               </FollowTrajectoryAction>
             </RoutingAction>
-          </PrivateAction>
-          <PrivateAction>
-            <TeleportAction>
-              <Position>
-                <TrajectoryPosition s="$Target_initS">
-                  <TrajectoryRef>
-                    <CatalogReference catalogName="TrajectoryCatalog" entryName="Target_straightAcross">
-                    </CatalogReference>
-                  </TrajectoryRef>
-                </TrajectoryPosition>
-              </Position>
-            </TeleportAction>
           </PrivateAction>
         </Private>
       </Actions>

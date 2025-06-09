@@ -69,6 +69,16 @@
         </GlobalAction>
         <Private entityRef="Ego">
           <PrivateAction>
+            <LongitudinalAction>
+              <SpeedAction>
+                <SpeedActionDynamics dynamicsDimension="time" dynamicsShape="step" value="0" />
+                <SpeedActionTarget>
+                  <AbsoluteTargetSpeed value="$_Ego_speed" />
+                </SpeedActionTarget>
+              </SpeedAction>
+            </LongitudinalAction>
+          </PrivateAction>
+          <PrivateAction>
             <RoutingAction>
               <FollowTrajectoryAction>
                 <TimeReference>
@@ -85,16 +95,6 @@
                 </TrajectoryRef>
               </FollowTrajectoryAction>
             </RoutingAction>
-          </PrivateAction>
-          <PrivateAction>
-            <LongitudinalAction>
-              <SpeedAction>
-                <SpeedActionDynamics dynamicsDimension="time" dynamicsShape="step" value="0" />
-                <SpeedActionTarget>
-                  <AbsoluteTargetSpeed value="$_Ego_speed" />
-                </SpeedActionTarget>
-              </SpeedAction>
-            </LongitudinalAction>
           </PrivateAction>
           <PrivateAction>
             <TeleportAction>

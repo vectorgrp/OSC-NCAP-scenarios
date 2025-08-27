@@ -1,6 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
 <OpenSCENARIO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="OpenSCENARIO.xsd">
-  <!--Copyright (c) 2025, Vector Informatik GmbH--><FileHeader revMajor="1" revMinor="3" date="2025-02-20T09:09:29" author="Vector Informatik GmbH" description="Base Scenario for NCAP AEB C2C CCFtap and (through variation) CMFtap"><License name="Mozilla Public License Version 2.0" resource="https://www.mozilla.org/en-US/MPL/2.0/" spdxId="MPL-2.0" /></FileHeader>
+  <!--Copyright (c) 2024-2025, Vector Informatik GmbH-->
+  <FileHeader revMajor="1" revMinor="3" date="2025-08-27T09:09:29" author="Vector Informatik GmbH" description="Base Scenario for NCAP AEB C2C CCFtap and (through variation) CMFtap">
+    <License name="Mozilla Public License Version 2.0" resource="https://www.mozilla.org/en-US/MPL/2.0/" spdxId="MPL-2.0" />
+  </FileHeader>
   <ParameterDeclarations>
     <ParameterDeclaration name="Ego_speed_kph" parameterType="double" value="10" />
     <ParameterDeclaration name="Ego_initS" parameterType="double" value="90"><!--initial advance of Ego entity-->
@@ -165,7 +168,7 @@
         <Private entityRef="Target">
           <PrivateAction>
             <RoutingAction>
-              <FollowTrajectoryAction>
+              <FollowTrajectoryAction initialDistanceOffset="$Target_initS">
                 <TimeReference>
                   <None />
                 </TimeReference>
@@ -176,18 +179,6 @@
                 </TrajectoryRef>
               </FollowTrajectoryAction>
             </RoutingAction>
-          </PrivateAction>
-          <PrivateAction>
-            <TeleportAction>
-              <Position>
-                <TrajectoryPosition s="$Target_initS">
-                  <TrajectoryRef>
-                    <CatalogReference catalogName="TrajectoryCatalog" entryName="Target_straightAcross">
-                    </CatalogReference>
-                  </TrajectoryRef>
-                </TrajectoryPosition>
-              </Position>
-            </TeleportAction>
           </PrivateAction>
         </Private>
       </Actions>

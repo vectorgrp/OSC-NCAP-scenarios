@@ -1,0 +1,386 @@
+<?xml version='1.0' encoding='utf-8'?>
+<OpenSCENARIO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="OpenSCENARIO.xsd">
+  <!--Copyright (c) 2025-2026, Vector Informatik GmbH-->
+  <FileHeader revMajor="1" revMinor="3" date="2026-02-24T14:44:00" author="Vector Informatik GmbH" description="Base Scenario CCCscp from Euro NCAP Crash Avoidance Frontal Collisions 2026 Protocol">
+    <License name="Mozilla Public License Version 2.0" resource="https://www.mozilla.org/en-US/MPL/2.0/" spdxId="MPL-2.0" />
+    <Properties>
+      <Property name="DYNA4.Version" value="10.0.0" />
+    </Properties>
+  </FileHeader>
+  <ParameterDeclarations>
+    <ParameterDeclaration name="Ego_speed_kph" parameterType="double" value="20" />
+    <ParameterDeclaration name="Ego_length" parameterType="double" value="4.358" />
+    <ParameterDeclaration name="Ego_width" parameterType="double" value="1.815" />
+    <ParameterDeclaration name="Ego_BBcenter_x" parameterType="double" value="1.349" />
+    <ParameterDeclaration name="Ego_initTTC" parameterType="double" value="8">
+      <!--time-to-collision for speed-dependent adjustment of initial distance to intersection-->
+      <ConstraintGroup>
+        <ValueConstraint value="5" rule="greaterThan" />
+        <!--set TTC large enough to avoid starting too close to junction-->
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Target_catalogName" parameterType="string" value="Vehicles">
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Target_catalogEntry" parameterType="string" value="NCAP_GlobalVehicleTarget">
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Target_width" parameterType="double" value="1.712" />
+    <ParameterDeclaration name="Target_length" parameterType="double" value="4.023" />
+    <ParameterDeclaration name="ObstructionVehicle_Large_length" parameterType="double" value="4.418" />
+    <ParameterDeclaration name="ObstructionVehicle_Large_width" parameterType="double" value="1.82" />
+    <ParameterDeclaration name="ObstructionVehicle_Small_length" parameterType="double" value="4.316" />
+    <ParameterDeclaration name="ObstructionVehicle_Small_width" parameterType="double" value="1.79" />
+    <ParameterDeclaration name="Target_BBcenter_x" parameterType="double" value="1.328" />
+    <ParameterDeclaration name="Target_final_speed_kph" parameterType="double" value="20" />
+    <ParameterDeclaration name="Target_steadyStateTTC" parameterType="double" value="3.5">
+      <!--time for which target will maintain constant speed prior to reaching synchronization point-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Road_armLength" parameterType="double" value="250" />
+    <ParameterDeclaration name="Road_laneWidth" parameterType="double" value="3.5" />
+    <ParameterDeclaration name="IntersectionLength" parameterType="double" value="23" />
+    <ParameterDeclaration name="Scenario_ID" parameterType="string" value="CCCscp">
+      <!--this parameter is not used within the scenario but may support the assessment-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Ego_speed" parameterType="double" value="${$Ego_speed_kph/3.6}">
+      <!--allows kph as unit in variation definition as in NCAP protocol -->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Ego_frontBumperLon" parameterType="double" value="${$Ego_BBcenter_x+($Ego_length/2)}">
+      <!--distance from rear axle to front end (bumper) of the bounding box -->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Target_frontBumperLon" parameterType="double" value="${$Target_BBcenter_x+($Target_length/2)}">
+      <!--distance from rear axle to front end (bumper) of the bounding box -->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Target_final_speed" parameterType="double" value="${$Target_final_speed_kph/3.6}">
+      <!--allows kph as unit in variation definition as in NCAP protocol -->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Target_trajectory" parameterType="string" value="X-IntersectionTrajectory_Farside">
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Target_motorcyclist" parameterType="int" value="0">
+      <!--parameter is used to modify sync positions for the CMCscp scenario-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="ImpactSide" parameterType="int" value="1">
+      <!--used to toggle between nearside and farside collision points. 1 for farside, -1 for nearside.-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Ego_syncS" parameterType="double" value="${$Road_armLength+$IntersectionLength/2-$ImpactSide*$Road_laneWidth/2-$_Ego_frontBumperLon-$Target_width/2+$Target_motorcyclist*(0.1*$Ego_length+$Target_width/2)}">
+      <!--synchronization point of Ego vehicle along its trajectory-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Target_syncS" parameterType="double" value="${$Road_armLength+$IntersectionLength/2+$ImpactSide*$Road_laneWidth/2-$_Target_frontBumperLon+$Target_length/4+$Target_motorcyclist*(-$Ego_width/2-$Target_length/4)}">
+      <!--synchronization point of GVT vehicle along its trajectory-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Ego_initS" parameterType="double" value="${$_Ego_syncS-$_Ego_speed*$Ego_initTTC}">
+      <!--initial advance of Ego entity-->
+      <ConstraintGroup>
+        <!--ensure that speed-dependent s-coordinate is positive-->
+        <ValueConstraint rule="greaterThan" value="0" />
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Target_initS" parameterType="double" value="${$_Target_syncS-$_Target_final_speed*$Ego_initTTC*0.8}">
+      <!--initial advance of Target entity, using 80% to reduce accelerations by SynchronizeAction-->
+      <ConstraintGroup>
+        <!--ensure that speed-dependent s-coordinate is positive-->
+        <ValueConstraint rule="greaterThan" value="0" />
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="ObstructionVehicle_Small_catalogName" parameterType="string" value="Vehicles" />
+    <ParameterDeclaration name="ObstructionVehicle_Small_catalogEntry" parameterType="string" value="NCAP_ObstructionVehicle_Small" />
+    <ParameterDeclaration name="ObstructionVehicle_Large_catalogName" parameterType="string" value="Vehicles" />
+    <ParameterDeclaration name="ObstructionVehicle_Large_catalogEntry" parameterType="string" value="NCAP_ObstructionVehicle_Large" />
+    <ParameterDeclaration name="ObstructionVehicle_Large_BBcenter_x" parameterType="double" value="1.399" />
+    <ParameterDeclaration name="ObstructionVehicle_Small_BBcenter_x" parameterType="double" value="1.368" />
+    <ParameterDeclaration name="_ObstructionVehicle_Large_frontBumperLon" parameterType="double" value="${$ObstructionVehicle_Large_BBcenter_x+($ObstructionVehicle_Large_length/2)}">
+      <!--distance from rear axle to front end (bumper) of the bounding box -->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_ObstructionVehicle_Large_rearBumperLon" parameterType="double" value="${$ObstructionVehicle_Large_BBcenter_x-($ObstructionVehicle_Large_length/2)}">
+      <!--distance from rear axle to rear end (bumper) of the bounding box -->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_ObstructionVehicle_Small_frontBumperLon" parameterType="double" value="${$ObstructionVehicle_Small_BBcenter_x+($ObstructionVehicle_Small_length/2)}">
+      <!--distance from rear axle to front end (bumper) of the bounding box -->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_ObstructionVehicle_Small_rearBumperLon" parameterType="double" value="${$ObstructionVehicle_Small_BBcenter_x-($ObstructionVehicle_Small_length/2)}">
+      <!--distance from rear axle to rear end (bumper) of the bounding box -->
+    </ParameterDeclaration>
+  </ParameterDeclarations>
+  <VariableDeclarations>
+    <VariableDeclaration name="collisionDetected" variableType="boolean" value="false" />
+    <VariableDeclaration name="egoSpeedReached" variableType="double" value="0.0" />
+  </VariableDeclarations>
+  <CatalogLocations>
+    <VehicleCatalog>
+      <Directory path="../Catalogs/Vehicles" />
+    </VehicleCatalog>
+    <PedestrianCatalog>
+      <Directory path="../Catalogs/Pedestrians" />
+    </PedestrianCatalog>
+    <TrajectoryCatalog>
+      <Directory path="../Catalogs/Trajectories" />
+    </TrajectoryCatalog>
+    <RouteCatalog>
+      <Directory path="../Catalogs/Routes" />
+    </RouteCatalog>
+    <ManeuverCatalog>
+      <Directory path="../Catalogs/Maneuver" />
+    </ManeuverCatalog>
+    <EnvironmentCatalog>
+      <Directory path="../Catalogs/Environments" />
+    </EnvironmentCatalog>
+  </CatalogLocations>
+  <RoadNetwork>
+    <LogicFile filepath="../../../OpenDRIVE/NCAP/X-Intersection_NCAP.xodr" />
+  </RoadNetwork>
+  <Entities>
+    <ScenarioObject name="Ego">
+      <CatalogReference entryName="VW_Golf_Sportsvan_2015" catalogName="Vehicles" />
+    </ScenarioObject>
+    <ScenarioObject name="Target">
+      <CatalogReference entryName="$Target_catalogEntry" catalogName="$Target_catalogName" />
+    </ScenarioObject>
+    <ScenarioObject name="ObstructionVehicle_Large">
+      <CatalogReference catalogName="$ObstructionVehicle_Large_catalogName" entryName="$ObstructionVehicle_Large_catalogEntry" />
+    </ScenarioObject>
+    <ScenarioObject name="ObstructionVehicle_Small">
+      <CatalogReference catalogName="$ObstructionVehicle_Small_catalogName" entryName="$ObstructionVehicle_Small_catalogEntry" />
+    </ScenarioObject>
+    <ScenarioObject name="ObstructionVehicle_Small2">
+      <CatalogReference catalogName="$ObstructionVehicle_Small_catalogName" entryName="$ObstructionVehicle_Small_catalogEntry" />
+    </ScenarioObject>
+  </Entities>
+  <Storyboard>
+    <Init>
+      <Actions>
+        <GlobalAction>
+          <EnvironmentAction>
+            <CatalogReference catalogName="Environments" entryName="Sunny" />
+          </EnvironmentAction>
+        </GlobalAction>
+        <Private entityRef="Ego">
+          <PrivateAction>
+            <LongitudinalAction>
+              <SpeedAction>
+                <SpeedActionDynamics dynamicsDimension="time" dynamicsShape="step" value="0" />
+                <SpeedActionTarget>
+                  <AbsoluteTargetSpeed value="$_Ego_speed" />
+                </SpeedActionTarget>
+              </SpeedAction>
+            </LongitudinalAction>
+          </PrivateAction>
+          <PrivateAction>
+            <RoutingAction>
+              <FollowTrajectoryAction initialDistanceOffset="$_Ego_initS">
+                <TimeReference>
+                  <None />
+                </TimeReference>
+                <TrajectoryFollowingMode followingMode="follow" />
+                <TrajectoryRef>
+                  <CatalogReference catalogName="TrajectoryCatalog" entryName="Ego_CxCscp" />
+                </TrajectoryRef>
+              </FollowTrajectoryAction>
+            </RoutingAction>
+          </PrivateAction>
+        </Private>
+        <Private entityRef="Target">
+          <PrivateAction>
+            <RoutingAction>
+              <FollowTrajectoryAction initialDistanceOffset="$_Target_initS">
+                <TimeReference>
+                  <None />
+                </TimeReference>
+                <TrajectoryFollowingMode followingMode="follow" />
+                <TrajectoryRef>
+                  <CatalogReference catalogName="TrajectoryCatalog" entryName="$Target_trajectory" />
+                </TrajectoryRef>
+              </FollowTrajectoryAction>
+            </RoutingAction>
+          </PrivateAction>
+        </Private>
+        <Private entityRef="ObstructionVehicle_Large">
+          <PrivateAction>
+            <TeleportAction>
+              <Position>
+                <LanePosition roadId="0" laneId="-1" s="${$Road_armLength+$IntersectionLength/2-$ImpactSide*$Road_laneWidth/2-$_ObstructionVehicle_Large_frontBumperLon-22.5000+$ImpactSide*1.5}" offset="${$Road_laneWidth/2+$ImpactSide*($Road_laneWidth/2+2+$ObstructionVehicle_Large_width/2)}">
+                  <Orientation type="relative" h="${2*pi}" />
+                </LanePosition>
+              </Position>
+            </TeleportAction>
+          </PrivateAction>
+        </Private>
+        <Private entityRef="ObstructionVehicle_Small">
+          <PrivateAction>
+            <TeleportAction>
+              <Position>
+                <RelativeObjectPosition entityRef="ObstructionVehicle_Large" dx="${($_ObstructionVehicle_Large_rearBumperLon-$_ObstructionVehicle_Small_frontBumperLon-1)}" dy="${$ImpactSide*(-$ObstructionVehicle_Large_width/2+$ObstructionVehicle_Small_width/2)}" />
+              </Position>
+            </TeleportAction>
+          </PrivateAction>
+        </Private>
+        <Private entityRef="ObstructionVehicle_Small2">
+          <PrivateAction>
+            <TeleportAction>
+              <Position>
+                <RelativeObjectPosition entityRef="ObstructionVehicle_Small" dx="${($_ObstructionVehicle_Small_rearBumperLon-$_ObstructionVehicle_Small_frontBumperLon-1)}" dy="0" />
+              </Position>
+            </TeleportAction>
+          </PrivateAction>
+        </Private>
+      </Actions>
+    </Init>
+    <Story name="NCAP_CA-FC_CCCscp_2026">
+      <Act name="ExtendedRangeModifications_Act">
+        <ManeuverGroup name="ExtendedRangeModifications" maximumExecutionCount="1">
+          <Actors selectTriggeringEntities="false" />
+          <Maneuver name="ExtendedRange">
+            <Event name="ExtendedRangeEvent" priority="parallel">
+              <Action name="DeleteObstructionVehicle_Large">
+                <GlobalAction>
+                  <EntityAction entityRef="ObstructionVehicle_Large">
+                    <DeleteEntityAction />
+                  </EntityAction>
+                </GlobalAction>
+              </Action>
+              <Action name="DeleteObstructionVehicle_Small">
+                <GlobalAction>
+                  <EntityAction entityRef="ObstructionVehicle_Small">
+                    <DeleteEntityAction />
+                  </EntityAction>
+                </GlobalAction>
+              </Action>
+              <Action name="DeleteObstructionVehicle_Small2">
+                <GlobalAction>
+                  <EntityAction entityRef="ObstructionVehicle_Small2">
+                    <DeleteEntityAction />
+                  </EntityAction>
+                </GlobalAction>
+              </Action>
+              <StartTrigger>
+                <ConditionGroup>
+                  <Condition name="Ego_speed_exceeds" delay="0" conditionEdge="none">
+                    <ByValueCondition>
+                      <ParameterCondition parameterRef="Ego_speed_kph" rule="greaterThan" value="60" />
+                    </ByValueCondition>
+                  </Condition>
+                </ConditionGroup>
+                <ConditionGroup>
+                  <Condition name="Target_speed_exceeds" delay="0" conditionEdge="none">
+                    <ByValueCondition>
+                      <ParameterCondition parameterRef="Target_final_speed_kph" rule="greaterThan" value="60" />
+                    </ByValueCondition>
+                  </Condition>
+                </ConditionGroup>
+              </StartTrigger>
+            </Event>
+          </Maneuver>
+        </ManeuverGroup>
+        <StartTrigger>
+          <ConditionGroup>
+            <Condition name="SimulationStart" delay="0" conditionEdge="rising">
+              <ByValueCondition>
+                <SimulationTimeCondition value="0" rule="greaterThan" />
+              </ByValueCondition>
+            </Condition>
+          </ConditionGroup>
+        </StartTrigger>
+      </Act>
+      <Act name="Collision_Act">
+        <ManeuverGroup name="Synchronization_CollisionDetection" maximumExecutionCount="1">
+          <Actors selectTriggeringEntities="false">
+            <EntityRef entityRef="Target" />
+          </Actors>
+          <CatalogReference catalogName="ManeuverCatalog" entryName="LogAndSetVariables">
+            <ParameterAssignments>
+              <ParameterAssignment parameterRef="egoSpeed" value="$_Ego_speed" />
+              <ParameterAssignment parameterRef="collidingEntity" value="Target" />
+            </ParameterAssignments>
+          </CatalogReference>
+          <Maneuver name="Target_Synchronization">
+            <Event name="Target_SynchronizeEvent" priority="override">
+              <Action name="Target_SynchronizeAction">
+                <PrivateAction>
+                  <SynchronizeAction masterEntityRef="Ego">
+                    <TargetPositionMaster>
+                      <TrajectoryPosition s="$_Ego_syncS">
+                        <TrajectoryRef>
+                          <CatalogReference catalogName="TrajectoryCatalog" entryName="Ego_CxCscp" />
+                        </TrajectoryRef>
+                      </TrajectoryPosition>
+                    </TargetPositionMaster>
+                    <TargetPosition>
+                      <TrajectoryPosition s="$_Target_syncS">
+                        <TrajectoryRef>
+                          <CatalogReference catalogName="TrajectoryCatalog" entryName="$Target_trajectory" />
+                        </TrajectoryRef>
+                      </TrajectoryPosition>
+                    </TargetPosition>
+                    <FinalSpeed>
+                      <AbsoluteSpeed value="$_Target_final_speed">
+                        <TargetTimeSteadyState time="$Target_steadyStateTTC" />
+                      </AbsoluteSpeed>
+                    </FinalSpeed>
+                  </SynchronizeAction>
+                </PrivateAction>
+              </Action>
+            </Event>
+          </Maneuver>
+        </ManeuverGroup>
+        <StartTrigger>
+          <ConditionGroup>
+            <Condition name="SimulationStart" delay="0" conditionEdge="rising">
+              <ByValueCondition>
+                <SimulationTimeCondition value="0.1" rule="greaterThan" />
+              </ByValueCondition>
+            </Condition>
+          </ConditionGroup>
+        </StartTrigger>
+      </Act>
+    </Story>
+    <StopTrigger>
+      <ConditionGroup>
+        <Condition name="StopAfterCollision" delay="3" conditionEdge="none">
+          <ByValueCondition>
+            <VariableCondition variableRef="collisionDetected" rule="equalTo" value="true" />
+          </ByValueCondition>
+        </Condition>
+      </ConditionGroup>
+      <ConditionGroup>
+        <Condition name="EgoSpeedReached" delay="1" conditionEdge="none">
+          <ByValueCondition>
+            <VariableCondition variableRef="egoSpeedReached" rule="greaterThan" value="0" />
+          </ByValueCondition>
+        </Condition>
+        <Condition name="StopAtStandstill" delay="1" conditionEdge="none">
+          <ByEntityCondition>
+            <TriggeringEntities triggeringEntitiesRule="any">
+              <EntityRef entityRef="Ego" />
+            </TriggeringEntities>
+            <EntityCondition>
+              <StandStillCondition duration="0.1" />
+            </EntityCondition>
+          </ByEntityCondition>
+        </Condition>
+      </ConditionGroup>
+      <ConditionGroup>
+        <Condition name="StopPastTarget" delay="0" conditionEdge="none">
+          <ByEntityCondition>
+            <TriggeringEntities triggeringEntitiesRule="any">
+              <EntityRef entityRef="Ego" />
+            </TriggeringEntities>
+            <EntityCondition>
+              <TraveledDistanceCondition value="${$_Ego_syncS+$Ego_length}" />
+              <!--travel behind collision point-->
+            </EntityCondition>
+          </ByEntityCondition>
+        </Condition>
+      </ConditionGroup>
+      <ConditionGroup>
+        <Condition name="StopTargetCrossed" delay="0" conditionEdge="none">
+          <ByEntityCondition>
+            <TriggeringEntities triggeringEntitiesRule="any">
+              <EntityRef entityRef="Target" />
+            </TriggeringEntities>
+            <EntityCondition>
+              <TraveledDistanceCondition value="${1.5*($_Target_syncS-$_Target_initS)}" />
+              <!--consider Target travelled past the collision point-->
+            </EntityCondition>
+          </ByEntityCondition>
+        </Condition>
+      </ConditionGroup>
+    </StopTrigger>
+  </Storyboard>
+</OpenSCENARIO>

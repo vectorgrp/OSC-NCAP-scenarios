@@ -6,6 +6,7 @@
 
 The following protocols have served as a basis for the implementation of the scenarios:
 
+- [Euro NCAP Crash Avoidance Frontal Collisions Protocol, Implementation January 2026, Version 1.1, October 2025](https://www.euroncap.com/media/91710/euro-ncap-protocol-crash-avoidance-frontal-collisions-v11.pdf)
 - [Euro NCAP Test Protocol – AEB/LSS VRU systems, Implementation 2023, Version 4.5.1, February 2024](https://www.euroncap.com/media/80156/euro-ncap-aeb-lss-vru-test-protocol-v451.pdf)
 - [Euro NCAP Test Protocol – AEB Car-to-Car systems, Implementation 2023, Version 4.3.1, February 2024](https://www.euroncap.com/media/80155/euro-ncap-aeb-c2c-test-protocol-v431.pdf)
 
@@ -20,6 +21,31 @@ The following protocols have served as a basis for the implementation of the sce
 You only need to clone the repository to get the OpenSCENARIO XML and OpenDRIVE files and essentially you're ready to start simulating with your preferred standard-compliant simulator. However, the following notes on the usage should be considered:
 
 - Some of the scenarios defined by [Euro NCAP](https://www.euroncap.com/) are very similar, which is why some of the NCAP scenarios share the same concrete OpenSCENARIO definition, in the table below referred to as 'XOSC Base Scenario'. The differences are only achieved by a parameter variation through the logical scenario features of OpenSCENARIO XML (see section above). The same holds true for the variation of the parameters such as the vehicle speed according to the NCAP protocols. Variation files are included that enable a single execution of each NCAP scenario or the full variation of all values as described by [Euro NCAP](https://www.euroncap.com/). The provided scenarios are listed in the table below and it is indicated, which base scenario is used. Stay tuned as we prepare more scenarios.
+
+### NCAP 2026 Scenarios
+
+|NCAP Scenario |NCAP Protocol |XOSC Base Scenario |
+| --- | --- | --- |
+| **Car-to-Pedestrian Farside Adult (CPFA)** | [Crash Avoidance Frontal Collisions](https://www.euroncap.com/media/85851/euro-ncap-protocol-crash-avoidance-frontal-collisions-v10.pdf) | CPNA |
+| **Car-to-Pedestrian Nearside Adult (CPNA)** | [Crash Avoidance Frontal Collisions](https://www.euroncap.com/media/85851/euro-ncap-protocol-crash-avoidance-frontal-collisions-v10.pdf) | CPNA |
+| **Car-to-Pedestrian Nearside Child Obstructed (CPNCO)** | [Crash Avoidance Frontal Collisions](https://www.euroncap.com/media/85851/euro-ncap-protocol-crash-avoidance-frontal-collisions-v10.pdf) | CPNCO |
+| **Car-to-Pedestrian Longitudinal Adult (CPLA)** | [Crash Avoidance Frontal Collisions](https://www.euroncap.com/media/85851/euro-ncap-protocol-crash-avoidance-frontal-collisions-v10.pdf) | CBLA |
+| **Car-to-Bicyclist Nearside Adult (CBNA)** | [Crash Avoidance Frontal Collisions](https://www.euroncap.com/media/85851/euro-ncap-protocol-crash-avoidance-frontal-collisions-v10.pdf) | CBNA |
+| **Car-to-Bicyclist Nearside Adult Obstructed (CBNAO)** | [Crash Avoidance Frontal Collisions](https://www.euroncap.com/media/85851/euro-ncap-protocol-crash-avoidance-frontal-collisions-v10.pdf) | CBNAO |
+| **Car-to-Bicyclist Farside Adult (CBFA)** | [Crash Avoidance Frontal Collisions](https://www.euroncap.com/media/85851/euro-ncap-protocol-crash-avoidance-frontal-collisions-v10.pdf) | CBFA |
+| **Car-to-Bicyclist Longitudinal Adult (CBLA)** | [Crash Avoidance Frontal Collisions](https://www.euroncap.com/media/85851/euro-ncap-protocol-crash-avoidance-frontal-collisions-v10.pdf) | CBLA |
+| **Car-to-Motorcyclist Rear Stationary (CMRs)** | [Crash Avoidance Frontal Collisions](https://www.euroncap.com/media/85851/euro-ncap-protocol-crash-avoidance-frontal-collisions-v10.pdf) | CCRs |
+| **Car-to-Motorcyclist Rear Braking (CMRb)** | [Crash Avoidance Frontal Collisions](https://www.euroncap.com/media/85851/euro-ncap-protocol-crash-avoidance-frontal-collisions-v10.pdf) | CCRs |
+| **Car-to-Motorcyclist Front Turn Across Path (CMFtap)** | [Crash Avoidance Frontal Collisions](https://www.euroncap.com/media/85851/euro-ncap-protocol-crash-avoidance-frontal-collisions-v10.pdf) | CCFtap |
+| **Car-to-Motorcyclist Crossing Straight Crossing Path (CMCscp)** | [Crash Avoidance Frontal Collisions](https://www.euroncap.com/media/85851/euro-ncap-protocol-crash-avoidance-frontal-collisions-v10.pdf) | CCCscp |
+| **Car-to-Car Rear Stationary (CCRs)** | [Crash Avoidance Frontal Collisions](https://www.euroncap.com/media/85851/euro-ncap-protocol-crash-avoidance-frontal-collisions-v10.pdf) | CCRs |
+| **Car-to-Car Rear Braking (CCRb)** | [Crash Avoidance Frontal Collisions](https://www.euroncap.com/media/85851/euro-ncap-protocol-crash-avoidance-frontal-collisions-v10.pdf) | CCRs |
+| **Car-to-Car Rear Moving (CCRm)** | [Crash Avoidance Frontal Collisions](https://www.euroncap.com/media/85851/euro-ncap-protocol-crash-avoidance-frontal-collisions-v10.pdf) | CCRs |
+| **Car-to-Car Crossing Straight Crossing Path (CCCscp)** | [Crash Avoidance Frontal Collisions](https://www.euroncap.com/media/85851/euro-ncap-protocol-crash-avoidance-frontal-collisions-v10.pdf) | CCCscp |
+| **Car-to-Car Front Turn-Across-Path (CCFtap)** | [Crash Avoidance Frontal Collisions](https://www.euroncap.com/media/85851/euro-ncap-protocol-crash-avoidance-frontal-collisions-v10.pdf) | CCFtap |
+| **Car-to-Car Front Head-On Straight (CCFhos)** | [Crash Avoidance Frontal Collisions](https://www.euroncap.com/media/85851/euro-ncap-protocol-crash-avoidance-frontal-collisions-v10.pdf) | CCFhos |
+
+### NCAP 2023 Scenarios
 
 |NCAP Scenario |NCAP Protocol |XOSC Base Scenario |
 | --- | --- | --- |
@@ -50,7 +76,7 @@ You only need to clone the repository to get the OpenSCENARIO XML and OpenDRIVE 
 
 ### Notes for users of [Vector DYNA4](https://www.vector.com/dyna4)
 
-- We recommend to use DYNA4 Release 9 Service Pack 1.
+- We recommend to use DYNA4 Release 10.
 - DYNA4 already comes with an example project 'Demo_NCAP'. The most important differences of the files in this repository compared to the DYNA4 delivery are as follows:
   - relative paths between files are used instead of DYNA4 database paths using DYNA4's content management prefix
   - Vehicle Catalog and Pedestrian Catalog contain only entities that are used within the scenarios of this repository

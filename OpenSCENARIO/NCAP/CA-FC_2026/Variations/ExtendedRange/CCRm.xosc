@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='utf-8'?>
+<OpenSCENARIO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="OpenSCENARIO.xsd">
+  <!--Copyright (c) 2025-2026, Vector Informatik GmbH-->
+  <FileHeader author="Vector Informatik GmbH" date="2026-02-24T14:44:00" description="Extended Range Parameter Variation for CCRm scenario from Euro NCAP Crash Avoidance Frontal Collisions 2026 Protocol" revMajor="1" revMinor="3">
+    <License name="Mozilla Public License Version 2.0" resource="https://www.mozilla.org/en-US/MPL/2.0/" spdxId="MPL-2.0" />
+    <Properties>
+      <Property name="DYNA4.Version" value="10.0.0" />
+    </Properties>
+  </FileHeader>
+  <ParameterValueDistribution>
+    <ScenarioFile filepath="../../CCRs.xosc" />
+    <Deterministic>
+      <DeterministicSingleParameterDistribution parameterName="Scenario_ID">
+        <DistributionSet>
+          <Element value="CCRm" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="Target_catalogName">
+        <DistributionSet>
+          <Element value="Vehicles" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="Target_catalogEntry">
+        <DistributionSet>
+          <Element value="NCAP_GlobalVehicleTarget" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="ImpactLocation">
+        <DistributionSet>
+          <Element value="125" />
+          <Element value="-25" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicMultiParameterDistribution>
+        <ValueSetDistribution>
+          <ParameterValueSet>
+            <ParameterAssignment parameterRef="Ego_speed_kph" value="30" />
+            <ParameterAssignment parameterRef="Target_init_speed_kph" value="20" />
+          </ParameterValueSet>
+          <ParameterValueSet>
+            <ParameterAssignment parameterRef="Ego_speed_kph" value="40" />
+            <ParameterAssignment parameterRef="Target_init_speed_kph" value="20" />
+          </ParameterValueSet>
+          <ParameterValueSet>
+            <ParameterAssignment parameterRef="Ego_speed_kph" value="50" />
+            <ParameterAssignment parameterRef="Target_init_speed_kph" value="20" />
+          </ParameterValueSet>
+          <ParameterValueSet>
+            <ParameterAssignment parameterRef="Ego_speed_kph" value="60" />
+            <ParameterAssignment parameterRef="Target_init_speed_kph" value="20" />
+          </ParameterValueSet>
+          <ParameterValueSet>
+            <ParameterAssignment parameterRef="Ego_speed_kph" value="70" />
+            <ParameterAssignment parameterRef="Target_init_speed_kph" value="20" />
+          </ParameterValueSet>
+          <ParameterValueSet>
+            <ParameterAssignment parameterRef="Ego_speed_kph" value="80" />
+            <ParameterAssignment parameterRef="Target_init_speed_kph" value="20" />
+          </ParameterValueSet>
+          <ParameterValueSet>
+            <ParameterAssignment parameterRef="Ego_speed_kph" value="90" />
+            <ParameterAssignment parameterRef="Target_init_speed_kph" value="30" />
+          </ParameterValueSet>
+          <ParameterValueSet>
+            <ParameterAssignment parameterRef="Ego_speed_kph" value="100" />
+            <ParameterAssignment parameterRef="Target_init_speed_kph" value="40" />
+          </ParameterValueSet>
+          <ParameterValueSet>
+            <ParameterAssignment parameterRef="Ego_speed_kph" value="110" />
+            <ParameterAssignment parameterRef="Target_init_speed_kph" value="50" />
+          </ParameterValueSet>
+          <ParameterValueSet>
+            <ParameterAssignment parameterRef="Ego_speed_kph" value="120" />
+            <ParameterAssignment parameterRef="Target_init_speed_kph" value="60" />
+          </ParameterValueSet>
+          <ParameterValueSet>
+            <ParameterAssignment parameterRef="Ego_speed_kph" value="130" />
+            <ParameterAssignment parameterRef="Target_init_speed_kph" value="70" />
+          </ParameterValueSet>
+        </ValueSetDistribution>
+      </DeterministicMultiParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="Target_final_speed_kph">
+        <DistributionSet>
+          <Element value="20" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="isTargetbraking">
+        <DistributionSet>
+          <Element value="false" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+    </Deterministic>
+  </ParameterValueDistribution>
+</OpenSCENARIO>

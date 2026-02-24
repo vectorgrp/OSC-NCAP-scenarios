@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='utf-8'?>
+<OpenSCENARIO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../Schema/OpenSCENARIO.xsd">
+  <!--Copyright (c) 2025-2026, Vector Informatik GmbH-->
+  <FileHeader revMajor="1" revMinor="3" date="2026-02-24T14:44:00" description="Standard Range Parameter Variation for CCCscp scenario from Euro NCAP Crash Avoidance Frontal Collisions 2026 Protocol" author="Vector Informatik GmbH">
+    <License name="Mozilla Public License Version 2.0" resource="https://www.mozilla.org/en-US/MPL/2.0/" spdxId="MPL-2.0" />
+    <Properties>
+      <Property name="DYNA4.Version" value="10.0.0" />
+    </Properties>
+  </FileHeader>
+  <ParameterValueDistribution>
+    <ScenarioFile filepath="../../CCCscp.xosc" />
+    <Deterministic>
+      <DeterministicSingleParameterDistribution parameterName="Scenario_ID">
+        <DistributionSet>
+          <Element value="CCCscp" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="Target_catalogName">
+        <DistributionSet>
+          <Element value="Vehicles" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="Target_catalogEntry">
+        <DistributionSet>
+          <Element value="NCAP_GlobalVehicleTarget" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="Target_length">
+        <DistributionSet>
+          <Element value="4.023" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="Target_width">
+        <DistributionSet>
+          <Element value="1.712" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="Target_BBcenter_x">
+        <DistributionSet>
+          <Element value="1.328" />
+        </DistributionSet>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicMultiParameterDistribution>
+        <ValueSetDistribution>
+          <ParameterValueSet>
+            <ParameterAssignment value="1" parameterRef="ImpactSide" />
+            <ParameterAssignment value="X-IntersectionTrajectory_Farside" parameterRef="Target_trajectory" />
+          </ParameterValueSet>
+          <ParameterValueSet>
+            <ParameterAssignment value="-1" parameterRef="ImpactSide" />
+            <ParameterAssignment value="X-IntersectionTrajectory_Nearside" parameterRef="Target_trajectory" />
+          </ParameterValueSet>
+        </ValueSetDistribution>
+      </DeterministicMultiParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="Ego_speed_kph">
+        <DistributionRange stepWidth="10">
+          <Range lowerLimit="20" upperLimit="60" />
+        </DistributionRange>
+      </DeterministicSingleParameterDistribution>
+      <DeterministicSingleParameterDistribution parameterName="Target_final_speed_kph">
+        <DistributionRange stepWidth="10">
+          <Range lowerLimit="20" upperLimit="60" />
+        </DistributionRange>
+      </DeterministicSingleParameterDistribution>
+    </Deterministic>
+  </ParameterValueDistribution>
+</OpenSCENARIO>

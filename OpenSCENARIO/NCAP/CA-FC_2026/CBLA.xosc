@@ -1,0 +1,284 @@
+<?xml version='1.0' encoding='utf-8'?>
+<OpenSCENARIO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="OpenSCENARIO.xsd">
+  <!--Copyright (c) 2025-2026, Vector Informatik GmbH-->
+  <FileHeader revMajor="1" revMinor="3" date="2026-02-24T14:44:00" author="Vector Informatik GmbH" description="Base Scenario CBLA from Euro NCAP Crash Avoidance Frontal Collisions 2026 Protocol">
+    <License name="Mozilla Public License Version 2.0" resource="https://www.mozilla.org/en-US/MPL/2.0/" spdxId="MPL-2.0" />
+    <Properties>
+      <Property name="DYNA4.Version" value="10.0.0" />
+    </Properties>
+  </FileHeader>
+  <ParameterDeclarations>
+    <ParameterDeclaration name="Target_catalogName" parameterType="string" value="Vehicles">
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Target_catalogEntry" parameterType="string" value="NCAP_Bicycle">
+    </ParameterDeclaration>
+    <ParameterDeclaration name="ImpactLocation" parameterType="double" value="50">
+      <!--Impact location is defined as where the reference point of the target coincides with the %-age of the VUT width-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Ego_speed_kph" parameterType="double" value="25" />
+    <ParameterDeclaration name="Ego_initS" parameterType="double" value="50">
+      <!--initial advance of Ego entity-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Ego_initTTC" parameterType="double" value="6">
+      <!--time-to-collision to adjust initial distance additional to triggering distance-->
+      <ConstraintGroup>
+        <ValueConstraint value="2.5" rule="greaterThan" />
+        <!--set TTC at least greater than critical values-->
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Ego_width" parameterType="double" value="1.815">
+      <!--required when impact location is not 50% -->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Target_final_speed_kph" parameterType="double" value="15" />
+    <ParameterDeclaration name="Target_accelerationDist" parameterType="double" value="3.5">
+      <!--acceleration distance Q / R as defined in NCAP protocol -->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Target_steadyStateDist" parameterType="double" value="28">
+      <!--steady state distance to impact S as defined in NCAP protocol -->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Scenario_ID" parameterType="string" value="CBLA">
+      <!--this parameter is not used within the scenario but may support the assessment-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="LightingConditions" parameterType="string" value="Sunny">
+      <ConstraintGroup>
+        <ValueConstraint rule="equalTo" value="Sunny" />
+      </ConstraintGroup>
+      <ConstraintGroup>
+        <ValueConstraint rule="equalTo" value="Night" />
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Ego_speed" parameterType="double" value="${$Ego_speed_kph/3.6}">
+      <!--allows kph as unit in variation definition as in NCAP protocol -->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Target_final_speed" parameterType="double" value="${$Target_final_speed_kph/3.6}">
+      <!--allows kph as unit in variation definition as in NCAP protocol -->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_triggerDist" parameterType="double" value="${$_Ego_speed/$_Target_final_speed*(2*$Target_accelerationDist+$Target_steadyStateDist)-($Target_accelerationDist+$Target_steadyStateDist)}">
+      <!--net distance between Ego and Target to trigger acceleration-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Target_latOffset" parameterType="double" value="${$Ego_width*(($ImpactLocation-50)/100)}">
+      <!--Target offset to account for desired impact location-->
+    </ParameterDeclaration>
+  </ParameterDeclarations>
+  <VariableDeclarations>
+    <VariableDeclaration name="collisionDetected" variableType="boolean" value="false" />
+    <VariableDeclaration name="egoSpeedReached" variableType="double" value="0.0" />
+  </VariableDeclarations>
+  <CatalogLocations>
+    <VehicleCatalog>
+      <Directory path="../Catalogs/Vehicles" />
+    </VehicleCatalog>
+    <PedestrianCatalog>
+      <Directory path="../Catalogs/Pedestrians" />
+    </PedestrianCatalog>
+    <ManeuverCatalog>
+      <Directory path="../Catalogs/Maneuver" />
+    </ManeuverCatalog>
+    <EnvironmentCatalog>
+      <Directory path="../Catalogs/Environments" />
+    </EnvironmentCatalog>
+  </CatalogLocations>
+  <RoadNetwork>
+    <LogicFile filepath="../../../OpenDRIVE/NCAP/StraightRoad_NCAP_noRoadmarks.xodr" />
+  </RoadNetwork>
+  <Entities>
+    <ScenarioObject name="Ego">
+      <CatalogReference entryName="VW_Golf_Sportsvan_2015" catalogName="Vehicles" />
+    </ScenarioObject>
+    <ScenarioObject name="Target">
+      <CatalogReference entryName="$Target_catalogEntry" catalogName="$Target_catalogName" />
+    </ScenarioObject>
+  </Entities>
+  <Storyboard>
+    <Init>
+      <Actions>
+        <GlobalAction>
+          <EnvironmentAction>
+            <CatalogReference catalogName="Environments" entryName="$LightingConditions" />
+          </EnvironmentAction>
+        </GlobalAction>
+        <Private entityRef="Ego">
+          <PrivateAction>
+            <TeleportAction>
+              <Position>
+                <LanePosition roadId="0" laneId="-1" s="$Ego_initS">
+                </LanePosition>
+              </Position>
+            </TeleportAction>
+          </PrivateAction>
+          <PrivateAction>
+            <LongitudinalAction>
+              <SpeedAction>
+                <SpeedActionDynamics dynamicsDimension="time" dynamicsShape="step" value="0" />
+                <SpeedActionTarget>
+                  <AbsoluteTargetSpeed value="$_Ego_speed" />
+                </SpeedActionTarget>
+              </SpeedAction>
+            </LongitudinalAction>
+          </PrivateAction>
+        </Private>
+        <Private entityRef="Target">
+          <PrivateAction>
+            <TeleportAction>
+              <Position>
+                <RelativeLanePosition entityRef="Ego" dLane="0" offset="$_Target_latOffset" ds="${$_Ego_speed*$Ego_initTTC+$_triggerDist}" />
+              </Position>
+            </TeleportAction>
+          </PrivateAction>
+        </Private>
+      </Actions>
+    </Init>
+    <Story name="NCAP_CA-FC_CBLA_2026">
+      <Act name="Collision_Act">
+        <ManeuverGroup name="AccelerationTarget_CollisionDetection" maximumExecutionCount="1">
+          <Actors selectTriggeringEntities="false">
+            <EntityRef entityRef="Target" />
+          </Actors>
+          <CatalogReference catalogName="ManeuverCatalog" entryName="LogAndSetVariables">
+            <ParameterAssignments>
+              <ParameterAssignment parameterRef="egoSpeed" value="$_Ego_speed" />
+              <ParameterAssignment parameterRef="collidingEntity" value="Target" />
+            </ParameterAssignments>
+          </CatalogReference>
+          <Maneuver name="Target_Acceleration">
+            <Event name="Accelerate_Ego_Approaching" priority="override">
+              <Action name="Target_SpeedAction">
+                <PrivateAction>
+                  <LongitudinalAction>
+                    <SpeedAction>
+                      <SpeedActionDynamics dynamicsDimension="time" dynamicsShape="linear" value="${2*$Target_accelerationDist/$_Target_final_speed}" />
+                      <SpeedActionTarget>
+                        <AbsoluteTargetSpeed value="$_Target_final_speed" />
+                      </SpeedActionTarget>
+                      <!--using acceleration over time instead of distance to ensure constant acceleration and simplified subsequent calculations-->
+                    </SpeedAction>
+                  </LongitudinalAction>
+                </PrivateAction>
+              </Action>
+              <StartTrigger>
+                <ConditionGroup>
+                  <Condition name="AtEgoApproaching" delay="0.0" conditionEdge="rising">
+                    <ByEntityCondition>
+                      <TriggeringEntities triggeringEntitiesRule="any">
+                        <EntityRef entityRef="Ego" />
+                      </TriggeringEntities>
+                      <EntityCondition>
+                        <RelativeDistanceCondition freespace="true" relativeDistanceType="longitudinal" value="$_triggerDist" rule="lessOrEqual" entityRef="Target" />
+                        <!--use freespace to avoid dependencies on entity lengths-->
+                      </EntityCondition>
+                    </ByEntityCondition>
+                  </Condition>
+                </ConditionGroup>
+              </StartTrigger>
+            </Event>
+          </Maneuver>
+        </ManeuverGroup>
+      </Act>
+      <Act name="NightTimeAct">
+        <ManeuverGroup name="LowBeams" maximumExecutionCount="1">
+          <Actors selectTriggeringEntities="false">
+            <EntityRef entityRef="Ego" />
+          </Actors>
+          <Maneuver name="LowBeamsActivation">
+            <Event name="LowBeamsEvent" priority="override">
+              <Action name="LightStateEvent">
+                <PrivateAction>
+                  <AppearanceAction>
+                    <LightStateAction>
+                      <LightType>
+                        <VehicleLight vehicleLightType="lowBeam" />
+                      </LightType>
+                      <LightState mode="on" />
+                    </LightStateAction>
+                  </AppearanceAction>
+                </PrivateAction>
+              </Action>
+            </Event>
+          </Maneuver>
+        </ManeuverGroup>
+        <StartTrigger>
+          <ConditionGroup>
+            <Condition name="NightCondition" delay="0" conditionEdge="none">
+              <ByValueCondition>
+                <ParameterCondition parameterRef="LightingConditions" rule="equalTo" value="Night" />
+              </ByValueCondition>
+            </Condition>
+          </ConditionGroup>
+        </StartTrigger>
+      </Act>
+    </Story>
+    <StopTrigger>
+      <ConditionGroup>
+        <Condition name="StopAfterCollision" delay="1" conditionEdge="none">
+          <ByValueCondition>
+            <VariableCondition variableRef="collisionDetected" rule="equalTo" value="true" />
+          </ByValueCondition>
+        </Condition>
+      </ConditionGroup>
+      <ConditionGroup>
+        <Condition name="EgoSpeedReached" delay="1" conditionEdge="none">
+          <ByValueCondition>
+            <VariableCondition variableRef="egoSpeedReached" rule="greaterThan" value="0" />
+          </ByValueCondition>
+        </Condition>
+        <Condition name="StopAtStandstill" delay="1" conditionEdge="none">
+          <ByEntityCondition>
+            <TriggeringEntities triggeringEntitiesRule="any">
+              <EntityRef entityRef="Ego" />
+            </TriggeringEntities>
+            <EntityCondition>
+              <StandStillCondition duration="0.1" />
+            </EntityCondition>
+          </ByEntityCondition>
+        </Condition>
+      </ConditionGroup>
+      <ConditionGroup>
+        <Condition name="StopAtSameSpeed" delay="0" conditionEdge="rising">
+          <ByEntityCondition>
+            <TriggeringEntities triggeringEntitiesRule="any">
+              <EntityRef entityRef="Target" />
+            </TriggeringEntities>
+            <EntityCondition>
+              <RelativeSpeedCondition value="2" rule="greaterThan" entityRef="Ego" />
+              <!--could stop at same speed according to NCAP but using safety margin of 2 m/s difference-->
+            </EntityCondition>
+          </ByEntityCondition>
+        </Condition>
+        <Condition name="EnsureTraveledDistance" delay="0" conditionEdge="none">
+          <ByEntityCondition>
+            <TriggeringEntities triggeringEntitiesRule="any">
+              <EntityRef entityRef="Ego" />
+            </TriggeringEntities>
+            <EntityCondition>
+              <TraveledDistanceCondition value="${$_Ego_speed*$Ego_initTTC+$_triggerDist}" />
+              <!--travel at least to Target init position-->
+            </EntityCondition>
+          </ByEntityCondition>
+        </Condition>
+      </ConditionGroup>
+      <ConditionGroup>
+        <Condition name="StopAtStandstill2" delay="0" conditionEdge="rising">
+          <ByEntityCondition>
+            <TriggeringEntities triggeringEntitiesRule="any">
+              <EntityRef entityRef="Ego" />
+            </TriggeringEntities>
+            <EntityCondition>
+              <StandStillCondition duration="0.1" />
+            </EntityCondition>
+          </ByEntityCondition>
+        </Condition>
+        <Condition name="EnsureTraveledDistance2" delay="0" conditionEdge="none">
+          <ByEntityCondition>
+            <TriggeringEntities triggeringEntitiesRule="any">
+              <EntityRef entityRef="Ego" />
+            </TriggeringEntities>
+            <EntityCondition>
+              <TraveledDistanceCondition value="${$_Ego_speed*$Ego_initTTC+$_triggerDist}" />
+              <!--travel at least to Target init position-->
+            </EntityCondition>
+          </ByEntityCondition>
+        </Condition>
+      </ConditionGroup>
+    </StopTrigger>
+  </Storyboard>
+</OpenSCENARIO>

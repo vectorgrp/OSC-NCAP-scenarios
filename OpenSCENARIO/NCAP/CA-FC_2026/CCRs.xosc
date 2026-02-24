@@ -1,0 +1,274 @@
+<?xml version='1.0' encoding='utf-8'?>
+<OpenSCENARIO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="OpenSCENARIO.xsd">
+  <!--Copyright (c) 2025-2026, Vector Informatik GmbH-->
+  <FileHeader revMajor="1" revMinor="3" date="2026-02-24T14:44:00" author="Vector Informatik GmbH" description="Base Scenario CCRs from Euro NCAP Crash Avoidance Frontal Collisions 2026 Protocol">
+    <License name="Mozilla Public License Version 2.0" resource="https://www.mozilla.org/en-US/MPL/2.0/" spdxId="MPL-2.0" />
+    <Properties>
+      <Property name="DYNA4.Version" value="10.0.0" />
+    </Properties>
+  </FileHeader>
+  <ParameterDeclarations>
+    <ParameterDeclaration name="Ego_width" parameterType="double" value="1.815">
+      <!--required for positioning according to overlap-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Ego_initTimeHeadway" parameterType="double" value="5">
+      <!--speed-dependent adjustment of initial distance to GVT-->
+      <ConstraintGroup>
+        <ValueConstraint value="4" rule="greaterThan" />
+        <!--set headway large enough to avoid critical distances at start-->
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Ego_speed_kph" parameterType="double" value="20">
+      <!--Ego test speed-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Ego_initS" parameterType="double" value="50">
+      <!--initial advance of Ego entity-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="ImpactLocation" parameterType="double" value="50">
+      <!--Impact location is defined as where the reference point of the target coincides with the %-age of the VUT width-->
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterOrEqual" value="-25" />
+        <ValueConstraint rule="lessOrEqual" value="125" />
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="isTargetbraking" parameterType="boolean" value="false">
+      <!--flag to indicate if GVT/EMT is braking (CCRb/CMRb only)-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Target_catalogName" parameterType="string" value="Vehicles">
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Target_catalogEntry" parameterType="string" value="NCAP_GlobalVehicleTarget">
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Target_init_speed_kph" parameterType="double" value="0">
+      <!--initial speed of the Target-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Target_final_speed_kph" parameterType="double" value="0">
+      <!--final speed of Target different from initial speed for CCRb/CMRb only-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Target_deceleration" parameterType="double" value="4">
+      <!--deceleration in m/s^2 of the Target for CCRb/CMRb only-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Target_braking_delay" parameterType="double" value="3">
+      <!--time delay in s after headway is established to initiate braking for CCRb/CMRb only-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Target_time_headway" parameterType="double" value="1">
+      <!--time headway in seconds as defined in NCAP protocol for CCRb/CMRb only-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Scenario_ID" parameterType="string" value="CCRs">
+      <!--this parameter is not used within the scenario but may support the assessment-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Ego_speed" parameterType="double" value="${$Ego_speed_kph/3.6}">
+      <!--allows kph as unit in variation definition as in NCAP protocol -->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Target_headway" parameterType="double" value="${$_Ego_speed*$Target_time_headway}">
+      <!--space headway in m for CCRb/CMRb only-->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Target_init_speed" parameterType="double" value="${$Target_init_speed_kph/3.6}">
+      <!--allows kph as unit in variation definition as in NCAP protocol -->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Target_final_speed" parameterType="double" value="${$Target_final_speed_kph/3.6}">
+      <!--allows kph as unit in variation definition as in NCAP protocol -->
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Target_offset" parameterType="double" value="${$ImpactLocation/100*$Ego_width-$Ego_width/2}">
+      <!--resulting lateral offset of the GVT depending on VUTs width and desired Impact location-->
+    </ParameterDeclaration>
+  </ParameterDeclarations>
+  <VariableDeclarations>
+    <VariableDeclaration name="collisionDetected" variableType="boolean" value="false" />
+    <VariableDeclaration name="egoSpeedReached" variableType="double" value="0.0" />
+  </VariableDeclarations>
+  <CatalogLocations>
+    <VehicleCatalog>
+      <Directory path="../Catalogs/Vehicles" />
+    </VehicleCatalog>
+    <ManeuverCatalog>
+      <Directory path="../Catalogs/Maneuver" />
+    </ManeuverCatalog>
+    <EnvironmentCatalog>
+      <Directory path="../Catalogs/Environments" />
+    </EnvironmentCatalog>
+  </CatalogLocations>
+  <RoadNetwork>
+    <LogicFile filepath="../../../OpenDRIVE/NCAP/StraightRoad_NCAP_noRoadmarks.xodr" />
+  </RoadNetwork>
+  <Entities>
+    <ScenarioObject name="Ego">
+      <CatalogReference entryName="VW_Golf_Sportsvan_2015" catalogName="Vehicles" />
+    </ScenarioObject>
+    <ScenarioObject name="Target">
+      <CatalogReference entryName="$Target_catalogEntry" catalogName="$Target_catalogName" />
+    </ScenarioObject>
+  </Entities>
+  <Storyboard>
+    <Init>
+      <Actions>
+        <GlobalAction>
+          <EnvironmentAction>
+            <CatalogReference catalogName="Environments" entryName="Sunny" />
+          </EnvironmentAction>
+        </GlobalAction>
+        <Private entityRef="Ego">
+          <PrivateAction>
+            <TeleportAction>
+              <Position>
+                <LanePosition roadId="0" laneId="-1" s="$Ego_initS">
+                </LanePosition>
+              </Position>
+            </TeleportAction>
+          </PrivateAction>
+          <PrivateAction>
+            <LongitudinalAction>
+              <SpeedAction>
+                <SpeedActionDynamics dynamicsDimension="time" dynamicsShape="step" value="0" />
+                <SpeedActionTarget>
+                  <AbsoluteTargetSpeed value="$_Ego_speed" />
+                </SpeedActionTarget>
+              </SpeedAction>
+            </LongitudinalAction>
+          </PrivateAction>
+        </Private>
+        <Private entityRef="Target">
+          <PrivateAction>
+            <TeleportAction>
+              <Position>
+                <RelativeLanePosition entityRef="Ego" dLane="0" offset="$_Target_offset" ds="${$Ego_initTimeHeadway*$_Ego_speed}" />
+              </Position>
+            </TeleportAction>
+          </PrivateAction>
+          <PrivateAction>
+            <LongitudinalAction>
+              <SpeedAction>
+                <SpeedActionDynamics dynamicsDimension="time" dynamicsShape="step" value="0" />
+                <SpeedActionTarget>
+                  <AbsoluteTargetSpeed value="$_Target_init_speed" />
+                </SpeedActionTarget>
+              </SpeedAction>
+            </LongitudinalAction>
+          </PrivateAction>
+        </Private>
+      </Actions>
+    </Init>
+    <Story name="NCAP_CA-FC_CCRs_2026">
+      <Act name="Set_Variables">
+        <ManeuverGroup name="Set_Variables" maximumExecutionCount="1">
+          <Actors selectTriggeringEntities="false">
+          </Actors>
+          <CatalogReference catalogName="ManeuverCatalog" entryName="LogAndSetVariables">
+            <ParameterAssignments>
+              <ParameterAssignment parameterRef="egoSpeed" value="$_Ego_speed" />
+              <ParameterAssignment parameterRef="collidingEntity" value="Target" />
+            </ParameterAssignments>
+          </CatalogReference>
+        </ManeuverGroup>
+      </Act>
+      <Act name="TeleportAndBrake_CXRb_only">
+        <ManeuverGroup name="Target_TeleportAndBrake" maximumExecutionCount="1">
+          <Actors selectTriggeringEntities="false">
+            <EntityRef entityRef="Target" />
+          </Actors>
+          <Maneuver name="Target_Teleport">
+            <!--set correct position with LongitudinalDistanceAction to account for vehicle length immediately after init-->
+            <Event name="Target_TeleportEvent" priority="override">
+              <Action name="Target_LongitudinalDistanceAction">
+                <PrivateAction>
+                  <LongitudinalAction>
+                    <LongitudinalDistanceAction freespace="true" continuous="false" entityRef="Ego" distance="$_Target_headway" displacement="leadingReferencedEntity" coordinateSystem="entity" />
+                  </LongitudinalAction>
+                </PrivateAction>
+              </Action>
+            </Event>
+          </Maneuver>
+          <Maneuver name="Target_DelayedBraking">
+            <Event name="Target_DelayedBrakingEvent" priority="override">
+              <Action name="Target_BrakingAction">
+                <PrivateAction>
+                  <LongitudinalAction>
+                    <SpeedAction>
+                      <SpeedActionDynamics dynamicsDimension="rate" dynamicsShape="linear" value="$Target_deceleration" />
+                      <SpeedActionTarget>
+                        <AbsoluteTargetSpeed value="${$_Target_final_speed}" />
+                      </SpeedActionTarget>
+                    </SpeedAction>
+                  </LongitudinalAction>
+                </PrivateAction>
+              </Action>
+              <StartTrigger>
+                <ConditionGroup>
+                  <Condition name="delay" delay="$Target_braking_delay" conditionEdge="none">
+                    <ByValueCondition>
+                      <StoryboardElementStateCondition storyboardElementType="maneuver" storyboardElementRef="Target_Teleport" state="completeState" />
+                    </ByValueCondition>
+                  </Condition>
+                </ConditionGroup>
+              </StartTrigger>
+            </Event>
+          </Maneuver>
+        </ManeuverGroup>
+        <StartTrigger>
+          <ConditionGroup>
+            <Condition name="isCCRb" delay="0" conditionEdge="none">
+              <ByValueCondition>
+                <ParameterCondition parameterRef="isTargetbraking" rule="equalTo" value="true" />
+              </ByValueCondition>
+            </Condition>
+          </ConditionGroup>
+        </StartTrigger>
+      </Act>
+    </Story>
+    <StopTrigger>
+      <ConditionGroup>
+        <Condition name="StopAfterCollision" delay="1" conditionEdge="none">
+          <ByValueCondition>
+            <VariableCondition variableRef="collisionDetected" rule="equalTo" value="true" />
+          </ByValueCondition>
+        </Condition>
+      </ConditionGroup>
+      <ConditionGroup>
+        <Condition name="EgoSpeedReached" delay="1" conditionEdge="none">
+          <ByValueCondition>
+            <VariableCondition variableRef="egoSpeedReached" rule="greaterThan" value="0" />
+          </ByValueCondition>
+        </Condition>
+        <Condition name="StopAtStandstill" delay="1" conditionEdge="none">
+          <ByEntityCondition>
+            <TriggeringEntities triggeringEntitiesRule="any">
+              <EntityRef entityRef="Ego" />
+            </TriggeringEntities>
+            <EntityCondition>
+              <StandStillCondition duration="0.1" />
+            </EntityCondition>
+          </ByEntityCondition>
+        </Condition>
+      </ConditionGroup>
+      <ConditionGroup>
+        <Condition name="EgoSpeedReached2" delay="1" conditionEdge="none">
+          <ByValueCondition>
+            <VariableCondition variableRef="egoSpeedReached" rule="greaterThan" value="0" />
+          </ByValueCondition>
+        </Condition>
+        <Condition name="StopWhenBelowTargetSpeed" delay="1" conditionEdge="none">
+          <ByEntityCondition>
+            <TriggeringEntities triggeringEntitiesRule="any">
+              <EntityRef entityRef="Ego" />
+            </TriggeringEntities>
+            <EntityCondition>
+              <RelativeSpeedCondition value="-1" rule="lessThan" entityRef="Target" />
+            </EntityCondition>
+          </ByEntityCondition>
+        </Condition>
+      </ConditionGroup>
+      <ConditionGroup>
+        <Condition name="StopPastTarget" delay="0" conditionEdge="none">
+          <ByEntityCondition>
+            <TriggeringEntities triggeringEntitiesRule="any">
+              <EntityRef entityRef="Ego" />
+            </TriggeringEntities>
+            <EntityCondition>
+              <!--Ego passed Target-->
+              <RelativeDistanceCondition freespace="true" relativeDistanceType="longitudinal" value="${$Ego_initTimeHeadway*$_Ego_speed}" rule="greaterThan" entityRef="Target" />
+            </EntityCondition>
+          </ByEntityCondition>
+        </Condition>
+      </ConditionGroup>
+    </StopTrigger>
+  </Storyboard>
+</OpenSCENARIO>

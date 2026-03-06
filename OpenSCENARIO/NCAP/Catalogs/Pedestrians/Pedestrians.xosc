@@ -1,6 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
 <OpenSCENARIO>
-  <!--Copyright (c) 2024, Vector Informatik GmbH--><FileHeader author="Vector Informatik GmbH" date="2024-07-08T13:20:36" description="Pedestrian Catalog for NCAP Scenarios" revMajor="1" revMinor="3"><License name="Mozilla Public License Version 2.0" resource="https://www.mozilla.org/en-US/MPL/2.0/" spdxId="MPL-2.0" /></FileHeader>
+  <!--Copyright (c) 2024-2026, Vector Informatik GmbH-->
+  <FileHeader author="Vector Informatik GmbH" date="2024-07-08T13:20:36" description="Pedestrian Catalog for NCAP Scenarios" revMajor="1" revMinor="3">
+    <License name="Mozilla Public License Version 2.0" resource="https://www.mozilla.org/en-US/MPL/2.0/" spdxId="MPL-2.0" />
+    <Properties>
+      <Property name="DYNA4.Version" value="10.0.0" />
+    </Properties>
+  </FileHeader>
   <Catalog name="Pedestrians">
     <Pedestrian name="NCAP_Adult" pedestrianCategory="pedestrian" mass="0">
       <BoundingBox>

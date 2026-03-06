@@ -1,11 +1,19 @@
 <?xml version='1.0' encoding='utf-8'?>
 <OpenSCENARIO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="OpenSCENARIO.xsd">
-  <!--Copyright (c) 2024-2025, Vector Informatik GmbH--><FileHeader revMajor="1" revMinor="3" date="2025-02-20T09:09:29" author="Vector Informatik GmbH" description="Base Scenario for NCAP 2023 AEB VRU CBFA-50"><License name="Mozilla Public License Version 2.0" resource="https://www.mozilla.org/en-US/MPL/2.0/" spdxId="MPL-2.0" /></FileHeader>
+  <!--Copyright (c) 2024-2026, Vector Informatik GmbH-->
+  <FileHeader revMajor="1" revMinor="3" date="2026-02-24T14:44:00" author="Vector Informatik GmbH" description="Base Scenario for NCAP 2023 AEB VRU CBFA-50">
+    <License name="Mozilla Public License Version 2.0" resource="https://www.mozilla.org/en-US/MPL/2.0/" spdxId="MPL-2.0" />
+    <Properties>
+      <Property name="DYNA4.Version" value="10.0.0" />
+    </Properties>
+  </FileHeader>
   <ParameterDeclarations>
     <ParameterDeclaration name="Ego_speed_kph" parameterType="double" value="30" />
-    <ParameterDeclaration name="Ego_initTTC" parameterType="double" value="6"><!--time-to-collision for speed-dependent adjustment of initial distance to intersection-->
+    <ParameterDeclaration name="Ego_initTTC" parameterType="double" value="6">
+      <!--time-to-collision for speed-dependent adjustment of initial distance to intersection-->
       <ConstraintGroup>
-        <ValueConstraint value="5" rule="greaterThan" /><!--set TTC large enough to avoid starting too close to junction-->
+        <ValueConstraint value="5" rule="greaterThan" />
+        <!--set TTC large enough to avoid starting too close to junction-->
       </ConstraintGroup>
     </ParameterDeclaration>
     <ParameterDeclaration name="Ego_length" parameterType="double" value="4.358" />
@@ -13,9 +21,11 @@
     <ParameterDeclaration name="VRU_width" parameterType="double" value="0.5" />
     <ParameterDeclaration name="VRU_finalSpeed_kph" parameterType="double" value="20" />
     <ParameterDeclaration name="VRU_steadyStateDist" parameterType="double" value="22" />
-    <ParameterDeclaration name="VRU_collisionPointOffset" parameterType="double" value="0.62"><!--distance from origin (rear axle) to crank shaft-->
+    <ParameterDeclaration name="VRU_collisionPointOffset" parameterType="double" value="0.62">
+      <!--distance from origin (rear axle) to crank shaft-->
     </ParameterDeclaration>
-    <ParameterDeclaration name="VRU_lateralDist" parameterType="double" value="1"><!--lateral distance to obstructing vehicles-->
+    <ParameterDeclaration name="VRU_lateralDist" parameterType="double" value="1">
+      <!--lateral distance to obstructing vehicles-->
     </ParameterDeclaration>
     <ParameterDeclaration name="ObstructionLarge_length" parameterType="double" value="4.418">
       <ConstraintGroup>
@@ -40,32 +50,44 @@
       <ConstraintGroup>
         <ValueConstraint rule="greaterThan" value="0.1" />
         <ValueConstraint rule="lessThan" value="0.3" />
-      </ConstraintGroup><!--distance between obstructing vehicles defined as 0.1m...0.3m in NCAP protocol-->
+      </ConstraintGroup>
+      <!--distance between obstructing vehicles defined as 0.1m...0.3m in NCAP protocol-->
     </ParameterDeclaration>
-    <ParameterDeclaration name="Road_armLength" parameterType="double" value="150" />
+    <ParameterDeclaration name="Road_armLength" parameterType="double" value="250" />
     <ParameterDeclaration name="Road_laneWidth" parameterType="double" value="3.5" />
-    <ParameterDeclaration name="Road_radius" parameterType="double" value="8"><!--road radius as defined by NCAP-->
+    <ParameterDeclaration name="Road_radius" parameterType="double" value="8">
+      <!--road radius as defined by NCAP-->
     </ParameterDeclaration>
-    <ParameterDeclaration name="Scenario_ID" parameterType="string" value="CBFA-50"><!--this parameter is not used within the scenario but may support the assessment-->
+    <ParameterDeclaration name="Scenario_ID" parameterType="string" value="CBFA-50">
+      <!--this parameter is not used within the scenario but may support the assessment-->
     </ParameterDeclaration>
-    <ParameterDeclaration name="_Road_radiusCenter" parameterType="double" value="${$Road_radius+$Road_laneWidth}"><!--road radius as defined by OpenDRIVE-->
+    <ParameterDeclaration name="_Road_radiusCenter" parameterType="double" value="${$Road_radius+$Road_laneWidth}">
+      <!--road radius as defined by OpenDRIVE-->
     </ParameterDeclaration>
-    <ParameterDeclaration name="_Road_collisionPointAQ" parameterType="double" value="${$Road_armLength+$_Road_radiusCenter+$Road_laneWidth/2}"><!--collision s-coordinate along the VRU route (A-axis) marked as Q in NCAP protocol-->
+    <ParameterDeclaration name="_Road_collisionPointAQ" parameterType="double" value="${$Road_armLength+$_Road_radiusCenter+$Road_laneWidth/2}">
+      <!--collision s-coordinate along the VRU route (A-axis) marked as Q in NCAP protocol-->
     </ParameterDeclaration>
-    <ParameterDeclaration name="_Road_collisionPointBQ" parameterType="double" value="${$Road_armLength+$_Road_radiusCenter-$Road_laneWidth/2-$VRU_width/2}"><!--collision s-coordinate along the Ego route (B-axis) marked as Q in NCAP protocol-->
+    <ParameterDeclaration name="_Road_collisionPointBQ" parameterType="double" value="${$Road_armLength+$_Road_radiusCenter-$Road_laneWidth/2-$VRU_width/2}">
+      <!--collision s-coordinate along the Ego route (B-axis) marked as Q in NCAP protocol-->
     </ParameterDeclaration>
-    <ParameterDeclaration name="_Ego_frontBumperLon" parameterType="double" value="${$Ego_BBcenter_x+($Ego_length/2)}"><!--distance from rear axle to front end (bumper) of the bounding box -->
+    <ParameterDeclaration name="_Ego_frontBumperLon" parameterType="double" value="${$Ego_BBcenter_x+($Ego_length/2)}">
+      <!--distance from rear axle to front end (bumper) of the bounding box -->
     </ParameterDeclaration>
-    <ParameterDeclaration name="_Ego_speed" parameterType="double" value="${$Ego_speed_kph/3.6}"><!--allows kph as unit in variation definition as in NCAP protocol -->
+    <ParameterDeclaration name="_Ego_speed" parameterType="double" value="${$Ego_speed_kph/3.6}">
+      <!--allows kph as unit in variation definition as in NCAP protocol -->
     </ParameterDeclaration>
-    <ParameterDeclaration name="_Ego_initS" parameterType="double" value="${$Road_armLength-$_Ego_speed*$Ego_initTTC}"><!--not actual time-to-collision but conservative estimate to intersection start-->
+    <ParameterDeclaration name="_Ego_initS" parameterType="double" value="${$Road_armLength-$_Ego_speed*$Ego_initTTC}">
+      <!--not actual time-to-collision but conservative estimate to intersection start-->
       <ConstraintGroup>
-        <ValueConstraint rule="greaterThan" value="0" /><!--negative numbers not valid-->
+        <ValueConstraint rule="greaterThan" value="0" />
+        <!--negative numbers not valid-->
       </ConstraintGroup>
     </ParameterDeclaration>
-    <ParameterDeclaration name="_VRU_finalSpeed" parameterType="double" value="${$VRU_finalSpeed_kph/3.6}"><!--allows kph as unit in variation definition as in NCAP protocol -->
+    <ParameterDeclaration name="_VRU_finalSpeed" parameterType="double" value="${$VRU_finalSpeed_kph/3.6}">
+      <!--allows kph as unit in variation definition as in NCAP protocol -->
     </ParameterDeclaration>
-    <ParameterDeclaration name="_VRU_initS" parameterType="double" value="${$_Road_collisionPointAQ-$VRU_steadyStateDist-7}"><!--placing VRU somewhere behind obstruction vehicles with < 8m according to NCAP protocol-->
+    <ParameterDeclaration name="_VRU_initS" parameterType="double" value="${$_Road_collisionPointAQ-$VRU_steadyStateDist-7}">
+      <!--placing VRU somewhere behind obstruction vehicles with < 8m according to NCAP protocol-->
     </ParameterDeclaration>
     <ParameterDeclaration name="_ObstructionLarge_rearOverhang" parameterType="double" value="${$ObstructionLarge_length/2-$ObstructionLarge_BBcenter_x}" />
   </ParameterDeclarations>
@@ -98,10 +120,10 @@
       <CatalogReference entryName="NCAP_Bicycle" catalogName="Vehicles" />
     </ScenarioObject>
     <ScenarioObject name="ObstructionSmall">
-      <CatalogReference catalogName="Vehicles" entryName="NCAP_2018_ObstructionVehicle_Small" />
+      <CatalogReference catalogName="Vehicles" entryName="NCAP_ObstructionVehicle_Small" />
     </ScenarioObject>
     <ScenarioObject name="ObstructionLarge">
-      <CatalogReference catalogName="Vehicles" entryName="NCAP_2018_ObstructionVehicle_Large" />
+      <CatalogReference catalogName="Vehicles" entryName="NCAP_ObstructionVehicle_Large" />
     </ScenarioObject>
   </Entities>
   <Storyboard>
@@ -235,7 +257,8 @@
                     </TargetPosition>
                     <FinalSpeed>
                       <AbsoluteSpeed value="$_VRU_finalSpeed">
-                        <TargetDistanceSteadyState distance="$VRU_steadyStateDist" /><!--crank shaft offset already included in target position-->
+                        <TargetDistanceSteadyState distance="$VRU_steadyStateDist" />
+                        <!--crank shaft offset already included in target position-->
                       </AbsoluteSpeed>
                     </FinalSpeed>
                   </SynchronizeAction>
@@ -252,6 +275,23 @@
           <ByValueCondition>
             <VariableCondition variableRef="collisionDetected" rule="equalTo" value="true" />
           </ByValueCondition>
+        </Condition>
+      </ConditionGroup>
+      <ConditionGroup>
+        <Condition name="EgoSpeedReached" delay="1" conditionEdge="none">
+          <ByValueCondition>
+            <VariableCondition variableRef="egoSpeedReached" rule="greaterThan" value="0" />
+          </ByValueCondition>
+        </Condition>
+        <Condition name="StopAtStandstill" delay="1" conditionEdge="none">
+          <ByEntityCondition>
+            <TriggeringEntities triggeringEntitiesRule="any">
+              <EntityRef entityRef="Ego" />
+            </TriggeringEntities>
+            <EntityCondition>
+              <StandStillCondition duration="0.1" />
+            </EntityCondition>
+          </ByEntityCondition>
         </Condition>
       </ConditionGroup>
       <ConditionGroup>

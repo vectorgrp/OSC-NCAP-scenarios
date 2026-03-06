@@ -1,30 +1,42 @@
 <?xml version='1.0' encoding='utf-8'?>
 <OpenSCENARIO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="OpenSCENARIO.xsd">
-  <!--Copyright (c) 2024-2025, Vector Informatik GmbH-->
-  <FileHeader revMajor="1" revMinor="3" date="2025-08-27T13:34:51" author="Vector Informatik GmbH" description="Base Scenario for NCAP AEB VRU CPRA/Cs">
+  <!--Copyright (c) 2024-2026, Vector Informatik GmbH-->
+  <FileHeader revMajor="1" revMinor="3" date="2026-02-24T14:44:00" author="Vector Informatik GmbH" description="Base Scenario for NCAP AEB VRU CPRA/Cs">
     <License name="Mozilla Public License Version 2.0" resource="https://www.mozilla.org/en-US/MPL/2.0/" spdxId="MPL-2.0" />
+    <Properties>
+      <Property name="DYNA4.Version" value="10.0.0" />
+    </Properties>
   </FileHeader>
   <ParameterDeclarations>
     <ParameterDeclaration name="Ego_speed_kph" parameterType="double" value="4" />
-    <ParameterDeclaration name="Ego_initDist" parameterType="double" value="10"><!--initial distance of Ego to collision point L as defined in NCAP protocol--><!--value not explicitly provided in NCAP protocol-->
+    <ParameterDeclaration name="Ego_initDist" parameterType="double" value="10">
+      <!--initial distance of Ego to collision point L as defined in NCAP protocol-->
+      <!--value not explicitly provided in NCAP protocol-->
     </ParameterDeclaration>
-    <ParameterDeclaration name="Ego_width" parameterType="double" value="1.815"><!--required for positioning according to overlap-->
+    <ParameterDeclaration name="Ego_width" parameterType="double" value="1.815">
+      <!--required for positioning according to overlap-->
     </ParameterDeclaration>
     <ParameterDeclaration name="VRU_catalogName" parameterType="string" value="Pedestrians">
     </ParameterDeclaration>
     <ParameterDeclaration name="VRU_catalogEntry" parameterType="string" value="NCAP_Adult">
     </ParameterDeclaration>
-    <ParameterDeclaration name="VRU_orientation" parameterType="double" value="${-pi/2}"><!--orientation of the VRU relative to the Ego vehicle (either pi/2 or -pi/2)-->
+    <ParameterDeclaration name="VRU_orientation" parameterType="double" value="${-pi/2}">
+      <!--orientation of the VRU relative to the Ego vehicle (either pi/2 or -pi/2)-->
     </ParameterDeclaration>
-    <ParameterDeclaration name="Overlap" parameterType="double" value="50"><!--Impact location of the VRU in percent of the Ego width-->
+    <ParameterDeclaration name="Overlap" parameterType="double" value="50">
+      <!--Impact location of the VRU in percent of the Ego width-->
     </ParameterDeclaration>
-    <ParameterDeclaration name="CollisionPoint_S" parameterType="double" value="90"><!--position of collision point L as defined in NCAP protocol along the road-->
+    <ParameterDeclaration name="CollisionPoint_S" parameterType="double" value="90">
+      <!--position of collision point L as defined in NCAP protocol along the road-->
     </ParameterDeclaration>
-    <ParameterDeclaration name="Scenario_ID" parameterType="string" value="CPRA_Cs"><!--this parameter is not used within the scenario but may support the assessment-->
+    <ParameterDeclaration name="Scenario_ID" parameterType="string" value="CPRA_Cs">
+      <!--this parameter is not used within the scenario but may support the assessment-->
     </ParameterDeclaration>
-    <ParameterDeclaration name="_Ego_speed" parameterType="double" value="${-1*$Ego_speed_kph/3.6}"><!--allows kph as unit in variation definition as in NCAP protocol -->
+    <ParameterDeclaration name="_Ego_speed" parameterType="double" value="${-1*$Ego_speed_kph/3.6}">
+      <!--allows kph as unit in variation definition as in NCAP protocol -->
     </ParameterDeclaration>
-    <ParameterDeclaration name="_VRU_lateralOffset" parameterType="double" value="${-1*$Ego_width*($Overlap-50)/100}"><!--lateral offset of the VRU based to match K, L, M as defined in NCAP protocol-->
+    <ParameterDeclaration name="_VRU_lateralOffset" parameterType="double" value="${-1*$Ego_width*($Overlap-50)/100}">
+      <!--lateral offset of the VRU based to match K, L, M as defined in NCAP protocol-->
     </ParameterDeclaration>
   </ParameterDeclarations>
   <VariableDeclarations>
@@ -142,30 +154,20 @@
         </Condition>
       </ConditionGroup>
       <ConditionGroup>
-        <Condition name="StopAtStandstillNegative" delay="0" conditionEdge="none">
-          <ByEntityCondition>
-            <TriggeringEntities triggeringEntitiesRule="any">
-              <EntityRef entityRef="Ego" />
-            </TriggeringEntities>
-            <EntityCondition>
-              <SpeedCondition value="0.1" rule="lessThan" />
-            </EntityCondition>
-          </ByEntityCondition>
-        </Condition>
-        <Condition name="StopAtStandstillPositive" delay="0" conditionEdge="none">
-          <ByEntityCondition>
-            <TriggeringEntities triggeringEntitiesRule="any">
-              <EntityRef entityRef="Ego" />
-            </TriggeringEntities>
-            <EntityCondition>
-              <SpeedCondition value="-0.1" rule="greaterThan" />
-            </EntityCondition>
-          </ByEntityCondition>
-        </Condition>
-        <Condition name="EnsureSpeedWasReached" delay="0" conditionEdge="none">
+        <Condition name="EgoSpeedReached" delay="1" conditionEdge="none">
           <ByValueCondition>
-            <VariableCondition variableRef="egoSpeedReached" rule="equalTo" value="$_Ego_speed" />
+            <VariableCondition variableRef="egoSpeedReached" rule="greaterThan" value="0" />
           </ByValueCondition>
+        </Condition>
+        <Condition name="StopAtStandstill" delay="1" conditionEdge="none">
+          <ByEntityCondition>
+            <TriggeringEntities triggeringEntitiesRule="any">
+              <EntityRef entityRef="Ego" />
+            </TriggeringEntities>
+            <EntityCondition>
+              <StandStillCondition duration="0.1" />
+            </EntityCondition>
+          </ByEntityCondition>
         </Condition>
       </ConditionGroup>
       <ConditionGroup>
@@ -175,7 +177,8 @@
               <EntityRef entityRef="Ego" />
             </TriggeringEntities>
             <EntityCondition>
-              <TraveledDistanceCondition value="${$Ego_initDist*1.5}" /><!--travel behind collision point-->
+              <TraveledDistanceCondition value="${$Ego_initDist*1.5}" />
+              <!--travel behind collision point-->
             </EntityCondition>
           </ByEntityCondition>
         </Condition>
